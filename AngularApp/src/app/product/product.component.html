@@ -1,0 +1,86 @@
+<div>
+  <h4>Add</h4>
+  <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+
+    <p>
+      English Name: <span style="color: red;"> *</span>
+      <input
+        type="text"
+        id="productName"
+        name="name"
+        [(ngModel)]="selectedProduct.name"
+        pattern="[a-zA-Z\s]+"
+        required
+      />
+<br><br>
+       French Name: <span style="color: red;"> *</span>
+      <input
+        type="text"
+        id="productFrenchName"
+        name="frenchName"
+        [(ngModel)]="selectedProduct.frenchName"
+        pattern="[a-zA-Z\s]+"
+        required
+      />
+<br><br>
+      Category: <span style="color: red;"> *</span>
+      <input
+        type="text"
+        id="productCategory"
+        name="type"
+        [(ngModel)]="selectedProduct.type"
+        pattern="[a-zA-Z\s]+"
+        required
+      />
+<br><br>
+      Loan Period:
+      <input
+        type="number"
+        id="loanP"
+        name="loan"
+        value="0"
+        [(ngModel)]="selectedProduct.loan"
+      />
+<br><br>
+      URL of the picture:
+      <input
+        type="url"
+        id="urlPic"
+        name="urlPic"
+        [(ngModel)]="selectedProduct.urlPic"
+      />
+
+      <button type="submit" [disabled]="!productForm.valid">Submit</button>
+    </p>
+  </form>
+</div>
+<br><br><br>
+<h2>All Products ({{listOfProducts.length}})</h2>
+<div>
+  <button type="button" (click)="getAllProducts()">Get All Products</button>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>English Name</th>
+        <th>French Name</th>
+        <th>Category</th>
+        <th>Loan</th>
+        <th>Quanitity</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr *ngFor="let product of listOfProducts">
+      <td>{{ product.name }}</td>
+      <td>{{ product.frenchName }}</td>
+      <td>{{ product.type }}</td>
+      <td>{{ product.loan }}</td>
+      <td>{{ product.quanitity }}</td>
+      <td>
+        <button id="{{ product._id }}" (click)="deleteProduct(product._id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
