@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 let songSchema = new Schema({
   //id from mongo
-  title: { type: String, required: true, max: 100 },
-  artist: { type: String, required: true, max: 100 },
+  title: { type: String, required: true, max: 30 },
+  artist: { type: String, required: true, max: 30 },
   album: { type: String, max: 30 },
   year: { type: Number, min: 0, max: 2019 },
   genre: { type: String },

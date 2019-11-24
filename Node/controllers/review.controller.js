@@ -7,7 +7,7 @@ exports.create_review = function (req, res) {
       subject: req.body.subject,
       comment: req.body.comment,
       songId: req.body.songId,
-      userId: req.body.userId,
+      submittedBy: req.body.submittedBy,
       rating: req.body.rating,
       submittedOn: req.body.submittedOn
 
