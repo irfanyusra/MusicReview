@@ -10,7 +10,7 @@ router.get('/items', users_controller.get_all_users); //Gets all the users
 
 router.get('/:id', users_controller.get_user); //Gets using id
 
-router.get('/name/:name', users_controller.get_user_name); //Gets using name 
+router.get('/email/:email', users_controller.get_user_email); //Gets using name 
 
 router.put('/update/:id', users_controller.update_user); //updates using id
 

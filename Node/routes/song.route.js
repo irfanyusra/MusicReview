@@ -10,7 +10,7 @@ router.get('/items', songs_controller.get_all_songs); //Gets all the songss
 
 router.get('/:id', songs_controller.get_song); //Gets using id
 
-router.get('/name/:name', songs_controller.get_song_name); //Gets using name 
+router.get('/title/:title', songs_controller.get_song_title); //Gets using name 
 
 router.put('/update/:id', songs_controller.update_song); //updates using id
 

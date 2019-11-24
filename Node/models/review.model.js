@@ -5,12 +5,13 @@ const Schema = mongoose.Schema;
 
 let reviewSchema = new Schema({
   //id from mongo
-  title: { type: String, required: true, max: 100 },
+  subject: { type: String, required: true, max: 100 },
   comment: { type: String, required: true, max: 100 },
-  songId: { type: Schema.Types.ObjectId, ref:'Song' }, 
-  userId: { type: Schema.Types.ObjectId, ref: 'User'},
+  songId: { type: Schema.Types.ObjectId, ref: 'Song', required: true }, 
+  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true},
   rating: { type: Number, min: 1, max: 5 },
-  submittedOn: { type:Date },
+  submittedOn: { type: Date, required: true}
+
 
 });
 

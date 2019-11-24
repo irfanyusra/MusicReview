@@ -4,14 +4,19 @@ const Review = require('../models/review.model');
 exports.create_review = function (req, res) {
   let review = new Review(
     {
-      name: req.body.name
-     
+      subject: req.body.subject,
+      comment: req.body.comment,
+      songId: req.body.songId,
+      userId: req.body.userId,
+      rating: req.body.rating,
+      submittedOn: req.body.submittedOn
+
     }
   );
 
   review.save(function (err) {
     if (err) return res.send(err);
-    res.send('review Created successfully')
+    res.send('Review Created successfully')
   })
 };
 
@@ -32,13 +37,13 @@ exports.get_review = function (req, res) {
 };
 
 
-//getting a review using name
-exports.get_review_name = function (req, res) {
-  Review.find({"name":req.params.name}, (err, review) => {
-    if (err) return res.send('Error in finding the review');
-    res.send(review);
-  })
-};
+// //getting a review using name
+// exports.get_review_name = function (req, res) {
+//   Review.find({"name":req.params.name}, (err, review) => {
+//     if (err) return res.send('Error in finding the review');
+//     res.send(review);
+//   })
+// };
 
 //updates review
 exports.update_review = function (req, res) {

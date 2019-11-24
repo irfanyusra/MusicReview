@@ -7,7 +7,11 @@ exports.create_user = function (req, res) {
     {
       email: req.body.email,
       name: req.body.name,
-      
+      reviewsId: req.body.reviewsId,
+      isAdmin: req.body.isAdmin,
+      password: req.body.password,
+      // verified: { type: Boolean },
+      isActive: req.body.isActive      
    
     }
   );
@@ -36,8 +40,8 @@ exports.get_user = function (req, res) {
 
 
 //getting a user using name
-exports.get_user_name = function (req, res) {
-  User.find({"name":req.params.name}, (err, user) => {
+exports.get_user_email = function (req, res) {
+  User.find({"email":req.params.email}, (err, user) => {
     if (err) return res.send('Error in finding the user');
     res.send(user);
   })

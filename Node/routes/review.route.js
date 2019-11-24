@@ -10,7 +10,7 @@ router.get('/items', reviews_controller.get_all_reviews); //Gets all the reviews
 
 router.get('/:id', reviews_controller.get_review); //Gets using id
 
-router.get('/name/:name', reviews_controller.get_review_name); //Gets using name 
+// router.get('/name/:name', reviews_controller.get_review_name); //Gets using name 
 
 router.put('/update/:id', reviews_controller.update_review); //updates using id
 

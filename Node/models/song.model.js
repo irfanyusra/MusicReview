@@ -8,12 +8,11 @@ let songSchema = new Schema({
   title: { type: String, required: true, max: 100 },
   artist: { type: String, required: true, max: 100 },
   album: { type: String, max: 30 },
-  year: { type: Int, min: 0, max: 2019 },
+  year: { type: Number, min: 0, max: 2019 },
   genre: { type: String },
-  hidden: { type: Boolean },
-  copyRightViolation: { type: Boolean },
+  hidden: { type: Boolean, default:false },
+  copyRightViolation: { type: Boolean, default:false },
   reviewsId: { type: [Schema.Types.ObjectId], ref: 'Review' },
-
 
 });
 

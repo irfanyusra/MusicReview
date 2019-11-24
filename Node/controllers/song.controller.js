@@ -40,7 +40,7 @@ exports.get_song = function (req, res) {
 
 
 //getting a song using name
-exports.get_song_name = function (req, res) {
+exports.get_song_title = function (req, res) {
   Song.find({"name":req.params.name}, (err, song) => {
     if (err) return res.send('Error in finding the song');
     res.send(song);
@@ -52,6 +52,7 @@ exports.update_song = function (req, res) {
   Song.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, song) {
     if (err) return res.send(err);
     res.send(song + ' udpated.');
+    console.log("updating song");
   });
 };
 
