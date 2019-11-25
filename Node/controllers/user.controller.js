@@ -18,15 +18,28 @@ exports.create_user = function (req, res) {
 
   user.save(function (err) {
     if (err) return res.send(err);
-    res.send('user Created successfully')
+    return res.send('user Created successfully')
   })
 };
 
+exports.toggle_active = function (req, res) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return res.send(err);
+    else {
+      user.isActive = !user.isActive;
+      user.save(function (err) {
+        if (err) return res.send(err);
+        return res.send('user active toggled successfully');
+      });
+    }
+  });
+};
 
 //getting all the users 
 exports.get_all_users = function (req, res) {
   User.find(function (err, user) {
-    res.send(user);
+    if (err) return res.send(err);
+    return res.send(user);
   })
 };
 
@@ -34,7 +47,7 @@ exports.get_all_users = function (req, res) {
 exports.get_user = function (req, res) {
   User.findById(req.params.id, (err, user) => {
     if (err) return res.send('Error for finding the user');
-    res.send(user);
+    return res.send(user);
   })
 };
 
@@ -43,7 +56,7 @@ exports.get_user = function (req, res) {
 exports.get_user_email = function (req, res) {
   User.find({"email":req.params.email}, (err, user) => {
     if (err) return res.send('Error in finding the user');
-    res.send(user);
+    return res.send(user);
   })
 };
 
@@ -51,7 +64,7 @@ exports.get_user_email = function (req, res) {
 exports.update_user = function (req, res) {
   User.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, user) {
     if (err) return res.send(err);
-    res.send(user + ' udpated.');
+    return res.send(user + ' udpated.');
   });
 };
 
@@ -59,6 +72,6 @@ exports.update_user = function (req, res) {
 exports.delete_user = function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err) {
     if (err) return res.send(err);
-    res.send('Deleted successfully!');
+    return res.send('Deleted successfully!');
   })
 };

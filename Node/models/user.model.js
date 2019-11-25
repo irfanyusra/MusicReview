@@ -11,7 +11,7 @@ let userSchema = new Schema({
   isAdmin: { type: Boolean, required: true, default:false },
   password: { type: String, required: true, max: 100 },
   verified: { type: Boolean, default: false },
-  isActive: { type: Boolean },
+  isActive: { type: Boolean, default: true },
 
 });
 
