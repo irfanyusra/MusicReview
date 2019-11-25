@@ -14,8 +14,6 @@ let songSchema = new Schema({
   copyRightViolation: { type: Boolean, default:false },
   noOfReviews: { type: Number,default:0 },
   avgOfRatings: { type: Number,default:0 },
-  //number of rating??? derived...
-  //avg rating?? derived...
 
 });
 

@@ -12,7 +12,7 @@ let reviewSchema = new Schema({
   rating: { type: Number, min: 1, max: 5, required: true },
   submittedOn: { type: Date}
 
-},{timestamps:true}
+}
 );
 
 

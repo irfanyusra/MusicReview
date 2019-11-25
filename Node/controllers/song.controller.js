@@ -51,7 +51,7 @@ exports.incrementNoOfReviews = function (songId){
 }
 
 exports.mostRecentReviewOfASong = function (req, res) {
-  Review.findById(req.params.id, { sort: { 'created_at': 1 } }, function (err, review) {
+  Review.findById(req.params.id, { sort: { 'submittedOn': 1 } }, function (err, review) {
     if (err) return res.send(err);
     else return res.send(review);
     

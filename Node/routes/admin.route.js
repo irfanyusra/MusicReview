@@ -10,4 +10,6 @@ router.get('/copyright', song_controller.get_all_songs_copyrightViolated); //Ret
 router.post('/toggle-active/:id', user_controller.toggle_active); // Set or clear “account deactivated” flag for a given user.
 router.post('/toggle-hide/:id', song_controller.toggle_hide); 
 
+//toggle admin for a user 
+
 module.exports = router;
