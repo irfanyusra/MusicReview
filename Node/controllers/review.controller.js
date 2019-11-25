@@ -19,9 +19,16 @@ exports.create_review = function (req, res) {
   review.save(function (err) {
     if (err) return res.send(err);
     song_controller.incrementNoOfReviews(songId);
+
+    //update avg rating
+    Review.find({ songId: songId }, function (err, reviews) {
+      if (err) console.log(err);
+      else song_controller.newAvgRating(reviews,songId);
+    });
+
     return res.send(review.id);
 
-  })
+  });
 };
 
 exports.get_reviews_of_song = function (req, res) {

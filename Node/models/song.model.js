@@ -12,7 +12,7 @@ let songSchema = new Schema({
   genre: { type: String },
   hidden: { type: Boolean, default:false },
   copyRightViolation: { type: Boolean, default:false },
-  noOfRatings: { type: Number,default:0 },
+  noOfReviews: { type: Number,default:0 },
   avgOfRatings: { type: Number,default:0 },
   //number of rating??? derived...
   //avg rating?? derived...

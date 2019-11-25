@@ -4,10 +4,30 @@ const Song = require('../models/song.model');
 
 exports.get_10_songs = function (req, res) {
   console.log("getting top ten songs");
+  //get all songs and sort by avg 
+  //get top 10 
 };
 
 exports.get_match_songs = function (req, res) {
   console.log("getting matched songs");
+};
+
+exports.newAvgRating = function (reviews,songId) {
+      let sum = 0;
+      for (let i = 0; i < reviews.length; i++) {
+        sum += reviews[i].rating;
+      }
+      let avg = sum / reviews.length;
+      Song.findById(songId, function (err, song) {
+        if (err) console.log(err);
+        else {
+          song.avgOfRatings = avg;
+          song.save(function (err) {
+            if (err) console.log(err);
+            else return;
+          });
+        }
+      });
 };
 
 exports.incrementNoOfReviews = function (songId){
@@ -15,7 +35,7 @@ exports.incrementNoOfReviews = function (songId){
   Song.findById(songId, function (err, song) {
     if (err) console.log(err);
     else {
-      song.noOfRatings = song.noOfRatings+1;  
+      song.noOfReviews = song.noOfReviews+1;  
       song.save(function (err) {
         if (err) console.log(err);
         else return;
@@ -59,8 +79,8 @@ exports.create_song = function (req, res) {
       genre: req.body.genre,
       hidden: req.body.hidden,
       copyRightViolation: req.body.copyRightViolation,
-      noOfRatings:req.body.noOfRatings,
-      avgOfRating: req.body.avgOfRating,
+      noOfReviews:req.body.noOfReviews,
+      avgOfRatings: req.body.avgOfRatings,
     }
   );
 
