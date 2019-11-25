@@ -12,7 +12,6 @@ exports.create_user = function (req, res) {
       password: req.body.password,
       verified: req.body.verified,
       isActive: req.body.isActive      
-   
     }
   );
 
@@ -20,6 +19,19 @@ exports.create_user = function (req, res) {
     if (err) return res.send(err);
     return res.send('user Created successfully')
   })
+};
+
+exports.toggle_admin = function (req, res) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return res.send(err);
+    else {
+      user.isAdmin = !user.isAdmin;
+      user.save(function (err) {
+        if (err) return res.send(err);
+        return res.send('user admin toggled successfully');
+      });
+    }
+  });
 };
 
 exports.toggle_active = function (req, res) {
