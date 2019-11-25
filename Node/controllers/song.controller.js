@@ -24,6 +24,16 @@ exports.incrementNoOfReviews = function (songId){
   });
 }
 
+//get avg rating for all songs 
+
+
+exports.mostRecentReviewOfASong = function (req, res) {
+  Review.findById(req.params.id, { sort: { 'created_at': 1 } }, function (err, review) {
+    if (err) return res.send(err);
+    else return res.send(review);
+    
+  });
+};
 
 exports.toggle_hide = function (req, res) {
   Song.findById(req.params.id, function (err, song) {
