@@ -1,7 +1,9 @@
 const Review = require('../models/review.model');
+const song_controller = require('../controllers/song.controller');
 
 //to create a review
 exports.create_review = function (req, res) {
+  let songId = req.params.id;
   let review = new Review(
     {
       subject: req.body.subject,
@@ -9,14 +11,16 @@ exports.create_review = function (req, res) {
       songId: req.params.id,
       submittedBy: req.body.submittedBy,
       rating: req.body.rating,
-      submittedOn: Date.now()
+      submittedOn: Date.now(),
 
     }
   );
 
   review.save(function (err) {
     if (err) return res.send(err);
-    res.send('Review Created successfully')
+    song_controller.incrementNoOfReviews(songId);
+    return res.send(review.id);
+
   })
 };
 

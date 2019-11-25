@@ -10,6 +10,19 @@ exports.get_match_songs = function (req, res) {
   console.log("getting matched songs");
 };
 
+exports.incrementNoOfReviews = function (songId){
+  console.log(songId);
+  Song.findById(songId, function (err, song) {
+    if (err) console.log(err);
+    else {
+      song.noOfRatings = song.noOfRatings+1;  
+      song.save(function (err) {
+        if (err) console.log(err);
+        else return;
+      });
+    }
+  });
+}
 
 
 exports.toggle_hide = function (req, res) {
@@ -19,7 +32,7 @@ exports.toggle_hide = function (req, res) {
     song.hidden=!song.hidden;
     song.save(function (err) {
       if (err) return res.send(err);
-      return res.send('hidden toggles successfully');
+      return res.send(song.id);
     });
   }
   });
@@ -36,12 +49,14 @@ exports.create_song = function (req, res) {
       genre: req.body.genre,
       hidden: req.body.hidden,
       copyRightViolation: req.body.copyRightViolation,
+      noOfRatings:req.body.noOfRatings,
+      avgOfRating: req.body.avgOfRating,
     }
   );
 
   song.save(function (err) {
     if (err) return res.send(err);
-    return res.send('song Created successfully');
+    return res.send(song.id);
   })
 };
 
@@ -49,8 +64,7 @@ exports.create_song = function (req, res) {
 exports.update_song = function (req, res) {
   Song.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, song) {
     if (err) return res.send(err);
-    res.send(song + ' udpated.');
-    console.log("updating song");
+    res.send(song.id + ' udpated.')
   });
 };
 
