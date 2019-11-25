@@ -102,7 +102,8 @@ exports.update_song = function (req, res) {
 };
 
 exports.update_song_copyright = function (req, res) {
-  Song.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, song) {
+  Song.findByIdAndUpdate(req.params.id, { $set: {copyRightViolation: req.body.copyRightViolation}}
+    , function (err, song) {
     if (err) return res.send(err);
     res.send(song + ' udpated.');
     console.log("updating song");
