@@ -10,7 +10,7 @@ let userSchema = new Schema({
   reviewsId: { type: [Schema.Types.ObjectId] },
   isAdmin: { type: Boolean, required: true, default:false },
   password: { type: String, required: true, max: 100 },
-  // verified: { type: Boolean },
+  verified: { type: Boolean, default: false },
   isActive: { type: Boolean },
 
 });

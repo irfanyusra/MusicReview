@@ -5,9 +5,12 @@ const bodyParser = require('body-parser');
 const app = express(); //our app
 
 
-const songRoute = require('./routes/song.route'); // Imports routes for the products
-const reviewRoute = require('./routes/review.route'); // Imports routes for the products
-const userRoute = require('./routes/user.route'); // Imports routes for the products
+// const songRoute = require('./routes/song.route'); // Imports routes for the products
+// const reviewRoute = require('./routes/review.route'); // Imports routes for the products
+// const userRoute = require('./routes/user.route'); // Imports routes for the products
+const openRoute = require('./routes/open.route'); // Imports routes for the products
+const secureRoute = require('./routes/secure.route'); // Imports routes for the products
+const adminRoute = require('./routes/admin.route'); // Imports routes for the products
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -33,9 +36,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.use('/song', songRoute);
-app.use('/review', reviewRoute);
-app.use('/user', userRoute);
+// app.use('/song', songRoute);
+// app.use('/review', reviewRoute);
+// app.use('/user', userRoute);
+app.use('/api/open', openRoute);
+app.use('/api/secure', secureRoute);
+app.use('/api/admin', adminRoute);
 
 
 

@@ -10,10 +10,11 @@ let reviewSchema = new Schema({
   songId: { type: Schema.Types.ObjectId, ref: 'Song', required: true }, 
   submittedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true},
   rating: { type: Number, min: 1, max: 5 },
-  submittedOn: { type: Date, required: true}
+  // submittedOn: { type: Date, required: true}
+  
 
-
-});
+},{timestamps:true}
+);
 
 
 // Export the model

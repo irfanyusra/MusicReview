@@ -12,7 +12,9 @@ let songSchema = new Schema({
   genre: { type: String },
   hidden: { type: Boolean, default:false },
   copyRightViolation: { type: Boolean, default:false },
-  reviewsId: { type: [Schema.Types.ObjectId], ref: 'Review' },
+  // reviewsId: { type: [Schema.Types.ObjectId], ref: 'Review' },
+  //number of rating??? derived...
+  //avg rating?? derived...
 
 });
 

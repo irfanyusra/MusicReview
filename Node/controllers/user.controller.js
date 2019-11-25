@@ -10,7 +10,7 @@ exports.create_user = function (req, res) {
       reviewsId: req.body.reviewsId,
       isAdmin: req.body.isAdmin,
       password: req.body.password,
-      // verified: { type: Boolean },
+      verified: req.body.verified,
       isActive: req.body.isActive      
    
     }
