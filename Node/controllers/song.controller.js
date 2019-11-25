@@ -11,6 +11,20 @@ exports.get_match_songs = function (req, res) {
 };
 
 
+
+exports.toggle_hide = function (req, res) {
+  Song.findById(req.params.id, function (err, song) {
+  if (err) return res.send(err);
+  else {
+    song.hidden=!song.hidden;
+    song.save(function (err) {
+      if (err) return res.send(err);
+      return res.send('hidden toggles successfully');
+    });
+  }
+  });
+};
+
 //to create a song
 exports.create_song = function (req, res) {
   let song = new Song(
@@ -22,14 +36,12 @@ exports.create_song = function (req, res) {
       genre: req.body.genre,
       hidden: req.body.hidden,
       copyRightViolation: req.body.copyRightViolation,
-      // reviewsId: req.body.reviewsId
-      
     }
   );
 
   song.save(function (err) {
     if (err) return res.send(err);
-    res.send('song Created successfully')
+    return res.send('song Created successfully');
   })
 };
 
@@ -50,15 +62,15 @@ exports.update_song_copyright = function (req, res) {
   });
 };
 
-// //getting all the songss 
+//getting all the songs that are copyrighted true 
 exports.get_all_songs_copyrightViolated = function (req, res) {
   Song.find({copyRightViolation: true},function (err, songs) {
-   if (err) res.send(err);
-   else res.send(songs);
+   if (err) return res.send(err);
+   return res.send(songs);
   })
 };
 
-// //getting a song using id 
+//getting a song using id 
 // exports.get_song = function (req, res) {
 //   Song.findById(req.params.id, (err, song) => {
 //     if (err) return res.send('Error for finding the song');
@@ -67,7 +79,7 @@ exports.get_all_songs_copyrightViolated = function (req, res) {
 // };
 
 
-// //getting a song using name
+//getting a song using name
 // exports.get_song_title = function (req, res) {
 //   Song.find({"name":req.params.name}, (err, song) => {
 //     if (err) return res.send('Error in finding the song');
@@ -77,7 +89,7 @@ exports.get_all_songs_copyrightViolated = function (req, res) {
 
 
 
-// //deletes song 
+//deletes song 
 // exports.delete_song = function (req, res) {
 //   Song.findByIdAndRemove(req.params.id, function (err) {
 //     if (err) return res.send(err);
