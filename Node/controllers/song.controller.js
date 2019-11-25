@@ -1,4 +1,5 @@
 const Song = require('../models/song.model');
+// const Song = require('../models/review.model');
 
 
 exports.get_10_songs = function (req, res) {
@@ -9,10 +10,6 @@ exports.get_match_songs = function (req, res) {
   console.log("getting matched songs");
 };
 
-
-exports.get_reviews_of_song = function (req, res) {
-  console.log("getting all reviews of this song");
-};
 
 //to create a song
 exports.create_song = function (req, res) {

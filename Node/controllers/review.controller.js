@@ -9,7 +9,7 @@ exports.create_review = function (req, res) {
       songId: req.params.id,
       submittedBy: req.body.submittedBy,
       rating: req.body.rating,
-      // submittedOn: req.body.submittedOn
+      submittedOn: Date.now()
 
     }
   );
@@ -17,6 +17,14 @@ exports.create_review = function (req, res) {
   review.save(function (err) {
     if (err) return res.send(err);
     res.send('Review Created successfully')
+  })
+};
+
+exports.get_reviews_of_song = function (req, res) {
+  console.log("getting all reviews of this song");
+  Review.find({songId:req.params.id}, function (err, songs) {
+    if (err) res.send(err);
+    else res.send(songs);
   })
 };
 
