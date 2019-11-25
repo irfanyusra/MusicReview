@@ -4,8 +4,14 @@ const Song = require('../models/song.model');
 
 exports.get_10_songs = function (req, res) {
   console.log("getting top ten songs");
-  //get all songs and sort by avg 
-  //get top 10 
+  //find all songs and sort by avg rating, limit of 10
+  Song.find({})
+    .sort({ avgOfRatings: 'desc' }).limit(10)
+    .exec(function(err, songs) {
+      if(err) res.send(err); 
+      return res.send(songs);  
+    });
+
 };
 
 exports.get_match_songs = function (req, res) {
@@ -43,9 +49,6 @@ exports.incrementNoOfReviews = function (songId){
     }
   });
 }
-
-//get avg rating for all songs 
-
 
 exports.mostRecentReviewOfASong = function (req, res) {
   Review.findById(req.params.id, { sort: { 'created_at': 1 } }, function (err, review) {

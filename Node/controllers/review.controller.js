@@ -34,9 +34,9 @@ exports.create_review = function (req, res) {
 exports.get_reviews_of_song = function (req, res) {
   console.log("getting all reviews of this song");
   Review.find({songId:req.params.id}, function (err, songs) {
-    if (err) res.send(err);
-    else res.send(songs);
-  })
+    if (err) return res.send(err);
+    else return res.send(songs);
+  });
 };
 
 
