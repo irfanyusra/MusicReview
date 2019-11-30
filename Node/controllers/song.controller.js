@@ -1,5 +1,4 @@
 const Song = require('../models/song.model');
-// const Song = require('../models/review.model');
 
 
 exports.get_10_songs = function (req, res) {
@@ -8,7 +7,7 @@ exports.get_10_songs = function (req, res) {
   Song.find({})
     .sort({ avgOfRatings: 'desc' }).limit(10)
     .exec(function(err, songs) {
-      if(err) res.send(err); 
+      if(err) return res.send(err); 
       return res.send(songs);  
     });
 
@@ -34,6 +33,7 @@ exports.newAvgRating = function (reviews,songId) {
           });
         }
       });
+      
 };
 
 exports.incrementNoOfReviews = function (songId){

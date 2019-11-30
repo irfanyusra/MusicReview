@@ -23,7 +23,7 @@ exports.create_review = function (req, res) {
     //update avg rating
     Review.find({ songId: songId }, function (err, reviews) {
       if (err) console.log(err);
-      else song_controller.newAvgRating(reviews,songId);
+      else console.log(song_controller.newAvgRating(reviews,songId));
     });
 
     return res.send(review.id);
