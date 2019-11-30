@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../http.service";
+import { User } from "../user";
 
 @Component({
   selector: "app-home",
@@ -8,7 +9,8 @@ import { HttpService } from "../http.service";
 })
 export class HomeComponent implements OnInit {
   songs: Object;
-
+  user_model = new User("email", "", "password", false, false, true);
+  // output: string;
   constructor(private _http: HttpService) {}
 
   ngOnInit() {
@@ -16,5 +18,13 @@ export class HomeComponent implements OnInit {
       this.songs = data;
       console.log(this.songs);
     });
+  }
+
+  login() {
+    this._http.user_login(this.user_model).subscribe(data => {
+      console.log(data);
+      // this.output="";
+    });
+    console.log(this.user_model);
   }
 }

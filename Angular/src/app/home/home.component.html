@@ -1,1 +1,31 @@
-<p>home works!</p>
+<!-- 
+<div class="container">    
+    <h2>Login</h2>
+    <form novalidate (ngSubmit)="submitLogin()">
+      <label for="email">Email:</label>
+      <input type="text" name="email" [(ngModel)]=userModel.email>
+      <label for="password">Password:</label>
+      <input type="text" name="password" [(ngModel)]=userModel.password>
+
+      <input type="submit">
+    </form>
+  </div> -->
+
+<header>
+  <div class="container">
+    <a routerLink="/" class="logo">3316 Lab 5</a>
+  </div>
+</header>
+
+<div class="container">
+  <p>Login</p>
+  <form name="form" (ngSubmit)="login()" novalidate>
+    <br />
+    <p>Email: <input name="email" type="text" [(ngModel)]="user_model.email" required /></p>
+
+    <p>Password: <input name="password" type="text" [(ngModel)]="user_model.password" required /></p>
+
+    <button>Login</button>
+  </form>
+  <p>{{output}}</p>
+</div>
