@@ -4,6 +4,8 @@ const argon2 = require('argon2');
 const config = require('../config');
 const jwt = require('jsonwebtoken');
 
+const passport = require('passport')
+
 exports.test = function (req, res) {
   res.send('User controller works!');
 };
@@ -128,23 +130,26 @@ exports.verify_user = function (req, res) {
 };
 
 exports.compare_token = function (req, res) {
-
   if (typeof (req.headers.authorization) === 'undefined')
     return res.status(401).send(`Access denied. Missing Authenticatio header`);
   else {
     const jwt_token = req.headers.authorization;
-
     try {
       jwt.verify(jwt_token, config.JWT_SECRET, function (err, paylod) { // Verify the token
-        if (err) {
-          return res.send(`Token not verified: ${err}`);
-        }
-        else {
-          return res.send(paylod)
-        }
+        if (err) return res.send(`Token not verified: ${err}`);
+        else return res.send(paylod);
       });
     } catch (ex) {
       return res.status(400).send("Invalid token");
     }
   }
 } 
+
+exports.passportTest = function (req, res, next) {
+
+  return res.send(`Passport authentication works: ${req}`);
+};
+
+exports.passportJwtTest = function (req, res, next) {
+  return res.send("Success! You can not see this without a token");
+};

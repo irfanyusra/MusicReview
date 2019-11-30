@@ -4,6 +4,7 @@ const express = require('express'); //express
 const bodyParser = require('body-parser');
 const app = express(); //our app
 
+const passport = require('passport');
 
 const openRoute = require('./routes/open.route'); // Imports routes for the products
 const secureRoute = require('./routes/secure.route'); // Imports routes for the products
@@ -32,6 +33,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api/open', openRoute);
 app.use('/api/secure', secureRoute);

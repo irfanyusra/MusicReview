@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const passport = require('passport')
+const passportConfig = require('../Config/passport')
+
 //The controller functions for item routes
 const song_controller = require('../controllers/song.controller');
 const user_controller = require('../controllers/user.controller');
@@ -21,10 +24,15 @@ router.get('/review/test', review_controller.test);
 router.get('/user/test', user_controller.test);
 
 
-router.post('/user/add', user_controller.create_user)
+router.post('/user/add', user_controller.create_user);
 
-router.get('/user/verify/:email', user_controller.verify_user)
+router.get('/user/verify/:email', user_controller.verify_user);
 
-router.get('/user/compare-token', user_controller.compare_token)
+router.get('/user/compare-token', user_controller.compare_token);
+
+router.get('/user/auth-local', passport.authenticate('local', { session: false, successRedirect: "/admin/user/test", failureRedirect: "/" }), user_controller.passportTest)
+
+router.get('/user/auth-jwt', passport.authenticate('jwt', { session: false }), user_controller.passportJwtTest)
+
 
 module.exports = router;
