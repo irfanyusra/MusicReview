@@ -100,7 +100,7 @@ exports.delete_user = function (req, res) {
 
 exports.verify_user = function (req, res) {
   let hashedPass;
-  User.findById(req.params.id, async function (err, user) {
+  User.findOne({ email: req.params.email }, async function (err, user) {
     if (err)
       return res.send(`err: cannot find the user: ${err}`);
     else {
