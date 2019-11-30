@@ -1,5 +1,8 @@
 const Song = require('../models/song.model');
 
+exports.test = function (req, res) {
+  res.send('song controller test');
+};
 
 exports.get_10_songs = function (req, res) {
   console.log("getting top ten songs");
@@ -7,7 +10,7 @@ exports.get_10_songs = function (req, res) {
   Song.find({})
     .sort({ avgOfRatings: 'desc' }).limit(10)
     .exec(function(err, songs) {
-      if(err) return res.send(err); 
+      if(err) return res.send("err: cannot get top 10 songs"); 
       return res.send(songs);  
     });
 
@@ -17,29 +20,28 @@ exports.get_match_songs = function (req, res) {
   console.log("getting matched songs");
 };
 
-exports.newAvgRating = function (reviews,songId) {
+exports.new_avg_rating = function (reviews,songId) {
       let sum = 0;
       for (let i = 0; i < reviews.length; i++) {
         sum += reviews[i].rating;
       }
       let avg = sum / reviews.length;
       Song.findById(songId, function (err, song) {
-        if (err) console.log(err);
+        if (err) console.log("err: cannot find a song");
         else {
           song.avgOfRatings = avg;
           song.save(function (err) {
-            if (err) console.log(err);
+            if (err) console.log("err: cannot get a new avg rating of a song");
             else return;
           });
         }
       });
-      
 };
 
-exports.incrementNoOfReviews = function (songId){
+exports.increment_no_of_reviews = function (songId){
   console.log(songId);
   Song.findById(songId, function (err, song) {
-    if (err) console.log(err);
+    if (err) console.log("err: cannot increment number of reviews in song controller");
     else {
       song.noOfReviews = song.noOfReviews+1;  
       song.save(function (err) {
@@ -49,14 +51,6 @@ exports.incrementNoOfReviews = function (songId){
     }
   });
 }
-
-exports.mostRecentReviewOfASong = function (req, res) {
-  Review.findById(req.params.id, { sort: { 'submittedOn': 1 } }, function (err, review) {
-    if (err) return res.send(err);
-    else return res.send(review);
-    
-  });
-};
 
 exports.toggle_hide = function (req, res) {
   Song.findById(req.params.id, function (err, song) {
@@ -92,6 +86,7 @@ exports.create_song = function (req, res) {
     return res.send(song.id);
   })
 };
+
 
 //updates song
 exports.update_song = function (req, res) {

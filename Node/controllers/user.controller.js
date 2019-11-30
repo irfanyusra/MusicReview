@@ -1,5 +1,9 @@
 const User = require('../models/user.model');
 
+exports.test = function (req, res) {
+  res.send('User controller works!');
+};
+
 //to create a user
 exports.create_user = function (req, res) {
   console.log("here");
