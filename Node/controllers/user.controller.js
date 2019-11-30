@@ -1,6 +1,9 @@
 const User = require('../models/user.model');
 const argon2 = require('argon2');
 
+const config = require('../config');
+const jwt = require('jsonwebtoken');
+
 exports.test = function (req, res) {
   res.send('User controller works!');
 };
@@ -104,10 +107,16 @@ exports.verify_user = function (req, res) {
     if (err)
       return res.send(`err: cannot find the user: ${err}`);
     else {
+      if (!user) {
+        return res.send(`cannot find the email`);
+      }
       hashedPass = user.hashPassword;
       try {
         if (await argon2.verify(hashedPass, req.body.password)) {
-          return res.send("passwords match");
+          const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' })
+          const { iat, exp } = jwt.decode(token);
+          return res.send({ iat, exp, token })
+          // return res.send("passwords match");  
         } else {
           return res.send("incorrect username or password");
         }
