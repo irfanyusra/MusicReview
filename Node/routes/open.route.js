@@ -29,9 +29,9 @@ router.get('/review/get-ordered/:songId', review_controller.get_desc_ord_reviews
 router.get('/user/verify/:email', user_controller.verify_user);
 router.get('/user/login', passport.authenticate('local', { session: false }), user_controller.login);
 
-router.get('/user/auth-local', passport.authenticate('local', { session: false, successRedirect: "/admin/user/test", failureRedirect: "/" }), user_controller.passportTest)
-router.get('/user/auth-jwt', passport.authenticate('jwt', { session: false }), user_controller.passportJwtTest)
-
-
+// router.get('/user/auth-local', passport.authenticate('local', { session: false, successRedirect: "/admin/user/test", failureRedirect: "/" }), user_controller.passportTest)
+// router.get('/user/auth-jwt', passport.authenticate('jwt', { session: false }), user_controller.passportJwtTest)
+router.get('/user/auth-local', user_controller.passportTest)
+router.get('/user/auth-jwt', user_controller.passportJwtTest)
 
 module.exports = router;
