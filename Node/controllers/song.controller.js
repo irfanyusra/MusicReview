@@ -9,9 +9,9 @@ exports.get_10_songs = function (req, res) {
   //find all songs and sort by avg rating, limit of 10
   Song.find({})
     .sort({ avgOfRatings: 'desc' }).limit(10)
-    .exec(function(err, songs) {
-      if(err) return res.send("err: cannot get top 10 songs"); 
-      return res.send(songs);  
+    .exec(function (err, songs) {
+      if (err) return res.send("err: cannot get top 10 songs");
+      return res.send(songs);
     });
 
 };
@@ -20,30 +20,30 @@ exports.get_match_songs = function (req, res) {
   console.log("getting matched songs");
 };
 
-exports.new_avg_rating = function (reviews,songId) {
-      let sum = 0;
-      for (let i = 0; i < reviews.length; i++) {
-        sum += reviews[i].rating;
-      }
-      let avg = sum / reviews.length;
-      Song.findById(songId, function (err, song) {
-        if (err) console.log("err: cannot find a song");
-        else {
-          song.avgOfRatings = avg;
-          song.save(function (err) {
-            if (err) console.log("err: cannot get a new avg rating of a song");
-            else return;
-          });
-        }
+exports.new_avg_rating = function (reviews, songId) {
+  let sum = 0;
+  for (let i = 0; i < reviews.length; i++) {
+    sum += reviews[i].rating;
+  }
+  let avg = sum / reviews.length;
+  Song.findById(songId, function (err, song) {
+    if (err) console.log("err: cannot find a song");
+    else {
+      song.avgOfRatings = avg;
+      song.save(function (err) {
+        if (err) console.log("err: cannot get a new avg rating of a song");
+        else return;
       });
+    }
+  });
 };
 
-exports.increment_no_of_reviews = function (songId){
+exports.increment_no_of_reviews = function (songId) {
   console.log(songId);
   Song.findById(songId, function (err, song) {
     if (err) console.log("err: cannot increment number of reviews in song controller");
     else {
-      song.noOfReviews = song.noOfReviews+1;  
+      song.noOfReviews = song.noOfReviews + 1;
       song.save(function (err) {
         if (err) console.log(err);
         else return;
@@ -54,14 +54,14 @@ exports.increment_no_of_reviews = function (songId){
 
 exports.toggle_hide = function (req, res) {
   Song.findById(req.params.id, function (err, song) {
-  if (err) return res.send(err);
-  else {
-    song.hidden=!song.hidden;
-    song.save(function (err) {
-      if (err) return res.send(err);
-      return res.send(song.id);
-    });
-  }
+    if (err) return res.send(err);
+    else {
+      song.hidden = !song.hidden;
+      song.save(function (err) {
+        if (err) return res.send(err);
+        return res.send(song.id);
+      });
+    }
   });
 };
 
@@ -76,7 +76,7 @@ exports.create_song = function (req, res) {
       genre: req.body.genre,
       hidden: req.body.hidden,
       copyRightViolation: req.body.copyRightViolation,
-      noOfReviews:req.body.noOfReviews,
+      noOfReviews: req.body.noOfReviews,
       avgOfRatings: req.body.avgOfRatings,
     }
   );
@@ -96,20 +96,24 @@ exports.update_song = function (req, res) {
   });
 };
 
-exports.update_song_copyright = function (req, res) {
-  Song.findByIdAndUpdate(req.params.id, { $set: {copyRightViolation: req.body.copyRightViolation}}
-    , function (err, song) {
+exports.toggle_song_copyright = function (req, res) {
+  Song.findById(req.params.id, function (err, song) {
     if (err) return res.send(err);
-    res.send(song + ' udpated.');
-    console.log("updating song");
+    else {
+      song.copyRightViolation = !song.copyRightViolation;
+      song.save(function (err) {
+        if (err) return res.send(err);
+        return res.send(song.id);
+      });
+    }
   });
 };
 
 //getting all the songs that are copyrighted true 
 exports.get_all_songs_copyrightViolated = function (req, res) {
-  Song.find({copyRightViolation: true},function (err, songs) {
-   if (err) return res.send(err);
-   return res.send(songs);
+  Song.find({ copyRightViolation: true }, function (err, songs) {
+    if (err) return res.send(err);
+    return res.send(songs);
   })
 };
 

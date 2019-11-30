@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express(); //our app
 
 const passport = require('passport');
+const configPassport = require('./Config/passport');
 
 const openRoute = require('./routes/open.route'); // Imports routes for the products
 const secureRoute = require('./routes/secure.route'); // Imports routes for the products
@@ -38,8 +39,8 @@ app.use(passport.session());
 
 app.use('/api/open', openRoute);
 app.use('/api/secure', secureRoute);
-app.use('/api/admin', adminRoute);
-
+// app.use('/api/admin', adminRoute);
+app.use('/api/admin', passport.authenticate('jwt', { session: false }), authenticatedRouter);
 
 
 let port = process.env.PORT || 8080;       

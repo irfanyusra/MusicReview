@@ -9,15 +9,11 @@ const review_controller = require('../controllers/review.controller');
 //song controller
 router.put('/song/add', song_controller.create_song); //Creates songs
 router.post('/song/update/:id', song_controller.update_song); //updates using id
-router.post('/song/toggle-hide/:id', song_controller.toggle_hide); //updates using id
 
 
 //review controller 
 router.put('/review/add/:songId', review_controller.create_review); //Create a new review for the song with the given ID
-router.get('/review/get/:id', review_controller.get_review);
 router.get('/review/get-all', review_controller.get_all_reviews)
-router.get('/review/get-reviews/:songId', review_controller.get_reviews_of_song)
-router.get('/review/most-recent/:songId', review_controller.get_most_recent_review)
 
 
 // router.get('/review/get-song/:id', review_controller.get_song_using_review);

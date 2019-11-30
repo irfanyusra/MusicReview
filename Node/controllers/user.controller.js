@@ -103,6 +103,18 @@ exports.delete_user = function (req, res) {
   })
 };
 
+exports.login = function (req, res, next) {
+  let user = req.user;
+  if (user.isActive == false) 
+    return res.send("user is marked as deactivated");
+  else {
+    const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });
+    const { iat, exp } = jwt.decode(token);
+    console.log("Generated token for user: " + token);
+    return res.send({ iat, exp, token });
+  }
+}
+
 exports.verify_user = function (req, res) {
   let hashedPass;
   User.findOne({ email: req.params.email }, async function (err, user) {
