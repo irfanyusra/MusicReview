@@ -5,20 +5,21 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
 
-const config = require('../config');
+const config = require('./config');
 
 // Models
-const User = require('../models/user.model');
+const User = require('./models/user.model');
 
 passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
         User.findOne({ email }, async function (err, user) {
-            if (err) return done(null, false, "User not found")
+            if (err) {
+                return done(null, false, `from passprt: ${err}`)
+            }
             else {
-                if (await argon2.verify(user.hashPassword, password)) 
-                    return done(null, user)
-                else 
-                    return done(null, false, "incorrect username or password")
+                if (!user) return done(null, false); //username doesnt exist
+                else if (await argon2.verify(user.hashPassword, password)) return done(null, user); //all good 
+                else return done(null, false); //pass wrong 
             }
         });
     })
@@ -30,12 +31,9 @@ passport.use(new JwtStrategy({
 },
     function (payload, done) {
         User.findOne({ email: payload.email }, function (err, user) {
-            console.log(payload)
-            if (err) {
-                return done(null, false);
-            }
-            else {
-                done(null, user)
-            }
-        })
+            console.log(payload);
+            if (err) return done(null, false);
+            else return done(null, user);
+        
+        });
     }));

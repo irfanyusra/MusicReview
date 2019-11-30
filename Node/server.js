@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express(); //our app
 
 const passport = require('passport');
-const configPassport = require('./Config/passport');
+const configPassport = require('./passport');
 
 const openRoute = require('./routes/open.route'); // Imports routes for the products
 const secureRoute = require('./routes/secure.route'); // Imports routes for the products
