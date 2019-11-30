@@ -105,9 +105,10 @@ exports.delete_user = function (req, res) {
 
 exports.login = function (req, res, next) {
   let user = req.user;
-  if (user.isActive == false) 
+  if (user.isActive == false)
     return res.send("user is marked as deactivated");
   else {
+    if (!user) return res.sent("cannot find the username");
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });
     const { iat, exp } = jwt.decode(token);
     console.log("Generated token for user: " + token);
@@ -155,7 +156,7 @@ exports.compare_token = function (req, res) {
       return res.status(400).send("Invalid token");
     }
   }
-} 
+}
 
 exports.passportTest = function (req, res, next) {
 
