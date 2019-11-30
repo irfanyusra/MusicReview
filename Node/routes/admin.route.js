@@ -23,6 +23,6 @@ router.get('/user/test', user_controller.test);
 
 router.post('/user/add', user_controller.create_user)
 
-router.get('/user/verify/:email', user_controller.verify_user)
+router.get('/user/verify/:id', user_controller.verify_user)
 
 module.exports = router;

@@ -5,10 +5,12 @@ const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
   //id from mongo 
-  email: { type: String, unique: true, required: true, max: 100 },
+  email: { type: String, required: true, max: 100 },
   name: { type: String, required: true, max: 100 },
   hashPassword: { type: String, required: true },
-  isAdmin: { type: Boolean, default: false },
+  isAdmin: { type: Boolean, default:false },
+  // password: { type: String, required: true, max: 100 },
+
   verified: { type: Boolean, default: false },
   isActive: { type: Boolean, default: true },
 
