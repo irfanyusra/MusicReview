@@ -25,4 +25,6 @@ router.post('/user/add', user_controller.create_user)
 
 router.get('/user/verify/:email', user_controller.verify_user)
 
+router.get('/user/compare-token', user_controller.compare_token)
+
 module.exports = router;
