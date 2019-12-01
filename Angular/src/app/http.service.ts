@@ -15,4 +15,7 @@ export class HttpService {
   user_login(user: User) {
     return this._http.post<any>(`/api/open/user/login`, user);
   }
+  get_most_recent_review(songId) {
+    return this._http.get<any>(`/api/open/review/most-recent/${songId}`);
+  }
 }

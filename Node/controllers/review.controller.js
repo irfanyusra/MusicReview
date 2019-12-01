@@ -87,8 +87,8 @@ exports.get_review = function (req, res) {
 exports.get_most_recent_review = function (req, res) {
   Review.find({ songId: req.params.songId }).sort({ submittedOn: 'desc' }).limit(1)
     .exec(function (err, review) {
-      if (err) return res.send(err);
-      return res.send(review);
+      if (err) return res.send("err");
+      return res.send({msg: review});
     });
 };
 
