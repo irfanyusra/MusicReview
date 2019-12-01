@@ -11,7 +11,14 @@ import { Router } from "@angular/router";
 export class HomeComponent implements OnInit {
   songs: Object;
   getRev = false;
-  recent_review: Object = {comment: '',subject:'',submittedBy:'',rating:'',submittedOn:''};
+  recent_review: Object = {
+    comment: "",
+    subject: "",
+    submittedBy: "",
+    rating: "",
+    submittedOn: ""
+  };
+  reviews: Object;
   constructor(private _http: HttpService, private _router: Router) {}
 
   ngOnInit() {
@@ -26,10 +33,28 @@ export class HomeComponent implements OnInit {
     this._http.get_most_recent_review(songId).subscribe(data => {
       //  this.songs = data;
       // this.getRev = false;
-      console.log(data.msg[0].comment);
-      if (data.error) this.recent_review="";
+      console.log(data.msg[0]);
+      if (data.error || data.msg[0] == undefined)
+        this.recent_review = {
+          comment: "",
+          subject: "",
+          submittedBy: "",
+          rating: "",
+          submittedOn: ""
+        };
       else this.recent_review = data.msg[0];
-    }
-    );
+    });
+  }
+  all_reviews(songId) {
+    console.log("hrtr");
+    this._http.get_all_reviews(songId).subscribe(data => {
+      //  this.songs = data;
+      // this.getRev = false;
+      // console.log(data.msg[0].comment);
+      console.log(data.msg[0]);
+      // console.log(data.msg[0].comment);
+      if (data.error) this.reviews = [];
+      else this.reviews=data.msg;
+    });
   }
 }

@@ -18,4 +18,8 @@ export class HttpService {
   get_most_recent_review(songId) {
     return this._http.get<any>(`/api/open/review/most-recent/${songId}`);
   }
+
+  get_all_reviews(songId) {
+    return this._http.get<any>(`/api/open/review/get-ordered/${songId}`);
+  }
 }

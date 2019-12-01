@@ -87,7 +87,7 @@ exports.get_review = function (req, res) {
 exports.get_most_recent_review = function (req, res) {
   Review.find({ songId: req.params.songId }).sort({ submittedOn: 'desc' }).limit(1)
     .exec(function (err, review) {
-      if (err) return res.send("err");
+      if (err) return res.send({error:"err"});
       return res.send({msg: review});
     });
 };
@@ -104,7 +104,7 @@ exports.get_song_using_review = function (req, res) {
 exports.get_desc_ord_reviews = function (req, res) {
   Review.find({ songId: req.params.songId }).sort({ submittedOn: 'desc' })
     .exec(function (err, reviews) {
-      if (err) return res.send(err);
-      return res.send(reviews);
+      if (err) return res.send({error: err});
+      return res.send({msg: reviews});
     });
 };
