@@ -10,8 +10,6 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   songs: Object;
-  user_model = new User("h", "", "333", false, false, true);
-  output: string;
   constructor(private _http: HttpService, private _router: Router) {}
 
   ngOnInit() {
@@ -19,25 +17,5 @@ export class HomeComponent implements OnInit {
       this.songs = data;
       console.log(this.songs);
     });
-  }
-
-  login() {
-    this._http.user_login(this.user_model).subscribe(
-      data => {
-        // console.log(data);
-        this.output = "Logged in";
-        if (!data.message) {
-          localStorage.setItem("token", data.token);
-          this._router.navigate(["secure"]);
-        } else {
-          console.log(data.message);
-        }
-      },
-      error => {
-        console.log(error);
-        this.output = "Error logging in";
-      }
-    );
-    console.log(this.user_model);
   }
 }

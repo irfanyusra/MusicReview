@@ -12,9 +12,10 @@ import { SecureService } from "./secure.service";
 import { SecureGuard } from "./secure.guard";
 import { HttpService } from "./http.service";
 import { TokenInterceptorService } from "./token-interceptor.service";
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SecureComponent],
+  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [SecureGuard, SecureService, HttpService,
   {
