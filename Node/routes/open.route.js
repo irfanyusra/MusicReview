@@ -36,5 +36,7 @@ router.get('/user/auth-local', user_controller.passport_test)
 router.get('/user/auth-jwt', user_controller.passport_jwt_test)
 //TODO: put or post
 router.post('/user/add', user_controller.create_user);
+router.get('/error', function(req, res){console.log("login again");
+    return res.send({msg: "Invalid token! Login again"})});
 
 module.exports = router;

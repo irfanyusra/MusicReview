@@ -7,7 +7,6 @@ exports.test = function (req, res) {
 
 //to create a review
 exports.create_review = function (req, res) {
-  console.log("till hwrw")
 
   let review = new Review(
     {
@@ -29,9 +28,10 @@ console.log("attempting to save this reveiew: " + review);
       //update avg rating
       Review.find({ songId: review.songId }, function (err, reviews) {
         if (err) return res.send({error: err});
-        console.log( song_controller.new_avg_rating(reviews, review.songId));
+        song_controller.new_avg_rating(reviews, review.songId);
+        console.log("adding the new avg");
       });
-      return res.send({msg: review.id});
+      return res.send({msg: "review added: " + review.id});
     }
   });
 };

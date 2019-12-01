@@ -15,13 +15,13 @@ import { Song } from "../song";
 export class SecureComponent implements OnInit {
   songs: Object;
   reviews: Object;
-
+add_review_output=""
   new_review: Review = {
     subject: "",
     comment: "",
     songId: "",
     submittedBy: "",
-    rating: 0
+    rating: 1
     // submittedOn: new Date("2017-05-03")
   };
   
@@ -33,7 +33,7 @@ export class SecureComponent implements OnInit {
     comment: "",
     songId: "",
     submittedBy: "",
-    rating: 0
+    rating: 1
     // submittedOn: new Date("2017-05-03")
   };
   constructor(
@@ -81,11 +81,11 @@ export class SecureComponent implements OnInit {
     this._http.add_review(this.new_review).subscribe(data => {
       if (data.error) console.log(data.error);
       else {
-        this._http.get_top_10_songs().subscribe(data => {
-          this.songs = data;
-        }
-        );
+        this._http.get_top_10_songs().subscribe(songs => {
+          this.songs = songs;
+        });
       }
+      this.add_review_output=data.msg;
     });
   }
 }
