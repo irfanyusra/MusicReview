@@ -107,6 +107,7 @@ exports.login = function (req, res, next) {
   let user = req.user;
   if (user.isActive == false)
     return res.send(`user is marked as deactivated`);
+    // res.send({message: "user is marked as deactivated"})
   else {
     if (!user) return res.sent(`cannot find the username`);
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });
