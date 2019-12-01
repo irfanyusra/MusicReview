@@ -79,12 +79,11 @@
           <ng-template #elseBlock>Less Reviews</ng-template>
         </button>
         <div *ngIf="this.s.rev_expand">
-          here
-
           <div *ngFor="let r of reviews; index as i">
         Review:
         <br />
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Subject:
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        Subject:
         <span> {{ r.subject }}</span> <br /><span
           >&nbsp;&nbsp;&nbsp;&nbsp;</span
         >

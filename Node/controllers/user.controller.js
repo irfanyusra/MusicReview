@@ -13,12 +13,11 @@ exports.test = function (req, res) {
 //to create a user
 exports.create_user = async function (req, res) {
   try {
-    const hash = await argon2.hash(req.body.password)
+    const hash = await argon2.hash(req.body.password);
     let user = new User(
       {
         email: req.body.email,
         name: req.body.name,
-        reviewsId: req.body.reviewsId,
         isAdmin: req.body.isAdmin,
         hashPassword: hash,
         verified: req.body.verified,
@@ -27,8 +26,18 @@ exports.create_user = async function (req, res) {
     );
 
     user.save(function (err) {
-      if (err) return res.send(err);
-      return res.send(`User Created successfully: ${user._id}`);
+      if (err) return res.send({
+        msg:
+          "The email already exists"
+      });
+      else {
+        const token = jwt.sign(user.toJSON(), config.JWT_SECRET, {
+          expiresIn: "45m"
+        });
+        const { iat, exp } = jwt.decode(token);
+        console.log("Generated token for user: " + token);
+        return res.send({ iat, exp, token });
+      }
     });
   } catch (err) {
     return res.send(`err: cannot hash or get the password`)
@@ -107,7 +116,7 @@ exports.login = function (req, res, next) {
   let user = req.user;
   if (user.isActive == false)
     return res.send(`user is marked as deactivated`);
-    // res.send({message: "user is marked as deactivated"})
+  // res.send({message: "user is marked as deactivated"})
   else {
     if (!user) return res.sent(`cannot find the username`);
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });

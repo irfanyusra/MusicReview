@@ -22,4 +22,8 @@ export class HttpService {
   get_all_reviews(songId) {
     return this._http.get<any>(`/api/open/review/get-ordered/${songId}`);
   }
+
+  add_new_user(user: User) {
+    return this._http.post<any>(`/api/open/user/add`, user);
+  }
 }

@@ -34,5 +34,6 @@ router.get('/login/error', user_controller.login_error);
 // router.get('/user/auth-jwt', passport.authenticate('jwt', { session: false }), user_controller.passportJwtTest)
 router.get('/user/auth-local', user_controller.passport_test)
 router.get('/user/auth-jwt', user_controller.passport_jwt_test)
+router.post('/user/add', user_controller.create_user);
 
 module.exports = router;

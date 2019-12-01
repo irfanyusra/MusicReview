@@ -9,7 +9,7 @@
   <form name="form" (ngSubmit)="login()" novalidate>
     <p>
       Email:
-      <input name="email" type="text" [(ngModel)]="user_model.email" required />
+      <input name="email" type="text" [(ngModel)]="login_user_model.email" required />
     </p>
 
     <p>
@@ -17,11 +17,41 @@
       <input
         name="password"
         type="text"
-        [(ngModel)]="user_model.password"
+        [(ngModel)]="login_user_model.password"
         required
       />
     </p>
       <button>Login</button>
   </form>
   <p>{{ output }}</p>
+
+
+ <h3>Create Account</h3>
+  <form name="form" (ngSubmit)="createUser()" novalidate>
+     <p>
+      Name:
+      <input
+        name="user_name"
+        type="text"
+        [(ngModel)]="create_user_model.name"
+        required
+      />
+    </p>
+    <p>
+      Email:
+      <input name="email" type="text" [(ngModel)]="create_user_model.email" required />
+    </p>
+    <p>
+      Password:
+      <input
+        name="password"
+        type="text"
+        [(ngModel)]="create_user_model.password"
+        required
+      />
+    </p>
+      <button>Create</button>
+  </form>
+  <p>{{ create_output }}</p>
+
 </div>

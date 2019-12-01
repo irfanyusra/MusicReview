@@ -21,7 +21,6 @@ router.get('/users', user_controller.get_all_users); //Return all songs which ar
 
 
 
-router.post('/user/add', user_controller.create_user);
 router.get('/user/compare-token', user_controller.compare_token);
 
 
