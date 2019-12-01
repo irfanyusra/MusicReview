@@ -123,7 +123,7 @@
       >
     </select>
     <input type="submit" />
-    <br>
+    <br />
     {{ add_review_output }}
   </form>
   <br />
@@ -152,9 +152,36 @@
     Comment:
     <input name="comment" type="text" [(ngModel)]="new_song.comment" />
     <br />
+    <br />
 
-    <input type="submit" />
+     <a 
+          (click)="this.song_rev_expand = !this.song_rev_expand"
+          (click)="add_song_rev = !add_song_rev"
+        >
+          <span
+            *ngIf="!this.song_rev_expand; then thenBlock; else elseBlock"
+          ></span>
+          <ng-template #thenBlock>Add Review</ng-template>
+
+          <ng-template #elseBlock>Cancel Review</ng-template>
+  </a>
+    <div *ngIf="this.song_rev_expand">
+      <h5>
+        Review:
+        <br />
+        Subject:
+        <input name="subject" type="text" [(ngModel)]="new_review.subject" />
+        <br />
+        Rating:
+        <input name="rating" type="number" [(ngModel)]="new_review.rating" />
+        <br />
+        Comment:
+        <input name="comment" type="text" [(ngModel)]="new_review.comment" />
+      </h5>
+    </div>
     <br>
+    <input type="submit" />
+    <br />
     {{ add_song_output }}
   </form>
 

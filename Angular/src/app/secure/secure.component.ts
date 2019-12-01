@@ -17,7 +17,7 @@ export class SecureComponent implements OnInit {
   reviews: Object;
   add_review_output = "";
   add_song_output = "";
-
+add_song_rev =false; 
   new_review: Review = {
     subject: "",
     comment: "",
@@ -91,12 +91,12 @@ export class SecureComponent implements OnInit {
   }
   submit_review() {
     console.log(this.current_user.email);
-    this.new_review.submittedBy = "h"; //this.current_user.email;
+    this.new_review.submittedBy =  this.current_user.email;
     console.log(this.new_review);
     this._http.add_review(this.new_review).subscribe(data => {
       if (data.error) console.log(data.error);
       else {
-        this._http.get_top_10_songs().subscribe(songs => {
+          this._http.get_top_10_songs().subscribe(songs => {
           this.songs = songs;
         });
       }
@@ -114,8 +114,18 @@ export class SecureComponent implements OnInit {
         this._http.get_top_10_songs().subscribe(songs => {
           this.songs = songs;
         });
+      if (this.add_song_rev){
+        this.new_review.submittedBy = this.current_user.email;
+        this.new_review.songId = data.msg;
+        console.log(this.new_review);
+        this.submit_review();
+        this.add_song_output = "Song added with Review:" +data.msg;
+
       }
-      this.add_song_output = data.msg;
+      else this.add_song_output = "Song ID:" + data.msg;
+      }
+
+      
     });
   }
 }

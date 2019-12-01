@@ -89,7 +89,7 @@ exports.create_song = function (req, res) {
 
   song.save(function (err) {
     if (err) return res.send({error: err});
-    return res.send({msg: "Song added: "+ song.id});
+    return res.send({msg: song.id});
   });
 };
 
