@@ -40,7 +40,7 @@ exports.create_user = async function (req, res) {
       }
     });
   } catch (err) {
-    return res.send({ msg:`err: cannot hash or get the password`});
+    return res.send({ msg: `err: cannot hash or get the password` });
   }
 
 };
@@ -115,10 +115,10 @@ exports.delete_user = function (req, res) {
 exports.login = function (req, res, next) {
   let user = req.user;
   if (user.isActive == false)
-    return res.send({msg: `user is marked as deactivated`});
+    return res.send({ msg: `user is marked as deactivated` });
   // res.send({message: "user is marked as deactivated"})
   else {
-    if (!user) return res.send({msg: `cannot find the username`});
+    if (!user) return res.send({ msg: `cannot find the username` });
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });
     const { iat, exp } = jwt.decode(token);
     console.log(`Generated token for user: ` + token);

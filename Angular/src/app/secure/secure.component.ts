@@ -15,7 +15,7 @@ import { Song } from "../song";
 export class SecureComponent implements OnInit {
   songs: Object;
   reviews: Object;
-add_review_output=""
+  add_review_output = "";
   new_review: Review = {
     subject: "",
     comment: "",
@@ -24,7 +24,7 @@ add_review_output=""
     rating: 1
     // submittedOn: new Date("2017-05-03")
   };
-  
+
   current_user: User;
   selected_song: Song;
 
@@ -75,8 +75,8 @@ add_review_output=""
     this.selected_song = song;
   }
   submit_review() {
-    console.log(this.current_user.email)
-    this.new_review.submittedBy = "h";//this.current_user.email;
+    console.log(this.current_user.email);
+    this.new_review.submittedBy = "h"; //this.current_user.email;
     console.log(this.new_review);
     this._http.add_review(this.new_review).subscribe(data => {
       if (data.error) console.log(data.error);
@@ -85,7 +85,7 @@ add_review_output=""
           this.songs = songs;
         });
       }
-      this.add_review_output=data.msg;
+      this.add_review_output = data.msg;
     });
   }
 }

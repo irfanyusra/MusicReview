@@ -19,19 +19,19 @@ exports.create_review = function (req, res) {
     }
   );
 
-console.log("attempting to save this reveiew: " + review);
+  console.log("attempting to save this reveiew: " + review);
 
   review.save(function (err) {
-    if (err) return res.send({error: "err: cannot increment the number of reviews in reviews controller"});
+    if (err) return res.send({ error: "err: cannot increment the number of reviews in reviews controller" });
     else {
       song_controller.increment_no_of_reviews(review.songId);
       //update avg rating
       Review.find({ songId: review.songId }, function (err, reviews) {
-        if (err) return res.send({error: err});
+        if (err) return res.send({ error: err });
         song_controller.new_avg_rating(reviews, review.songId);
         console.log("adding the new avg");
       });
-      return res.send({msg: "review added: " + review.id});
+      return res.send({ msg: "review added: " + review.id });
     }
   });
 };
@@ -90,8 +90,8 @@ exports.get_review = function (req, res) {
 exports.get_most_recent_review = function (req, res) {
   Review.find({ songId: req.params.songId }).sort({ submittedOn: 'desc' }).limit(1)
     .exec(function (err, review) {
-      if (err) return res.send({error:"err"});
-      return res.send({msg: review});
+      if (err) return res.send({ error: "err" });
+      return res.send({ msg: review });
     });
 };
 
@@ -107,7 +107,7 @@ exports.get_song_using_review = function (req, res) {
 exports.get_desc_ord_reviews = function (req, res) {
   Review.find({ songId: req.params.songId }).sort({ submittedOn: 'desc' })
     .exec(function (err, reviews) {
-      if (err) return res.send({error: err});
-      return res.send({msg: reviews});
+      if (err) return res.send({ error: err });
+      return res.send({ msg: reviews });
     });
 };

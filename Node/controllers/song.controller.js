@@ -32,7 +32,7 @@ exports.new_avg_rating = function (reviews, songId) {
   Song.findById(songId, function (err, song) {
     if (err) console.log("err: cannot find a song");
     else {
-      console.log("old avg"+song.avgOfRatings);
+      console.log("old avg" + song.avgOfRatings);
       song.avgOfRatings = avg;
       song.save(function (err) {
         if (err) console.log("err: cannot get a new avg rating of a song");
