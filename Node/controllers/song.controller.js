@@ -1,7 +1,7 @@
 const Song = require('../models/song.model');
 
 exports.test = function (req, res) {
-  res.send('song controller test');
+  return res.send('song controller test');
 };
 
 exports.get_10_songs = function (req, res) {
@@ -16,6 +16,7 @@ exports.get_10_songs = function (req, res) {
 
 };
 
+// TODO: get matching songs .. fuse.js 
 exports.get_match_songs = function (req, res) {
   console.log("getting matched songs");
 };
@@ -84,7 +85,7 @@ exports.create_song = function (req, res) {
   song.save(function (err) {
     if (err) return res.send(err);
     return res.send(song.id);
-  })
+  });
 };
 
 
@@ -114,7 +115,7 @@ exports.get_all_songs_copyrightViolated = function (req, res) {
   Song.find({ copyRightViolation: true }, function (err, songs) {
     if (err) return res.send(err);
     return res.send(songs);
-  })
+  });
 };
 
 //getting a song using id 

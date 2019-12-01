@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { User } from "./user";
 
@@ -13,6 +13,6 @@ export class HttpService {
   }
 
   user_login(user: User) {
-     return this._http.post<any>(`/api/open/user/login`, user);
-}
+    return this._http.post<any>(`/api/open/user/login`, user);
+  }
 }

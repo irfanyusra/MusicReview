@@ -16,16 +16,16 @@ const mongoose = require('mongoose');
 const dev_db_url = "mongodb+srv://yusra:yusra@cluster0-v75ag.mongodb.net/Lab5?retryWrites=true&w=majority";
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 // mongoose.Promise = global.Promise;
 
-app.use(function(req, res, next) {
-     res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 const db = mongoose.connection;
@@ -43,7 +43,7 @@ app.use('/api/secure', secureRoute);
 app.use('/api/admin', passport.authenticate('jwt', { session: false }), adminRoute);
 
 
-let port = process.env.PORT || 8080;       
+let port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server is up and running on port number  ${port}`);
 });

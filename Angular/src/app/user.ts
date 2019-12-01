@@ -5,6 +5,6 @@ export class User {
     public password: string,
     public isAdmin: boolean,
     public verified: boolean,
-    public isActive: boolean,
+    public isActive: boolean
   ) {}
 }

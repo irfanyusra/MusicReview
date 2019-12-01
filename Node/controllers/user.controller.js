@@ -31,7 +31,7 @@ exports.create_user = async function (req, res) {
       return res.send(`User Created successfully: ${user._id}`);
     });
   } catch (err) {
-    res.send(`err: cannot hash or get the password`)
+    return res.send(`err: cannot hash or get the password`)
   }
 
 };
@@ -119,12 +119,9 @@ exports.login = function (req, res, next) {
 exports.verify_user = function (req, res) {
   let hashedPass;
   User.findOne({ email: req.params.email }, async function (err, user) {
-    if (err)
-      return res.send(`err: cannot find the user: ${err}`);
+    if (err) return res.send(`err: cannot find the user: ${err}`);
     else {
-      if (!user) {
-        return res.send(`cannot find the email`);
-      }
+      if (!user) return res.send(`cannot find the email`);
       hashedPass = user.hashPassword;
       try {
         if (await argon2.verify(hashedPass, req.body.password)) {
@@ -159,7 +156,6 @@ exports.compare_token = function (req, res) {
 }
 
 exports.passport_test = function (req, res, next) {
-
   return res.send(`Passport authentication works: ${req}`);
 };
 
@@ -169,5 +165,6 @@ exports.passport_jwt_test = function (req, res, next) {
 
 exports.login_error = function (req, res, next) {
   return res.send(`Error logging in`);
+  //   res.send({message: "incorrect username or password"})
 };
 

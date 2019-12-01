@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
         this.output = "Logged in";
         if (!data.message) {
           localStorage.setItem("jwtToken", data.token);
-          this._router.navigate(['secure']);
+          this._router.navigate(["secure"]);
         } else {
           console.log(data.message);
         }

@@ -35,6 +35,6 @@ passport.use(new JwtStrategy({
             console.log(payload);
             if (err) return done(null, false);
             else return done(null, user);
-        
+
         });
     }));
