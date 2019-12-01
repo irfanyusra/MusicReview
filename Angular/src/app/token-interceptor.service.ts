@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor } from "@angular/common/http";
 import {SecureService} from './secure.service'
+import { User } from "./user";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class TokenInterceptorService {
   intercept(req, next){
     let tokenReq = req.clone({
       setHeaders: {
-        Authorization: `'Bearer ' ${this._secureService.getToken()}`,
+        Authorization: `Bearer ${this._secureService.getToken()}`,
       }
     });
     return next.handle(tokenReq);

@@ -1,3 +1,6 @@
+<!-- TODO: add header and html tag stuff for all the html files -->
+<!-- TODO: make a componenet for the song stufff and import it here and open route -->
+<!-- TODO: make a model for review -->
 <header>
   <div class="container">
     <a routerLink="/" class="logo">3316 Lab 5</a>
@@ -99,4 +102,27 @@
       </h5>
     </div>
   </div>
+</div>
+
+<div class="container">
+    <h2> 
+        Add a Review to a song
+    </h2>
+        <form name= "add-review-form" novalidate (ngSubmit)="submit_review()">
+        Subject:
+        <input name="subject" type="text" [(ngModel)]="new_review.subject" />
+        
+        Rating:
+        <input  name="rating" type="number" [(ngModel)]="new_review.rating" />
+        Comment:
+         <input name="comment" type="text" [(ngModel)]="new_review.comment" />
+        Song: 
+        <select name="songId" [(ngModel)]="new_review.songId">
+          <option>Song to add review</option>
+          <option value="{{song._id}}" *ngFor="let song of songs">{{song.title}} - {{song.artist}}</option>
+        </select>
+        <input type="submit"/>
+      </form>
+<br>
+
 </div>

@@ -26,4 +26,8 @@ export class HttpService {
   add_new_user(user: User) {
     return this._http.post<any>(`/api/open/user/add`, user);
   }
+
+  add_review(review) {
+    return this._http.post<any>(`/api/secure/review/add`, review);
+  }
 }

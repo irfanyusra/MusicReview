@@ -7,28 +7,31 @@ exports.test = function (req, res) {
 
 //to create a review
 exports.create_review = function (req, res) {
-  let songId = req.params.songId;
+  console.log("till hwrw")
+
   let review = new Review(
     {
       subject: req.body.subject,
       comment: req.body.comment,
-      songId: req.params.id,
+      songId: req.body.songId,
       submittedBy: req.body.submittedBy,
       rating: req.body.rating,
       submittedOn: Date.now(),
     }
   );
 
+console.log("attempting to save this reveiew: " + review);
+
   review.save(function (err) {
-    if (err) return res.send("err: cannot increment the number of reviews in reviews controller");
+    if (err) return res.send({error: "err: cannot increment the number of reviews in reviews controller"});
     else {
-      song_controller.increment_no_of_reviews(songId);
+      song_controller.increment_no_of_reviews(review.songId);
       //update avg rating
-      Review.find({ songId: songId }, function (err, reviews) {
-        if (err) return res.send(err);
-        console.log(song_controller.new_avg_rating(reviews, songId));
+      Review.find({ songId: review.songId }, function (err, reviews) {
+        if (err) return res.send({error: err});
+        console.log( song_controller.new_avg_rating(reviews, review.songId));
       });
-      return res.send(review.id);
+      return res.send({msg: review.id});
     }
   });
 };
