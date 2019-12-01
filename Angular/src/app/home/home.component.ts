@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../http.service";
-import { User } from "../user";
 import { Router } from "@angular/router";
 
 @Component({
@@ -10,7 +9,6 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   songs: Object;
-  getRev = false;
   recent_review: Object = {
     comment: "",
     subject: "",
@@ -29,10 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   most_recent_review(songId) {
-    // console.log("hrtr");
     this._http.get_most_recent_review(songId).subscribe(data => {
-      //  this.songs = data;
-      // this.getRev = false;
       console.log(data.msg[0]);
       if (data.error || data.msg[0] == undefined)
         this.recent_review = {
@@ -46,13 +41,8 @@ export class HomeComponent implements OnInit {
     });
   }
   all_reviews(songId) {
-    console.log("hrtr");
     this._http.get_all_reviews(songId).subscribe(data => {
-      //  this.songs = data;
-      // this.getRev = false;
-      // console.log(data.msg[0].comment);
       console.log(data.msg[0]);
-      // console.log(data.msg[0].comment);
       if (data.error) this.reviews = [];
       else this.reviews=data.msg;
     });

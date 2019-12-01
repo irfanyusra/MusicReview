@@ -6,7 +6,7 @@
 
 <div class="container">
   <h3>Login</h3>
-  <form name="form" (ngSubmit)="login()" validate>
+  <form name="form" (ngSubmit)="login()" novalidate>
     <p>
       Email:
       <input name="email" type="text" [(ngModel)]="login_user_model.email" required />
