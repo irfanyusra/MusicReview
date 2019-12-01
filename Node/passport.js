@@ -7,6 +7,7 @@ const passport = require('passport');
 
 const config = require('./config');
 
+const jsonwebtoken = require('jsonwebtoken');
 // Models
 const User = require('./models/user.model');
 
@@ -15,12 +16,12 @@ passport.use(
         User.findOne({ email }, async function (err, user) {
             if (err) {
                 console.log(`from passprt: ${err}`);
-                return done(null, false, `from passprt: ${err}`);
+                return done(null, false, {error:`from passprt: ${err}`});
             }
             else {
-                if (!user) return done(null, false); //username doesnt exist
+                if (!user) return done(null, false,{message: "username doesnt exist"}); //username doesnt exist
                 else if (await argon2.verify(user.hashPassword, password)) return done(null, user); //all good 
-                else return done(null, false); //pass wrong 
+                else return done(null, false, { message: "password wrong" }); //pass wrong 
             }
         });
     })
@@ -31,9 +32,9 @@ passport.use(new JwtStrategy({
     secretOrKey: config.JWT_SECRET
 },
     function (payload, done) {
-        User.findOne({ email: payload.email }, function (err, user) {
+        User.findOne({ email: payload.email }, function (error, user) {
             console.log(payload);
-            if (err) return done(null, false);
+            if (error) return done(null, false);
             else return done(null, user);
 
         });

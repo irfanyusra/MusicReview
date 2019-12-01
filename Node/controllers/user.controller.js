@@ -114,9 +114,11 @@ exports.delete_user = function (req, res) {
 
 exports.login = function (req, res, next) {
   let user = req.user;
+  console.log(user);
   if (user.isActive == false)
     return res.send({ msg: `user is marked as deactivated` });
-  // res.send({message: "user is marked as deactivated"})
+  if (user.verified == false)
+    return res.send({ msg: `Please verify your emai` })
   else {
     if (!user) return res.send({ msg: `cannot find the username` });
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });

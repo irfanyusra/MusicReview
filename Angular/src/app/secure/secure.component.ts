@@ -119,6 +119,7 @@ add_song_rev =false;
         this.new_review.songId = data.msg;
         console.log(this.new_review);
         this.submit_review();
+        // TODO: fi the validate problem 
         this.add_song_output = "Song added with Review:" +data.msg;
 
       }

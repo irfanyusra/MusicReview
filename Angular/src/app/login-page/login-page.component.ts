@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "../user";
 import { Router } from "@angular/router";
 import { HttpService } from "../http.service";
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: "app-login-page",
@@ -25,16 +26,19 @@ export class LoginPageComponent implements OnInit {
         console.log(data);
         if (!data.msg) {
           localStorage.setItem("token", data.token);
-          this._router.navigate(["secure"]);
+          if (jwt_decode(data.token).isAdmin)
+            this._router.navigate(["secure/admin"]);
+          else this._router.navigate(["secure"]);
+
           console.log("Logged in");
         } else {
-          this.output = "user deactivated. ";
-          console.log(data.message);
+          this.output = data.msg;
+          console.log(data.msg);
         }
       },
       error => {
         console.log(error);
-        this.output = "user not found";
+        this.output = "username or password incorrect";
       }
     );
     console.log(this.login_user_model);
