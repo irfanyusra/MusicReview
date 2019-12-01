@@ -20,18 +20,21 @@ export class LoginPageComponent implements OnInit {
   login() {
     this._http.user_login(this.login_user_model).subscribe(
       data => {
-        // console.log(data);
-        this.output = "Logged in";
-        if (!data.message) {
+        console.log("data");
+
+        console.log(data);
+        if (!data.msg) {
           localStorage.setItem("token", data.token);
           this._router.navigate(["secure"]);
+          console.log("Logged in");
         } else {
+          this.output = "user deactivated. ";
           console.log(data.message);
         }
       },
       error => {
         console.log(error);
-        this.output = "Error logging in";
+        this.output = "user not found";
       }
     );
     console.log(this.login_user_model);
@@ -41,13 +44,17 @@ export class LoginPageComponent implements OnInit {
     console.log(this.create_user_model);
     this._http.add_new_user(this.create_user_model).subscribe(data => {
       console.log(data);
-    // TODO: it just sys email already exists for everything 
-      this.create_output = data.msg;
-      if (!data.msg) {
+      if (
+        this.create_user_model.name == "" ||
+        this.create_user_model.email == "" ||
+        this.create_user_model.password == ""
+      )
+        this.create_output = "required fields missing";
+      else if (!data.msg) {
         localStorage.setItem("token", data.token);
         this._router.navigate(["secure"]);
       } else {
-        console.log(data.msg);
+        this.create_output = "email already exits";
       }
     });
   }
