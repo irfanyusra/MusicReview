@@ -47,12 +47,12 @@ exports.create_user = async function (req, res) {
 
 exports.toggle_admin = function (req, res) {
   User.findById(req.params.id, function (err, user) {
-    if (err) return res.send(err);
+    if (err) return res.send({error: err});
     else {
       user.isAdmin = !user.isAdmin;
       user.save(function (err) {
-        if (err) return res.send('error toggling admin status for the user: ${err}');
-        return res.send('user admin toggled successfully');
+        if (err) return res.send({error: 'error toggling admin status for the user: ${err}'});
+        return res.send({msg: 'user admin toggled successfully'});
       });
     }
   });
@@ -64,8 +64,8 @@ exports.toggle_active = function (req, res) {
     else {
       user.isActive = !user.isActive;
       user.save(function (err) {
-        if (err) return res.send(`Error toggling active for the user: ${err}`);
-        return res.send('user active toggled successfully');
+        if (err) return res.send({errore:`Error toggling active for the user: ${err}`});
+        return res.send({msg: 'user active toggled successfully'});
       });
     }
   });
@@ -73,44 +73,44 @@ exports.toggle_active = function (req, res) {
 
 //getting all the users 
 exports.get_all_users = function (req, res) {
-  User.find(function (err, user) {
-    if (err) return res.send(err);
-    return res.send(user);
+  User.find(function (err, users) {
+    if (err) return res.send({error: err});
+    return res.send({msg: users});
   })
 };
 
 //getting a user using id 
-exports.get_user = function (req, res) {
-  User.findById(req.params.id, (err, user) => {
-    if (err) return res.send('Error for finding the user');
-    return res.send(user);
-  })
-};
+// exports.get_user = function (req, res) {
+//   User.findById(req.params.id, (err, user) => {
+//     if (err) return res.send({error: 'Error for finding the user'});
+//     return res.send({msg: user});
+//   })
+// };
 
 
 //getting a user using name
 exports.get_user_email = function (req, res) {
   User.find({ "email": req.params.email }, (err, user) => {
-    if (err) return res.send('Error in finding the user');
-    return res.send(user);
+    if (err) return res.send({error: 'Error in finding the user'});
+    return res.send({msg: user});
   })
 };
 
 //updates user
-exports.update_user = function (req, res) {
-  User.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, user) {
-    if (err) return res.send(err);
-    return res.send(user + ' udpated.');
-  });
-};
+// exports.update_user = function (req, res) {
+//   User.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, user) {
+//     if (err) return res.send({error: err});
+//     return res.send({msg: user._id + ' udpated.'});
+//   });
+// };
 
 //deletes user 
-exports.delete_user = function (req, res) {
-  User.findByIdAndRemove(req.params.id, function (err) {
-    if (err) return res.send(err);
-    return res.send('Deleted successfully!');
-  })
-};
+// exports.delete_user = function (req, res) {
+//   User.findByIdAndRemove(req.params.id, function (err) {
+//     if (err) return res.send({error: err});
+//     return res.send({msg: 'Deleted successfully!'});
+//   })
+// };
 
 exports.login = function (req, res, next) {
   let user = req.user;
@@ -131,9 +131,9 @@ exports.login = function (req, res, next) {
 exports.verify_user = function (req, res) {
   let hashedPass;
   User.findOne({ email: req.params.email }, async function (err, user) {
-    if (err) return res.send(`err: cannot find the user: ${err}`);
+    if (err) return res.send({error: `err: cannot find the user: ${err}`});
     else {
-      if (!user) return res.send(`cannot find the email`);
+      if (!user) return res.send({error: `cannot find the email`});
       hashedPass = user.hashPassword;
       try {
         if (await argon2.verify(hashedPass, req.body.password)) {
@@ -142,10 +142,10 @@ exports.verify_user = function (req, res) {
           return res.send({ iat, exp, token })
           // return res.send(`passwords match`);  
         } else {
-          return res.send(`incorrect username or password`);
+          return res.send({msg: `incorrect username or password`});
         }
       } catch (err) {
-        return res.send(`verification failed: ${err}`);
+        return res.send({error: `verification failed: ${err}`});
       }
     }
   });
@@ -177,6 +177,5 @@ exports.passport_jwt_test = function (req, res, next) {
 
 exports.login_error = function (req, res, next) {
   return res.send(`Error logging in`);
-  //   res.send({message: "incorrect username or password"})
 };
 

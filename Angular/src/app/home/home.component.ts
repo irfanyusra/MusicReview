@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   constructor(private _http: HttpService, private _router: Router) {}
 
   ngOnInit() {
+    localStorage.clear();
     this._http.get_top_10_songs().subscribe(data => {
       this.songs = data;
       console.log(this.songs);
