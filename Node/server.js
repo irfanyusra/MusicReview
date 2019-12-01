@@ -7,6 +7,8 @@ const app = express(); //our app
 const passport = require('passport');
 const configPassport = require('./passport');
 
+const cors = require('cors');
+
 const openRoute = require('./routes/open.route'); // Imports routes for the products
 const secureRoute = require('./routes/secure.route'); // Imports routes for the products
 const adminRoute = require('./routes/admin.route'); // Imports routes for the products
@@ -22,12 +24,14 @@ mongoose.connect(mongoDB, {
 
 // mongoose.Promise = global.Promise;
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', "*");
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
+app.use(cors({ origin: '*' }));
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
