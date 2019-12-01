@@ -59,11 +59,13 @@
         Rating: <span> {{ this.recent_review.rating }}</span> <br /><span
           >&nbsp;&nbsp;&nbsp;&nbsp;</span
         >
-        SubmittedBy: Submitted On:
+        SubmittedBy: <span> {{ this.recent_review.submittedBy }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+          >
+        Submitted On:
         <span> {{ this.recent_review.submittedOn }}</span>
-
-        <!-- <span>{{ s.avgOfRatings }}</span> -->
-        <!-- <span *ngIf="this.getRev==true"></span> -->
+<br>
+        
       </h5>
     </div>
   </div>
