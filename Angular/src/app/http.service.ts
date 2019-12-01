@@ -30,4 +30,8 @@ export class HttpService {
   add_review(review) {
     return this._http.post<any>(`/api/secure/review/add`, review);
   }
+  add_song(song) {
+    console.log(song);
+    return this._http.post<any>(`/api/secure/song/add`, song);
+  }
 }

@@ -7,8 +7,8 @@ const user_controller = require('../controllers/user.controller');
 const review_controller = require('../controllers/review.controller');
 
 //song controller
-router.put('/song/add', song_controller.create_song); //Creates songs
-router.post('/song/update/:id', song_controller.update_song); //updates using id
+router.post('/song/add', song_controller.create_song); //Creates songs
+router.put('/song/update/:id', song_controller.update_song); //updates using id
 
 
 //review controller 

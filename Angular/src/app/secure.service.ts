@@ -7,7 +7,7 @@ import { HttpService } from "./http.service";
 })
 export class SecureService {
   constructor() {}
-//TODO: fix the error with the token 
+
   loggedIn() {
     return !!localStorage.getItem("token");
   }

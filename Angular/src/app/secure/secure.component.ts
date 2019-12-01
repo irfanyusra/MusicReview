@@ -16,13 +16,14 @@ export class SecureComponent implements OnInit {
   songs: Object;
   reviews: Object;
   add_review_output = "";
+  add_song_output = "";
+
   new_review: Review = {
     subject: "",
     comment: "",
     songId: "",
     submittedBy: "",
     rating: 1
-    // submittedOn: new Date("2017-05-03")
   };
 
   current_user: User;
@@ -34,8 +35,21 @@ export class SecureComponent implements OnInit {
     songId: "",
     submittedBy: "",
     rating: 1
-    // submittedOn: new Date("2017-05-03")
   };
+
+  new_song: Song = {
+    title: "",
+    artist: "",
+    album: "",
+    year: 2019,
+    genre: "",
+    comment: "",
+    hidden: false,
+    copyRightViolation: false,
+    noOfReviews: 0,
+    avgRatings: 0
+  };
+
   constructor(
     public _activatedRoute: ActivatedRoute,
     private _router: Router,
@@ -50,6 +64,7 @@ export class SecureComponent implements OnInit {
     });
     this.current_user = jwt_decode(localStorage.getItem("token"));
     console.log(this.current_user);
+    console.log(this.new_song.comment);
   }
   most_recent_review(songId) {
     this._http.get_most_recent_review(songId).subscribe(data => {
@@ -86,6 +101,21 @@ export class SecureComponent implements OnInit {
         });
       }
       this.add_review_output = data.msg;
+    });
+  }
+
+  add_new_song() {
+    console.log(this.current_user.email);
+    console.log(this.new_song.comment);
+
+    this._http.add_song(this.new_song).subscribe(data => {
+      if (data.error) console.log(data.error);
+      else {
+        this._http.get_top_10_songs().subscribe(songs => {
+          this.songs = songs;
+        });
+      }
+      this.add_song_output = data.msg;
     });
   }
 }
