@@ -14,7 +14,8 @@ passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
         User.findOne({ email }, async function (err, user) {
             if (err) {
-                return done(null, false, `from passprt: ${err}`)
+                console.log(`from passprt: ${err}`);
+                return done(null, false, `from passprt: ${err}`);
             }
             else {
                 if (!user) return done(null, false); //username doesnt exist

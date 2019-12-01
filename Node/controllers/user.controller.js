@@ -28,10 +28,10 @@ exports.create_user = async function (req, res) {
 
     user.save(function (err) {
       if (err) return res.send(err);
-      return res.send(`User Created successfully: ` + user._id);
+      return res.send(`User Created successfully: ${user._id}`);
     });
   } catch (err) {
-    res.send("err: cannot hash or get the password")
+    res.send(`err: cannot hash or get the password`)
   }
 
 };
@@ -106,12 +106,12 @@ exports.delete_user = function (req, res) {
 exports.login = function (req, res, next) {
   let user = req.user;
   if (user.isActive == false)
-    return res.send("user is marked as deactivated");
+    return res.send(`user is marked as deactivated`);
   else {
-    if (!user) return res.sent("cannot find the username");
+    if (!user) return res.sent(`cannot find the username`);
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });
     const { iat, exp } = jwt.decode(token);
-    console.log("Generated token for user: " + token);
+    console.log(`Generated token for user: ` + token);
     return res.send({ iat, exp, token });
   }
 }
@@ -131,9 +131,9 @@ exports.verify_user = function (req, res) {
           const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' })
           const { iat, exp } = jwt.decode(token);
           return res.send({ iat, exp, token })
-          // return res.send("passwords match");  
+          // return res.send(`passwords match`);  
         } else {
-          return res.send("incorrect username or password");
+          return res.send(`incorrect username or password`);
         }
       } catch (err) {
         return res.send(`verification failed: ${err}`);
@@ -153,7 +153,7 @@ exports.compare_token = function (req, res) {
         else return res.send(paylod);
       });
     } catch (ex) {
-      return res.status(400).send("Invalid token");
+      return res.status(400).send(`Invalid token`);
     }
   }
 }
@@ -164,10 +164,10 @@ exports.passport_test = function (req, res, next) {
 };
 
 exports.passport_jwt_test = function (req, res, next) {
-  return res.send("Success! You can not see this without a token");
+  return res.send(`Success! You can not see this without a token`);
 };
 
 exports.login_error = function (req, res, next) {
-  return res.send("Error logging in");
+  return res.send(`Error logging in`);
 };
 
