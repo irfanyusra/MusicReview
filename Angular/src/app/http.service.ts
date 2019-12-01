@@ -6,14 +6,13 @@ import { User } from "./user";
   providedIn: "root"
 })
 export class HttpService {
-  baseURL = "http://localhost:8080"
   constructor(private _http: HttpClient) {}
 
   get_top_10_songs() {
-    return this._http.get(`${this.baseURL}/api/open/songs/top-10`);
+    return this._http.get(`/api/open/songs/top-10`);
   }
 
   user_login(user: User) {
-     return this._http.post<any>(`${this.baseURL}/api/open/user/login`, user);
+     return this._http.post<any>(`/api/open/user/login`, user);
 }
 }

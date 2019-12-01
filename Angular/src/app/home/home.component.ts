@@ -9,8 +9,8 @@ import { User } from "../user";
 })
 export class HomeComponent implements OnInit {
   songs: Object;
-  user_model = new User("email", "", "password", false, false, true);
-  // output: string;
+  user_model = new User("h", "", "333", false, false, true);
+  output: string;
   constructor(private _http: HttpService) {}
 
   ngOnInit() {
@@ -21,10 +21,16 @@ export class HomeComponent implements OnInit {
   }
 
   login() {
-    this._http.user_login(this.user_model).subscribe(data => {
-      console.log(data);
-      // this.output="";
-    });
+    this._http.user_login(this.user_model).subscribe(
+      data => {
+        // console.log(data);
+        this.output = "Logged in";
+      },
+      error => {
+        console.log(error);
+        this.output = "Error logging in";
+      }
+    );
     console.log(this.user_model);
   }
 }

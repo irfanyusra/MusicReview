@@ -27,11 +27,12 @@ router.get('/review/get-ordered/:songId', review_controller.get_desc_ord_reviews
 // router.get('/user/error', user_controller.loginError);
 
 router.get('/user/verify/:email', user_controller.verify_user);
-router.post('/user/login', passport.authenticate('local', { session: false }), user_controller.login);
+router.post('/user/login', passport.authenticate('local', { session: false, failureRedirect: "/api/open/login/error" }), user_controller.login);
+router.get('/login/error', user_controller.login_error);
 
 // router.get('/user/auth-local', passport.authenticate('local', { session: false, successRedirect: "/admin/user/test", failureRedirect: "/" }), user_controller.passportTest)
 // router.get('/user/auth-jwt', passport.authenticate('jwt', { session: false }), user_controller.passportJwtTest)
-router.get('/user/auth-local', user_controller.passportTest)
-router.get('/user/auth-jwt', user_controller.passportJwtTest)
+router.get('/user/auth-local', user_controller.passport_test)
+router.get('/user/auth-jwt', user_controller.passport_jwt_test)
 
 module.exports = router;

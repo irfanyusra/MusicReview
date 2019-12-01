@@ -158,11 +158,16 @@ exports.compare_token = function (req, res) {
   }
 }
 
-exports.passportTest = function (req, res, next) {
+exports.passport_test = function (req, res, next) {
 
   return res.send(`Passport authentication works: ${req}`);
 };
 
-exports.passportJwtTest = function (req, res, next) {
+exports.passport_jwt_test = function (req, res, next) {
   return res.send("Success! You can not see this without a token");
 };
+
+exports.login_error = function (req, res, next) {
+  return res.send("Error logging in");
+};
+
