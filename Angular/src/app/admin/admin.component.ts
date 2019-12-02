@@ -173,8 +173,13 @@ export class AdminComponent implements OnInit {
           this.output_dmca_takedown_update = "successful edit: " + data.msg;
           this.get_dmca_takedown_policy();
         } else {
-          this.output_dmca_takedown_update = "getting policy error: " + data.error;
+          this.output_dmca_takedown_update =
+            "getting policy error: " + data.error;
         }
       });
+  }
+
+  showDCMAPolicy() {
+    this._router.navigate(["dmca-takedown-policy"]);
   }
 }

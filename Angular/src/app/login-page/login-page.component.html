@@ -10,9 +10,17 @@
   <header>
     <div class="container">
       <a routerLink="/" class="logo">3316 Lab 5</a>
-      <li><a (click)="showSecurityPolicy()">Security/Privacy Policy </a></li>
-      <!-- <li><a (click)="showDCMAPolicy()">Security/Privacy Policy </a></li> -->
-    </div>
+      <nav>
+        <ul>
+          <li><a routerLink="/" class="logo">Logout</a></li>
+          <li>
+            <a (click)="showSecurityPolicy()">Security Privacy Policy </a>
+          </li>
+           <li><a (click)="showDCMAPolicy()" >DCMA Tackdown Policy </a></li>
+
+        </ul>
+      </nav>
+        </div>
   </header>
 
   <div class="container">
