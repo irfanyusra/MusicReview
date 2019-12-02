@@ -9,6 +9,9 @@ const song_controller = require('../controllers/song.controller');
 const user_controller = require('../controllers/user.controller');
 const review_controller = require('../controllers/review.controller');
 
+const log_controller = require('../controllers/log.controller'); 
+
+
 router.get('/song/test', song_controller.test);
 router.get('/review/test', review_controller.test);
 router.get('/user/test', user_controller.test);
@@ -27,10 +30,12 @@ router.get('/user/compare-token', user_controller.compare_token);
 
 router.post('/dmca-takedown/create', dmca_takedown_controller.create_dmca_takedown);
 router.post('/dmca-takedown/update/:id', dmca_takedown_controller.update_dmca_takedown);
-// router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
 
 router.post('/security-privacy/create', security_privacy_controller.create_security_privacy);
 router.post('/security-privacy/update/:id', security_privacy_controller.update_security_privacy);
+
+router.post('/log/create', log_controller.create_log)
+router.get('/log/all', log_controller.get_all_logs)
 
 
 module.exports = router;

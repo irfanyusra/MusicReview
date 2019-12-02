@@ -12,6 +12,8 @@ const review_controller = require('../controllers/review.controller');
 const security_privacy_controller = require('../controllers/sec_priv.controller');
 const dmca_takedown_controller = require('../controllers/dmca_takedown.controller'); 
 
+const log_controller = require('../controllers/log.controller'); 
+
 
 // router.post('/song/add', song_controller.create_song);
 router.get('/song/search', song_controller.get_match_songs);
@@ -50,6 +52,10 @@ router.get('/error', function (req, res) {
 
 router.get('/security-privacy', security_privacy_controller.get_security_privacy);
 router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
+
+
+router.post('/log/create', log_controller.create_log)
+router.get('/log/all', log_controller.get_all_logs)
 
 
 module.exports = router;
