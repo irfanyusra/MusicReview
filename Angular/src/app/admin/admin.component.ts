@@ -136,7 +136,7 @@ export class AdminComponent implements OnInit {
       });
   }
 
-  showSecurityPolicy() {
+  show_security_policy() {
     this._router.navigate(["security-privacy-policy"]);
   }
 
@@ -179,7 +179,7 @@ export class AdminComponent implements OnInit {
       });
   }
 
-  showDCMAPolicy() {
+  show_DCMA_policy() {
     this._router.navigate(["dmca-takedown-policy"]);
   }
 }

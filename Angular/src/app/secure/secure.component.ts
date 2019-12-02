@@ -98,10 +98,10 @@ export class SecureComponent implements OnInit {
       }
     });
   }
-  showSecurityPolicy() {
+  show_security_policy() {
     this._router.navigate(["security-privacy-policy"]);
   }
-  showDCMAPolicy() {
+  show_DCMA_policy() {
     this._router.navigate(["dmca-takedown-policy"]);
   }
 }

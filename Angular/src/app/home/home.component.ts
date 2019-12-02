@@ -16,11 +16,11 @@ export class HomeComponent implements OnInit {
     localStorage.clear();
   }
 
-  showSecurityPolicy() {
+  show_security_policy() {
     this._router.navigate(["security-privacy-policy"]);
   }
 
-  showDCMAPolicy(){
+  show_DCMA_policy(){
     this._router.navigate(["dmca-takedown-policy"]);
 
   }
