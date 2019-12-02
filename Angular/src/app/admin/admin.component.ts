@@ -14,24 +14,26 @@ import * as jwt_decode from "jwt-decode";
 export class AdminComponent implements OnInit {
   users: Object;
   songs: Object;
-  selected_song: Song;
+  // selected_song: Song;
   current_user: User;
+  refresh_top10 = true;
 
-  selected_user: User = {
-    id: "",
-    email: "",
-    name: "",
-    password: "",
-    isAdmin: false,
-    verified: false,
-    isActive: true
-  };
+  // selected_user: User = {
+  //   id: "",
+  //   email: "",
+  //   name: "",
+  //   password: "",
+  //   isAdmin: false,
+  //   verified: false,
+  //   isActive: true
+  // };
 
   toggle_admin_output = "";
   toggle_active_output = "";
   toggle_hidden_output = "";
 
   selected_user_id: "";
+  selected_song_id: "";
 
   constructor(private _http: HttpService, private _router: Router) {}
 
@@ -63,13 +65,29 @@ export class AdminComponent implements OnInit {
   toggle_admin() {
     console.log(this.selected_user_id);
     this._http.toggle_admin(this.selected_user_id).subscribe(data => {
-      if(data.error) this.toggle_admin_output = data.error;
-       else { 
-      console.log("data " + data.msg);
+      if (data.error) this.toggle_admin_output = data.error;
+      else {
+        console.log("data " + data.msg);
         this.toggle_admin_output = data.msg;
-            this.get_all_users();
-
-       }
-      });
+        this.get_all_users();
+      }
+    });
   }
+
+  toggle_hide() {
+    console.log(this.selected_song_id);
+    this._http.toggle_hide(this.selected_song_id).subscribe(data => {
+      if (data.error) this.toggle_hidden_output = data.error;
+      else {
+        console.log("data " + data.msg);
+        this.toggle_hidden_output = data.msg;
+        this.get_all_songs();
+        this.refresh_top10 = !this.refresh_top10;
+      }
+    });
+  }
+
+
+
+  
 }

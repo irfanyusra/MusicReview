@@ -23,9 +23,40 @@
 
     <app-top10-songs [refresh_top10]="refresh_top10"></app-top10-songs>
 
-    <!-- TODO: add child componenet top10 songs  -->
+    <div>
+      <h2>Add/Remove Admin Access</h2>
+      <form novalidate (ngSubmit)="toggle_admin()">
+        <select name="selected_user_id" [(ngModel)]="selected_user_id">
+          <option value="{{ user._id }}" *ngFor="let user of users">{{
+            user.email}} - {{user.isAdmin}}
+          
+          
+          </option>
+        </select>
+        <input type="submit" />
+      </form>
+      {{toggle_admin_output}}
+    </div>
+   
 
-    <h2>Add/Remove Admin Access</h2>
-    
+
+    <div >
+      <h2>Hide/Unhide Songs</h2>
+      <form novalidate (ngSubmit)="toggle_hide()">
+        <select name="selected_song_id" [(ngModel)]="selected_song_id">
+          <option value="{{ song._id }}" *ngFor="let song of songs">{{
+            song.title}} - {{song.artist}} - {{song.hidden}}
+          
+          
+          </option>
+        </select>
+        <input type="submit" />
+      </form>
+      {{toggle_hidden_output}}
+    </div>
+
+
+
+
   </div>
 </html>

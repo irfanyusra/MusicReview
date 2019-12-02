@@ -31,14 +31,13 @@ export class HttpService {
     return this._http.post<any>(`/api/open/user/add`, user);
   }
 
-  get_all_users(){
-    console.log("ddd")
+  get_all_users() {
+    console.log("ddd");
     return this._http.get<any>(`/api/admin/user/all`);
   }
 
-  toggle_admin(userId){
+  toggle_admin(userId) {
     return this._http.post<any>(`/api/admin/user/toggle-admin/${userId}`, {});
-    
   }
 
   add_review(review) {
@@ -47,5 +46,9 @@ export class HttpService {
   add_song(song) {
     console.log(song);
     return this._http.post<any>(`/api/secure/song/add`, song);
+  }
+
+  toggle_hide(songId) {
+    return this._http.post<any>(`/api/admin/song/toggle-hide/${songId}`, {});
   }
 }

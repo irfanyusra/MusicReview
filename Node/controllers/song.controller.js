@@ -7,7 +7,7 @@ exports.test = function (req, res) {
 exports.get_10_songs = function (req, res) {
   console.log("getting top ten songs");
   //find all songs and sort by avg rating, limit of 10
-  Song.find({})
+  Song.find({hidden:false})
     .sort({ avgOfRatings: 'desc' }).limit(10)
     .exec(function (err, songs) {
       if (err) return res.send("err: cannot get top 10 songs");
@@ -59,12 +59,12 @@ exports.increment_no_of_reviews = function (songId) {
 
 exports.toggle_hide = function (req, res) {
   Song.findById(req.params.id, function (err, song) {
-    if (err) return res.send(err);
+    if (err) return res.send({error: err});
     else {
       song.hidden = !song.hidden;
       song.save(function (err) {
-        if (err) return res.send(err);
-        return res.send(song.id);
+        if (err) return res.send({error: err});
+        return res.send({msg: `Song ${song.id} toggled`});
       });
     }
   });
