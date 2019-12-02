@@ -1,6 +1,7 @@
-const Security_Privacy = require('../models/sec-priv.model')
+const Security_Privacy = require('../models/sec_priv.model')
 
 exports.create_security_privacy = function (req, res) {
+    console.log("here");
     try {
         let security_privacy = new Security_Privacy({
             security: req.body.security,
@@ -8,7 +9,7 @@ exports.create_security_privacy = function (req, res) {
             submittedOn: Date.now(),
 
         })
-
+console.log(security_privacy);
         security_privacy.save(function (err) {
             if (err) return res.send({ error: err });
             else  {
@@ -16,7 +17,7 @@ exports.create_security_privacy = function (req, res) {
                     { sort: { 'createdAt': -1 } }, 
                     function (err, policy) {
                     if (err) return res.send({ error: err })
-                    else return res.send({ msg: "created security and privacy policy" });
+                     return res.send({ msg: "created security and privacy policy" });
                 });
         }
     });
@@ -29,13 +30,13 @@ exports.get_security_privacy = function (req, res) {
     Security_Privacy.findOne({}, 
         function (err, policy) {
         if (err) return res.send({ error: err });
-        else return res.send({ message: policy });     
+        else return res.send({ msg: policy });     
     });
 };
 
 exports.update_security_privacy = function (req, res) {
     Security_Privacy.findByIdAndUpdate(req.params.id, 
-        { $set: req.body }, function (err, policy) {
+        { $set: req.body }, function (err) {
         if (err) return res.send({ error: err });
         else return res.send({ msg: "updated the policy" }); 
     });

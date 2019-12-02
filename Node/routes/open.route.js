@@ -9,8 +9,9 @@ const song_controller = require('../controllers/song.controller');
 const user_controller = require('../controllers/user.controller');
 const review_controller = require('../controllers/review.controller');
 
-const security_privacy_controller = require('../controllers/sec-priv.controller');
+const security_privacy_controller = require('../controllers/sec_priv.controller');
 const dmca_takedown_controller = require('../controllers/dmca_takedown.controller'); 
+
 
 // router.post('/song/add', song_controller.create_song);
 router.get('/song/search', song_controller.get_match_songs);
@@ -47,12 +48,8 @@ router.get('/error', function (req, res) {
     return res.send({ msg: "Invalid token! Login again" })
 });
 
-router.post('/dmca-takedown/create', dmca_takedown_controller.create_dmca_takedown);
-router.post('/dmca-takedown/update/:id', dmca_takedown_controller.update_dmca_takedown);
+router.get('/security-privacy', security_privacy_controller.get_security_privacy);
 router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
 
-router.get('/security-privacy', security_privacy_controller.get_security_privacy);
-router.post('/security-privacy/create', security_privacy_controller.create_security_privacy);
-router.post('/security-privacy/update/:id', security_privacy_controller.update_security_privacy);
 
 module.exports = router;

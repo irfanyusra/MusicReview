@@ -5,6 +5,7 @@ import { Song } from "../song";
 import { User } from "../user";
 import { Review } from "../review";
 import * as jwt_decode from "jwt-decode";
+import { SecPriv } from "../sec-priv";
 
 @Component({
   selector: "app-admin",
@@ -17,16 +18,8 @@ export class AdminComponent implements OnInit {
   // selected_song: Song;
   current_user: User;
   refresh_top10 = true;
-
-  // selected_user: User = {
-  //   id: "",
-  //   email: "",
-  //   name: "",
-  //   password: "",
-  //   isAdmin: false,
-  //   verified: false,
-  //   isActive: true
-  // };
+  update_sec_priv_policy = new SecPriv("", "", "");
+  add_sec_priv_policy = new SecPriv("", "", "");
 
   toggle_admin_output = "";
   toggle_active_output = "";
@@ -35,13 +28,17 @@ export class AdminComponent implements OnInit {
   selected_user_admin_id: "";
   selected_song_id: "";
   selected_user_active_id: "";
-
+  output_priv_sec_add = "";
+  output_priv_sec_update = "";
+  output_dmca_takedown_add = "";
+  output_dmca_takedown_update = "";
   constructor(private _http: HttpService, private _router: Router) {}
 
   ngOnInit() {
     this.get_all_users();
     this.get_all_songs();
     this.current_user = jwt_decode(localStorage.getItem("token"));
+    this.get_priv_sec_policy();
   }
 
   get_all_songs() {
@@ -49,10 +46,6 @@ export class AdminComponent implements OnInit {
       this.songs = data.msg;
     });
   }
-
-  // onSelect(song: Song) {
-  //   this.selected_song = song;
-  // }
 
   get_all_users() {
     this._http.get_all_users().subscribe(data => {
@@ -98,5 +91,43 @@ export class AdminComponent implements OnInit {
         this.get_all_users();
       }
     });
+  }
+
+  get_priv_sec_policy() {
+    this._http.get_security_privacy_policiy().subscribe(data => {
+      if (data.msg) {
+        this.update_sec_priv_policy = data.msg;
+        console.log(data.msg);
+      } else console.log("getting policy error: " + data.error);
+    });
+  }
+
+  add_priv_sec_policy() {
+    this._http
+      .add_security_privacy_policy(this.add_sec_priv_policy)
+      .subscribe(data => {
+        if (data.msg) {
+          this.output_priv_sec_add = "added new policy message";
+          this.get_priv_sec_policy();
+        } else {
+          console.log("Error" + data.error);
+          this.output_priv_sec_add = "Error when adding a policy";
+        }
+      });
+  }
+
+  update_priv_sec_policy() {
+    console.log(this.update_sec_priv_policy);
+    this._http
+      .update_security_privacy_policy(this.update_sec_priv_policy)
+      .subscribe(data => {
+        console.log(data);
+        if (data.msg) {
+          this.output_priv_sec_update = "successful edit: " + data.msg;
+          this.get_priv_sec_policy;
+        } else {
+          this.output_priv_sec_update = "getting policy error: " + data.error;
+        }
+      });
   }
 }

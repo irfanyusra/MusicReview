@@ -16,8 +16,10 @@ import { TokenInterceptorService } from "./token-interceptor.service";
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { Top10SongsComponent } from './top10-songs/top10-songs.component';
+import { ShowDcmaTakedownComponent } from './show-dcma-takedown/show-dcma-takedown.component';
+import { ShowSecPrivComponent } from './show-sec-priv/show-sec-priv.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent],
+  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDcmaTakedownComponent, ShowSecPrivComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [SecureGuard, SecureService, HttpService,AdminGuard,
   {

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { User } from "./user";
+import { SecPriv } from "./sec-priv";
 
 @Injectable({
   providedIn: "root"
@@ -58,4 +59,23 @@ export class HttpService {
   toggle_hide(songId) {
     return this._http.post<any>(`/api/admin/song/toggle-hide/${songId}`, {});
   }
+
+  get_security_privacy_policiy() {
+    return this._http.get<any>(`api/open/security-privacy`);
+  }
+
+  add_security_privacy_policy(security_privacy_policy) {
+    return this._http.post<any>(
+      "api/admin/security-privacy/create",
+      security_privacy_policy
+    );
+  }
+
+  update_security_privacy_policy(security_privacy_policy) {
+    return this._http.post<any>(
+      `api/admin/security-privacy/update/${security_privacy_policy._id}`,
+      security_privacy_policy
+    );
+  }
+
 }
