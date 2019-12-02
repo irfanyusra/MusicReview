@@ -12,7 +12,6 @@ exports.get_10_songs = function (req, res) {
     .exec(function (err, songs) {
       if (err) return res.send("err: cannot get top 10 songs");
       return res.send(songs);
-      // res.status(200).send(songs.slice(0, 9));
     });
 
 };
