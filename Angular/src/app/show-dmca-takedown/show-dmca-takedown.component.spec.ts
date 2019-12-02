@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShowDcmaTakedownComponent } from './show-dcma-takedown.component';
+import { ShowDmcaTakedownComponent } from './show-dmca-takedown.component';
 
-describe('ShowDcmaTakedownComponent', () => {
-  let component: ShowDcmaTakedownComponent;
-  let fixture: ComponentFixture<ShowDcmaTakedownComponent>;
+describe('ShowDmcaTakedownComponent', () => {
+  let component: ShowDmcaTakedownComponent;
+  let fixture: ComponentFixture<ShowDmcaTakedownComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowDcmaTakedownComponent ]
+      declarations: [ ShowDmcaTakedownComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShowDcmaTakedownComponent);
+    fixture = TestBed.createComponent(ShowDmcaTakedownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -78,4 +78,21 @@ export class HttpService {
     );
   }
 
+  get_dmca_takedown_policiy() {
+    return this._http.get<any>(`api/open/dmca-takedown`);
+  }
+
+  add_dmca_takedown_policy(dmca_takedown_policy) {
+    return this._http.post<any>(
+      "api/admin/dmca-takedown/create",
+      dmca_takedown_policy
+    );
+  }
+
+  update_dmca_takedown_policy(dmca_takedown_policy) {
+    return this._http.post<any>(
+      `api/admin/dmca-takedown/update/${dmca_takedown_policy._id}`,
+      dmca_takedown_policy
+    );
+  }
 }

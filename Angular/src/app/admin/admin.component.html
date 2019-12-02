@@ -14,8 +14,9 @@
       <nav>
         <ul>
           <li><a routerLink="/" class="logo">Logout</a></li>
-                <li><a (click)="showSecurityPolicy()" >Security Privacy Policy </a></li>
-
+          <li>
+            <a (click)="showSecurityPolicy()">Security Privacy Policy </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -71,7 +72,7 @@
     </div>
 
     <div>
-      <h2>Add & Replace Security & Privacy Policies</h2>
+      <h2>Add Security & Privacy Policy</h2>
 
       <form novalidate (ngSubmit)="add_priv_sec_policy()">
         Security Policy:
@@ -91,14 +92,15 @@
           cols="30"
           rows="10"
         ></textarea>
+        <br />
         <input type="submit" />
       </form>
-       <br />
+      <br />
       {{ output_priv_sec_add }}
     </div>
 
-     <div>
-      <h2>Update Security & Privacy Policies</h2>
+    <div>
+      <h2>Update Security & Privacy Policy</h2>
 
       <form novalidate (ngSubmit)="update_priv_sec_policy()">
         Security Policy:
@@ -118,12 +120,67 @@
           cols="30"
           rows="10"
         ></textarea>
+        <br />
         <input type="submit" />
       </form>
-       <br />
+      <br />
       {{ output_priv_sec_update }}
     </div>
 
+    <div>
+      <h2>Add DMCA & Take Down Policy</h2>
 
+      <form novalidate (ngSubmit)="add_dmca_takedown_policy()">
+        DCMA Policy:
+        <br />
+        <textarea
+          [(ngModel)]="add_dmcaTakedown_policy.dmca"
+          name="DCMA"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <br />
+        Takedown Policy:
+        <br />
+        <textarea
+          [(ngModel)]="add_dmcaTakedown_policy.takedown"
+          name="takedown"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <br />
+        <input type="submit" />
+      </form>
+      <br />
+      {{ output_dmca_takedown_add }}
+    </div>
+
+    <div>
+      <h2>Update DMCA & Take Down Policy</h2>
+
+      <form novalidate (ngSubmit)="update_dmca_takedown_policy()">
+        Update Policy:
+        <br />
+        <textarea
+          [(ngModel)]="update_dmcaTakedown_policy.dmca"
+          name="DCMA"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <br />
+        Takedown Policy:
+        <br />
+        <textarea
+          [(ngModel)]="update_dmcaTakedown_policy.takedown"
+          name="takedown"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <br />
+        <input type="submit" />
+      </form>
+      <br />
+      {{ output_dmca_takedown_update }}
+    </div>
   </div>
 </html>

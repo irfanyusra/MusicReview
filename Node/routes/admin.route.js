@@ -27,7 +27,7 @@ router.get('/user/compare-token', user_controller.compare_token);
 
 router.post('/dmca-takedown/create', dmca_takedown_controller.create_dmca_takedown);
 router.post('/dmca-takedown/update/:id', dmca_takedown_controller.update_dmca_takedown);
-router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
+// router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
 
 router.post('/security-privacy/create', security_privacy_controller.create_security_privacy);
 router.post('/security-privacy/update/:id', security_privacy_controller.update_security_privacy);

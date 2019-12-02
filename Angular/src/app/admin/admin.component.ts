@@ -6,6 +6,7 @@ import { User } from "../user";
 import { Review } from "../review";
 import * as jwt_decode from "jwt-decode";
 import { SecPriv } from "../sec-priv";
+import { DmcaTakedown } from "../dmca-takedown";
 
 @Component({
   selector: "app-admin",
@@ -20,6 +21,9 @@ export class AdminComponent implements OnInit {
   refresh_top10 = true;
   update_sec_priv_policy = new SecPriv("", "", "");
   add_sec_priv_policy = new SecPriv("", "", "");
+
+  update_dmcaTakedown_policy = new DmcaTakedown("", "", "");
+  add_dmcaTakedown_policy = new DmcaTakedown("", "", "");
 
   toggle_admin_output = "";
   toggle_active_output = "";
@@ -39,6 +43,7 @@ export class AdminComponent implements OnInit {
     this.get_all_songs();
     this.current_user = jwt_decode(localStorage.getItem("token"));
     this.get_priv_sec_policy();
+    this.get_dmca_takedown_policy();
   }
 
   get_all_songs() {
@@ -130,8 +135,46 @@ export class AdminComponent implements OnInit {
         }
       });
   }
-  
+
   showSecurityPolicy() {
     this._router.navigate(["security-privacy-policy"]);
+  }
+
+  get_dmca_takedown_policy() {
+    this._http.get_dmca_takedown_policiy().subscribe(data => {
+      if (data.msg) {
+        this.update_dmcaTakedown_policy = data.msg;
+        console.log(data.msg);
+      } else console.log("getting policy error: " + data.error);
+    });
+  }
+
+  add_dmca_takedown_policy() {
+    console.log("this policy to submit : " + this.add_dmcaTakedown_policy._id);
+    this._http
+      .add_dmca_takedown_policy(this.add_dmcaTakedown_policy)
+      .subscribe(data => {
+        if (data.msg) {
+          this.output_dmca_takedown_add =
+            "added new policy message: " + data.msg;
+        } else {
+          this.output_dmca_takedown_add = "Error" + data.error;
+        }
+      });
+  }
+
+  update_dmca_takedown_policy() {
+    console.log(this.update_dmca_takedown_policy);
+    this._http
+      .update_dmca_takedown_policy(this.update_dmca_takedown_policy)
+      .subscribe(data => {
+        console.log(data);
+        if (data.msg) {
+          this.output_dmca_takedown_update = "successful edit: " + data.msg;
+          this.get_dmca_takedown_policy();
+        } else {
+          this.output_dmca_takedown_update = "getting policy error: " + data.error;
+        }
+      });
   }
 }
