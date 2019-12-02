@@ -55,7 +55,7 @@ export class SecureComponent implements OnInit {
     this.current_user = jwt_decode(localStorage.getItem("token"));
     console.log(this.current_user);
     console.log(this.new_song.comment);
-    this.get_all_songs();
+    this.get_all_avail_songs();
   }
 
   onSelect(song) {
@@ -73,8 +73,8 @@ export class SecureComponent implements OnInit {
     });
   }
 
-  get_all_songs() {
-    this._http.get_all_songs().subscribe(data => {
+  get_all_avail_songs() {
+    this._http.get_all_avail_songs().subscribe(data => {
       this.songs = data.msg;
       console.log(this.songs);
     });
@@ -86,10 +86,7 @@ export class SecureComponent implements OnInit {
     this._http.add_song(this.new_song).subscribe(data => {
       if (data.error) console.log(data.error);
       else {
-        this.get_all_songs();
-        // this._http.get_top_10_songs().subscribe(songs => {
-        //   this.songs = songs;
-        // });
+        this.get_all_avail_songs();
         if (this.add_song_rev) {
           this.new_review.submittedBy = this.current_user.email;
           this.new_review.songId = data.msg;

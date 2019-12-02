@@ -16,6 +16,10 @@ export class HttpService {
     return this._http.get<any>(`/api/open/songs/all`);
   }
 
+  get_all_avail_songs() {
+    return this._http.get<any>(`/api/open/songs/all-avail`);
+  }
+
   user_login(user: User) {
     return this._http.post<any>(`/api/open/user/login`, user);
   }

@@ -43,8 +43,8 @@ app.use(passport.session());
 
 app.use('/api/open', openRoute);
 // app.use('/api/secure', secureRoute);
-app.use('/api/admin', adminRoute);
-// app.use('/api/admin', passport.authenticate('jwt', { session: false, failureRedirect: '/api/open/error' }), adminRoute);
+// app.use('/api/admin', adminRoute);
+app.use('/api/admin', passport.authenticate('jwt', { session: false, failureRedirect: '/api/open/error' }), adminRoute);
 app.use('/api/secure', passport.authenticate('jwt', { session: false, failureRedirect: '/api/open/error' }), secureRoute);
 
 

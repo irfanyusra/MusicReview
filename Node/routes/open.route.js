@@ -13,6 +13,7 @@ const review_controller = require('../controllers/review.controller');
 router.get('/song/search', song_controller.get_match_songs);
 router.get('/songs/top-10', song_controller.get_10_songs); //Gets 10 songs
 router.get('/songs/all', song_controller.get_all_songs); //Gets 10 songs
+router.get('/songs/all-avail', song_controller.get_all_avail_songs); //Gets 10 songs
 
 //review controller 
 router.get('/review/get/:id', review_controller.get_review);

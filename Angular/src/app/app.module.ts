@@ -10,6 +10,7 @@ import { SecureComponent } from "./secure/secure.component";
 
 import { SecureService } from "./secure.service";
 import { SecureGuard } from "./secure.guard";
+import { AdminGuard } from "./admin.guard";
 import { HttpService } from "./http.service";
 import { TokenInterceptorService } from "./token-interceptor.service";
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -18,7 +19,7 @@ import { Top10SongsComponent } from './top10-songs/top10-songs.component';
 @NgModule({
   declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [SecureGuard, SecureService, HttpService,
+  providers: [SecureGuard, SecureService, HttpService,AdminGuard,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

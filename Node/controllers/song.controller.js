@@ -7,7 +7,7 @@ exports.test = function (req, res) {
 exports.get_10_songs = function (req, res) {
   console.log("getting top ten songs");
   //find all songs and sort by avg rating, limit of 10
-  Song.find({hidden:false})
+  Song.find({ hidden: false })
     .sort({ avgOfRatings: 'desc' }).limit(10)
     .exec(function (err, songs) {
       if (err) return res.send("err: cannot get top 10 songs");
@@ -59,12 +59,12 @@ exports.increment_no_of_reviews = function (songId) {
 
 exports.toggle_hide = function (req, res) {
   Song.findById(req.params.id, function (err, song) {
-    if (err) return res.send({error: err});
+    if (err) return res.send({ error: err });
     else {
       song.hidden = !song.hidden;
       song.save(function (err) {
-        if (err) return res.send({error: err});
-        return res.send({msg: `Song ${song.id} toggled`});
+        if (err) return res.send({ error: err });
+        return res.send({ msg: `Song ${song.id} toggled` });
       });
     }
   });
@@ -89,8 +89,8 @@ exports.create_song = function (req, res) {
   );
 
   song.save(function (err) {
-    if (err) return res.send({error: err});
-    return res.send({msg: song.id});
+    if (err) return res.send({ error: err });
+    return res.send({ msg: song.id });
   });
 };
 
@@ -126,8 +126,15 @@ exports.get_all_songs_copyrightViolated = function (req, res) {
 
 exports.get_all_songs = function (req, res) {
   Song.find(function (err, songs) {
-    if (err) return res.send({error:err});
-    return res.send({msg: songs});
+    if (err) return res.send({ error: err });
+    return res.send({ msg: songs });
+  });
+};
+
+exports.get_all_avail_songs = function (req, res) {
+  Song.find({ hidden: false }, function (err, songs) {
+    if (err) return res.send({ error: err });
+    return res.send({ msg: songs });
   });
 };
 
