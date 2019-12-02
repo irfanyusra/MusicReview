@@ -40,6 +40,9 @@ export class HttpService {
     return this._http.post<any>(`/api/admin/user/toggle-admin/${userId}`, {});
   }
 
+  toggle_active(userId) {
+    return this._http.post<any>(`/api/admin/user/toggle-active/${userId}`, {});
+  }
   add_review(review) {
     return this._http.post<any>(`/api/secure/review/add`, review);
   }

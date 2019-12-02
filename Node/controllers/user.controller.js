@@ -60,11 +60,11 @@ exports.toggle_admin = function (req, res) {
 
 exports.toggle_active = function (req, res) {
   User.findById(req.params.id, function (err, user) {
-    if (err) return res.send(err);
+    if (err) return res.send({error: err});
     else {
       user.isActive = !user.isActive;
       user.save(function (err) {
-        if (err) return res.send({errore:`Error toggling active for the user: ${err}`});
+        if (err) return res.send({error:`Error toggling active for the user: ${err}`});
         return res.send({msg: 'user active toggled successfully'});
       });
     }

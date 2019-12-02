@@ -32,8 +32,9 @@ export class AdminComponent implements OnInit {
   toggle_active_output = "";
   toggle_hidden_output = "";
 
-  selected_user_id: "";
+  selected_user_admin_id: "";
   selected_song_id: "";
+  selected_user_active_id: "";
 
   constructor(private _http: HttpService, private _router: Router) {}
 
@@ -63,8 +64,8 @@ export class AdminComponent implements OnInit {
   }
 
   toggle_admin() {
-    console.log(this.selected_user_id);
-    this._http.toggle_admin(this.selected_user_id).subscribe(data => {
+    console.log(this.selected_user_admin_id);
+    this._http.toggle_admin(this.selected_user_admin_id).subscribe(data => {
       if (data.error) this.toggle_admin_output = data.error;
       else {
         console.log("data " + data.msg);
@@ -87,7 +88,15 @@ export class AdminComponent implements OnInit {
     });
   }
 
-
-
-  
+  toggle_active() {
+    console.log(this.selected_user_active_id);
+    this._http.toggle_active(this.selected_user_active_id).subscribe(data => {
+      if (data.error) this.toggle_active_output = data.error;
+      else {
+        console.log("data " + data.msg);
+        this.toggle_active_output = data.msg;
+        this.get_all_users();
+      }
+    });
+  }
 }
