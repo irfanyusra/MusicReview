@@ -14,9 +14,9 @@ import { HttpService } from "./http.service";
 import { TokenInterceptorService } from "./token-interceptor.service";
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { Top10SongsComponent } from './top10-songs/top10-songs.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent],
+  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [SecureGuard, SecureService, HttpService,
   {

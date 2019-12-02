@@ -123,6 +123,13 @@ exports.get_all_songs_copyrightViolated = function (req, res) {
   });
 };
 
+exports.get_all_songs = function (req, res) {
+  Song.find(function (err, songs) {
+    if (err) return res.send({error:err});
+    return res.send({msg: songs});
+  });
+};
+
 //getting a song using id 
 // exports.get_song = function (req, res) {
 //   Song.findById(req.params.id, (err, song) => {

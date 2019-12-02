@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Admin</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Admin</title>
+  </head>
 
-<header>
+  <header>
+    <div class="container">
+      <a routerLink="/" class="logo">3316 Lab 5</a>
+
+      <nav>
+        <ul>
+          <li><a routerLink="/" class="logo">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
   <div class="container">
-    <a routerLink="/" class="logo">3316 Lab 5</a>
+    <h1>Admin</h1>
 
-    <nav>
-      <ul>
-        <li><a routerLink="/" class="logo">Logout</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <app-top10-songs [refresh_top10]="refresh_top10"></app-top10-songs>
 
-<div class="container">
+    <!-- TODO: add child componenet top10 songs  -->
 
+    <h2>Add/Remove Admin Access</h2>
     
-</div>
+  </div>
+</html>

@@ -1,0 +1,101 @@
+
+  <h2>Top 10 Most Popular Songs</h2>
+  <div *ngFor="let s of songs; index as i">
+      <!-- <h1> dddsds</h1> -->
+    <h4>
+      {{ i + 1 }}. {{ s.title }}
+      <button
+        (click)="this.s.expand = !this.s.expand"
+        (click)="most_recent_review(s._id)"
+      >
+        <span *ngIf="!this.s.expand; then thenBlock; else elseBlock"></span>
+        <ng-template #thenBlock>v </ng-template>
+
+        <ng-template #elseBlock> ^</ng-template>
+      </button>
+    </h4>
+
+    <div *ngIf="this.s.expand">
+      <h5>
+        Artist:
+        <span>{{ s.artist }}</span>
+        <br />
+        Album:
+        <span>{{ s.album }}</span>
+        <br />
+        Year:
+        <span>{{ s.year }}</span>
+        <br />
+        Number Of Ratings:
+        <span>{{ s.noOfReviews }}</span>
+        <br />
+        Average Rating:
+        <span>{{ s.avgOfRatings }}</span>
+        <br />
+        Most Recent Review:
+        <br />
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Subject:
+        <span> {{ this.recent_review.subject }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+        Comment: <span> {{ this.recent_review.comment }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+        Rating: <span> {{ this.recent_review.rating }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+        SubmittedBy: <span> {{ this.recent_review.submittedBy }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+          >
+        Submitted On:
+        <span> {{ this.recent_review.submittedOn }}</span>
+<br>
+
+      <button
+          (click)="this.s.rev_expand = !this.s.rev_expand"
+          (click)="all_reviews(s._id)"
+        >
+        
+          <span
+            *ngIf="!this.s.rev_expand; then thenBlock; else elseBlock"
+          ></span>
+          <ng-template #thenBlock>More Reviews</ng-template>
+
+          <ng-template #elseBlock>Less Reviews</ng-template>
+        </button>
+        <div *ngIf="this.s.rev_expand">
+          <div *ngFor="let r of reviews; index as i">
+        Review:
+        <br />
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        Subject:
+        <span> {{ r.subject }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+        Comment: <span> {{ r.comment }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+        Rating: <span> {{ r.rating }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+        SubmittedBy: <span> {{ r.submittedBy }}</span> <br /><span
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+          >
+        Submitted On:
+        <span> {{ r.submittedOn }}</span>
+
+
+          </div>
+
+
+
+
+
+
+        </div>
+
+        
+      </h5>
+    </div>
+  </div>
+

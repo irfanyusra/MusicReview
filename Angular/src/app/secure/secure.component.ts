@@ -6,6 +6,7 @@ import { SecureService } from "../secure.service";
 import { User } from "../user";
 import { Review } from "../review";
 import { Song } from "../song";
+import { Top10SongsComponent } from "../top10-songs/top10-songs.component";
 
 @Component({
   selector: "app-secure",
@@ -13,23 +14,15 @@ import { Song } from "../song";
   styleUrls: ["./secure.component.scss"]
 })
 export class SecureComponent implements OnInit {
-  songs: Object;
-  reviews: Object;
-  add_review_output = "";
-  add_song_output = "";
-add_song_rev =false; 
-  new_review: Review = {
-    subject: "",
-    comment: "",
-    songId: "",
-    submittedBy: "",
-    rating: 1
-  };
-
   current_user: User;
   selected_song: Song;
+  refresh_top10 = true;
+  add_review_output = "";
+  add_song_output = "";
+  add_song_rev = false;
+  songs: Object;
 
-  recent_review: Review = {
+  new_review: Review = {
     subject: "",
     comment: "",
     songId: "",
@@ -58,52 +51,33 @@ add_song_rev =false;
 
   ngOnInit() {
     console.log(history.state);
-    this._http.get_top_10_songs().subscribe(data => {
-      this.songs = data;
-      console.log(this.songs);
-    });
     this.current_user = jwt_decode(localStorage.getItem("token"));
     console.log(this.current_user);
     console.log(this.new_song.comment);
+    this.get_all_songs();
   }
-  most_recent_review(songId) {
-    this._http.get_most_recent_review(songId).subscribe(data => {
-      console.log(data.msg[0]);
-      if (data.error || data.msg[0] == undefined)
-        this.recent_review = {
-          comment: "",
-          subject: "",
-          submittedBy: "",
-          rating: 1,
-          songId: ""
-        };
-      else this.recent_review = data.msg[0];
-    });
-  }
-  all_reviews(songId) {
-    this._http.get_all_reviews(songId).subscribe(data => {
-      if (data.error) this.reviews = [];
-      else this.reviews = data.msg;
-    });
-  }
+
   onSelect(song) {
     this.selected_song = song;
   }
+
   submit_review() {
     console.log(this.current_user.email);
-    this.new_review.submittedBy =  this.current_user.email;
+    this.new_review.submittedBy = this.current_user.email;
     console.log(this.new_review);
     this._http.add_review(this.new_review).subscribe(data => {
       if (data.error) console.log(data.error);
-      else {
-          this._http.get_top_10_songs().subscribe(songs => {
-          this.songs = songs;
-        });
-      }
+      else this.refresh_top10 = !this.refresh_top10;
       this.add_review_output = data.msg;
     });
   }
 
+  get_all_songs() {
+    this._http.get_all_songs().subscribe(data => {
+      this.songs = data.msg;
+      console.log(this.songs);
+    });
+  }
   add_new_song() {
     console.log(this.current_user.email);
     console.log(this.new_song.comment);
@@ -111,22 +85,18 @@ add_song_rev =false;
     this._http.add_song(this.new_song).subscribe(data => {
       if (data.error) console.log(data.error);
       else {
-        this._http.get_top_10_songs().subscribe(songs => {
-          this.songs = songs;
-        });
-      if (this.add_song_rev){
-        this.new_review.submittedBy = this.current_user.email;
-        this.new_review.songId = data.msg;
-        console.log(this.new_review);
-        this.submit_review();
-        // TODO: fi the validate problem 
-        this.add_song_output = "Song added with Review:" +data.msg;
-
+        // this._http.get_top_10_songs().subscribe(songs => {
+        //   this.songs = songs;
+        // });
+        if (this.add_song_rev) {
+          this.new_review.submittedBy = this.current_user.email;
+          this.new_review.songId = data.msg;
+          console.log(this.new_review);
+          this.submit_review();
+          // TODO: fi the validate problem
+          this.add_song_output = "Song added with Review:" + data.msg;
+        } else this.add_song_output = "Song ID:" + data.msg;
       }
-      else this.add_song_output = "Song ID:" + data.msg;
-      }
-
-      
     });
   }
 }
