@@ -1,67 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
 
-<header>
+  <header>
+    <div class="container">
+      <a routerLink="/" class="logo">3316 Lab 5</a>
+    </div>
+  </header>
+
   <div class="container">
-    <a routerLink="/" class="logo">3316 Lab 5</a>
-  </div>
-</header>
+    <h3>Login</h3>
+    <form name="form" (ngSubmit)="login()" novalidate>
+      <p>
+        Email:
+        <input
+          name="email"
+          type="emmail"
+          [(ngModel)]="login_user_model.email"
+          email="true"
+          required
+        />
+        <!-- <input type="email" name="email" ngModel > -->
+      </p>
 
-<div class="container">
-  <h3>Login</h3>
-  <form name="form" (ngSubmit)="login()" novalidate>
-    <p>
-      Email:
-      <input name="email" type="emmail" [(ngModel)]="login_user_model.email" email="true" required />
-    <!-- <input type="email" name="email" ngModel > -->
-    </p>
-
-    <p>
-      Password:
-      <input
-        name="password"
-        type="text"
-        [(ngModel)]="login_user_model.password"
-        required
-      />
-    </p>
+      <p>
+        Password:
+        <input
+          name="password"
+          type="text"
+          [(ngModel)]="login_user_model.password"
+          required
+        />
+      </p>
       <button>Login</button>
-  </form>
-  <p>{{ output }}</p>
+    </form>
+    <p>{{ output }}</p>
 
+    <button (click)="this.create_expand = !this.create_expand">
+      <span *ngIf="!this.create_expand; then thenBlock; else elseBlock"></span>
+      <ng-template #thenBlock>Create Account</ng-template>
 
- <h3>Create Account</h3>
-  <form name="form" (ngSubmit)="createUser()" novalidate>
-     <p>
-      Name:
-      <input
-        name="user_name"
-        type="text"
-        [(ngModel)]="create_user_model.name"
-        required
-      />
-    </p>
-    <p>
-      Email:
-      <input name="email" type="text" [(ngModel)]="create_user_model.email" required />
-    </p>
-    <p>
-      Password:
-      <input
-        name="password"
-        type="text"
-        [(ngModel)]="create_user_model.password"
-        required
-      />
-    </p>
-      <button>Create</button>
-  </form>
-  <p>{{ create_output }}</p>
+      <ng-template #elseBlock>Cancel</ng-template>
+    </button>
+    <div *ngIf="this.create_expand">
+      <h3>Create Account</h3>
+      <form name="form" (ngSubmit)="createUser()" novalidate>
+        <p>
+          Name:
+          <input
+            name="user_name"
+            type="text"
+            [(ngModel)]="create_user_model.name"
+            required
+          />
+        </p>
+        <p>
+          Email:
+          <input
+            name="email"
+            type="text"
+            [(ngModel)]="create_user_model.email"
+            required
+          />
+        </p>
+        <p>
+          Password:
+          <input
+            name="password"
+            type="text"
+            [(ngModel)]="create_user_model.password"
+            required
+          />
+        </p>
+        <button>Create</button>
+      </form>
+      <p>{{ create_output }}</p>
+    </div>
 
-</div>
+  </div>
+</html>
