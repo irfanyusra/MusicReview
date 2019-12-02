@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let songSchema = new Schema({
+let song_schema = new Schema({
   //id from mongo
   title: { type: String, required: true, max: 30 },
   artist: { type: String, required: true, max: 30 },
@@ -19,4 +19,4 @@ let songSchema = new Schema({
 
 
 // Export the model
-module.exports = mongoose.model('Song', songSchema);
+module.exports = mongoose.model('Song', song_schema);

@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let userSchema = new Schema({
+let user_schema = new Schema({
   //id from mongo 
   email: { type: String, unique: true, required: true, max: 100 },
   name: { type: String, required: true, max: 100 },
@@ -16,4 +16,4 @@ let userSchema = new Schema({
 
 
 // Export the model
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', user_schema);

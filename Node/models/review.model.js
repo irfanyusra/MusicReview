@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let reviewSchema = new Schema({
+let review_schema = new Schema({
   //id from mongo
   subject: { type: String, required: true, max: 100 },
   comment: { type: String, required: true, max: 100 },
@@ -16,4 +16,4 @@ let reviewSchema = new Schema({
 
 
 // Export the model
-module.exports = mongoose.model('Review', reviewSchema);
+module.exports = mongoose.model('Review', review_schema);

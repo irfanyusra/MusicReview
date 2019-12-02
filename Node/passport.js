@@ -19,9 +19,9 @@ passport.use(
                 return done(null, false, {error:`from passprt: ${err}`});
             }
             else {
-                if (!user) return done(null, false,{message: "username doesnt exist"}); //username doesnt exist
+                if (!user) return done(null, false,{msg: "username doesnt exist"}); //username doesnt exist
                 else if (await argon2.verify(user.hashPassword, password)) return done(null, user); //all good 
-                else return done(null, false, { message: "password wrong" }); //pass wrong 
+                else return done(null, false, { msg: "password wrong" }); //pass wrong 
             }
         });
     })
