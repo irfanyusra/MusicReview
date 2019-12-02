@@ -10,9 +10,9 @@ import * as jwt_decode from "jwt-decode";
   styleUrls: ["./login-page.component.scss"]
 })
 export class LoginPageComponent implements OnInit {
-  login_user_model = new User("","h", "", "333", false, false, true);
+  login_user_model = new User("", "h", "", "333", false, false, true);
   output: string;
-  create_user_model = new User("","h", "", "333", false, false, true);
+  create_user_model = new User("", "h", "", "333", false, false, true);
   create_output = "";
   constructor(private _http: HttpService, private _router: Router) {}
 
@@ -61,5 +61,9 @@ export class LoginPageComponent implements OnInit {
         this.create_output = "email already exits";
       }
     });
+  }
+
+  showSecurityPolicy() {
+    this._router.navigate(["security-privacy-policy"]);
   }
 }

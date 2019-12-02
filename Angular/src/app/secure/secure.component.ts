@@ -98,4 +98,7 @@ export class SecureComponent implements OnInit {
       }
     });
   }
+  showSecurityPolicy() {
+    this._router.navigate(["security-privacy-policy"]);
+  }
 }

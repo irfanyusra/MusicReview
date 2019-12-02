@@ -15,4 +15,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     localStorage.clear();
   }
+
+  showSecurityPolicy() {
+    this._router.navigate(["security-privacy-policy"]);
+  }
 }
