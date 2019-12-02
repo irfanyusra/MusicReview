@@ -5,6 +5,5 @@ export class Review {
     public songId: string,
     public submittedBy: string,
     public rating: number
-  ) 
-  {}
+  ) {}
 }

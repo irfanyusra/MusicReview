@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { HttpService } from "../http.service";
 import { Router } from "@angular/router";
-
+import { Review } from "../review";
 
 @Component({
   selector: "app-top10-songs",
@@ -12,13 +12,15 @@ export class Top10SongsComponent implements OnChanges {
   @Input() refresh_top10: boolean;
 
   songs: Object;
-  recent_review: Object = {
-    comment: "",
+
+  recent_review: Review = {
     subject: "",
+    comment: "",
+    songId: "",
     submittedBy: "",
-    rating: "",
-    submittedOn: ""
+    rating: 1
   };
+
   reviews: Object;
 
   constructor(private _http: HttpService, private _router: Router) {}
@@ -43,8 +45,8 @@ export class Top10SongsComponent implements OnChanges {
           comment: "",
           subject: "",
           submittedBy: "",
-          rating: "",
-          submittedOn: ""
+          songId: "",
+          rating: 1
         };
       else this.recent_review = data.msg[0];
     });

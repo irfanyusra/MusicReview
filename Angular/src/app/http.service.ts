@@ -31,6 +31,15 @@ export class HttpService {
     return this._http.post<any>(`/api/open/user/add`, user);
   }
 
+  get_all_users(){
+    return this._http.get<any>(`/api/open/user/all`);
+  }
+
+  toggle_admin(userId){
+    return this._http.post<any>(`/api/open/user/toggle-admin/${userId}`,{});
+    
+  }
+
   add_review(review) {
     return this._http.post<any>(`/api/secure/review/add`, review);
   }
