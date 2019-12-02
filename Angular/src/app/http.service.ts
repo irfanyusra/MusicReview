@@ -32,11 +32,12 @@ export class HttpService {
   }
 
   get_all_users(){
-    return this._http.get<any>(`/api/open/user/all`);
+    console.log("ddd")
+    return this._http.get<any>(`/api/admin/user/all`);
   }
 
   toggle_admin(userId){
-    return this._http.post<any>(`/api/open/user/toggle-admin/${userId}`,{});
+    return this._http.post<any>(`/api/admin/user/toggle-admin/${userId}`, {});
     
   }
 

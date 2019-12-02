@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../http.service";
 import { Router } from "@angular/router";
 import { Song } from "../song";
 import { User } from "../user";
 import { Review } from "../review";
-
-
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: "app-admin",
@@ -15,7 +14,8 @@ import { Review } from "../review";
 export class AdminComponent implements OnInit {
   users: Object;
   songs: Object;
-  selectedSong: Song;
+  selected_song: Song;
+  current_user: User;
 
   selected_user: User = {
     id: "",
@@ -27,40 +27,49 @@ export class AdminComponent implements OnInit {
     isActive: true
   };
 
+  toggle_admin_output = "";
+  toggle_active_output = "";
+  toggle_hidden_output = "";
+
+  selected_user_id: "";
+
   constructor(private _http: HttpService, private _router: Router) {}
 
   ngOnInit() {
     this.get_all_users();
     this.get_all_songs();
+    this.current_user = jwt_decode(localStorage.getItem("token"));
   }
 
   get_all_songs() {
     this._http.get_all_songs().subscribe(data => {
       this.songs = data.msg;
-      console.log(this.songs);
     });
   }
 
-  onSelect(song: Song) {
-    this.selectedSong = song;
-  }
+  // onSelect(song: Song) {
+  //   this.selected_song = song;
+  // }
 
   get_all_users() {
     this._http.get_all_users().subscribe(data => {
       this.users = data.msg;
+      console.log("this.users");
+
       console.log(this.users);
     });
   }
 
-  // submitAdmin() {
-  //   console.log("User to make admin: " + this.userModel);
-  //   this.authService.putUserAdmin(this.userModel.id).subscribe(
-  //     data => {
-  //       console.log("data " + data);
-  //     },
-  //     error => {
-  //       console.log("error " + error);
-  //     }
-  //   );
-  // }
+  toggle_admin() {
+    console.log(this.selected_user_id);
+    this._http.toggle_admin(this.selected_user_id).subscribe(data => {
+      if(data.error) this.toggle_admin_output = data.error;
+       else { 
+      console.log("data " + data.msg);
+        this.toggle_admin_output = data.msg;
+            this.get_all_users();
+
+       }
+      });
+  }
 }

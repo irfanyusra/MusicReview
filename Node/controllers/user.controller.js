@@ -73,6 +73,7 @@ exports.toggle_active = function (req, res) {
 
 //getting all the users 
 exports.get_all_users = function (req, res) {
+  console.log("hereee");
   User.find(function (err, users) {
     if (err) return res.send({error: err});
     return res.send({msg: users});

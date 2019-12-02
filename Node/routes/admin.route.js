@@ -16,7 +16,7 @@ router.get('/song/copyright', song_controller.get_all_songs_copyrightViolated); 
 router.post('/user/toggle-active/:id', user_controller.toggle_active); // Set or clear “account deactivated” flag for a given user.
 router.post('/user/toggle-hide/:id', song_controller.toggle_hide);
 router.post('/user/toggle-admin/:id', user_controller.toggle_admin); //toggle admin for a user 
-router.get('/users/all', user_controller.get_all_users); //Return all users
+router.get('/user/all', user_controller.get_all_users); //Return all users
 
 
 
