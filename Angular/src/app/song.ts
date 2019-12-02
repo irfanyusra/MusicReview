@@ -4,6 +4,7 @@ export class Song {
     public title: String,
     public artist: String,
     public album: String,
+    public track: Number,
     public year: Number,
     public genre: String,
     public comment : String,

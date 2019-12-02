@@ -6,6 +6,7 @@ let songSchema = new Schema({
   title: { type: String, required: true, max: 30 },
   artist: { type: String, required: true, max: 30 },
   album: { type: String, max: 30, default: "Unkown" },
+  track: { type: String, min: 1 },
   year: { type: String, max: 4, default: "2019" },
   genre: { type: String, max: 100, default: "Unkown" },
   comment: { type: String, max: 30, default: 'Unknown' },

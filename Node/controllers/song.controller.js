@@ -76,6 +76,7 @@ exports.create_song = function (req, res) {
     {
       title: req.body.title,
       artist: req.body.artist,
+      track: req.body.track,
       album: req.body.album,
       year: req.body.year,
       genre: req.body.genre,

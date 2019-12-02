@@ -32,6 +32,7 @@ export class SecureComponent implements OnInit {
 
   new_song: Song = {
     title: "",
+    track: null,
     artist: "",
     album: "",
     year: 2019,
@@ -85,6 +86,7 @@ export class SecureComponent implements OnInit {
     this._http.add_song(this.new_song).subscribe(data => {
       if (data.error) console.log(data.error);
       else {
+        this.get_all_songs();
         // this._http.get_top_10_songs().subscribe(songs => {
         //   this.songs = songs;
         // });
