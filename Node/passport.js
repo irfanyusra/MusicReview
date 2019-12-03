@@ -8,6 +8,8 @@ const passport = require('passport');
 const config = require('./config');
 
 const jsonwebtoken = require('jsonwebtoken');
+const FacebookTokenStrategy = require('passport-facebook-token');
+
 // Models
 const User = require('./models/user.model');
 
@@ -39,3 +41,33 @@ passport.use(new JwtStrategy({
 
         });
     }));
+
+passport.use('facebookToken', new FacebookTokenStrategy({
+    clientID: config.oauth.facebook.clientID,
+    clientSecret: config.oauth.facebook.clientSecret
+}, async (accessToken, refreshToken, profile, done) => {
+    try {
+        console.log('profile', profile);
+        console.log('accessToken', accessToken);
+        console.log('refreshToken', refreshToken);
+
+        const existingUser = await User.findOne({ "facebook.id": profile.id });
+        if (existingUser) {
+            return done(null, existingUser);
+        }
+
+        const user = new User({
+            method: 'facebook',
+            facebook: {
+                // id: profile.id,
+name: profile.displayName,
+                email: profile.emails[0].value
+            }
+        });
+
+        await user.save();
+        done(null, user);
+    } catch (error) {
+        done(error, false, error.message);
+    }
+}));

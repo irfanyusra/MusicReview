@@ -153,3 +153,9 @@ exports.login_error = function (req, res, next) {
   return res.send({ msg: `Please try to log in again` });
 };
 
+exports.facebookOAuth = async (req, res, next) => {
+  console.log("herre in fb auth")
+  // Generate token
+  // const token = signToken(req.user);
+  // res.status(200).json({ token });
+};

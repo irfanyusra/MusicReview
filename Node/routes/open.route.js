@@ -38,4 +38,7 @@ router.post('/user/add', user_controller.create_user);
 router.get('/security-privacy', security_privacy_controller.get_security_privacy);
 router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
 
+router.route('/oauth/facebook')
+    .post(passport.authenticate('facebookToken', { session: false }), user_controller.facebookOAuth);
+
 module.exports = router;
