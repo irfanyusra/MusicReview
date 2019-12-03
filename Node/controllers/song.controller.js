@@ -104,12 +104,13 @@ exports.update_song = function (req, res) {
 
 exports.toggle_song_copyright = function (req, res) {
   Song.findById(req.params.id, function (err, song) {
+    console.log(song);
     if (err) return res.send(err);
     else {
       song.copyRightViolation = !song.copyRightViolation;
       song.save(function (err) {
-        if (err) return res.send(err);
-        return res.send(song.id);
+        if (err) return res.send({error: err});
+        return res.send({msg: song.id});
       });
     }
   });

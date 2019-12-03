@@ -18,8 +18,9 @@ import { AdminComponent } from './admin/admin.component';
 import { Top10SongsComponent } from './top10-songs/top10-songs.component';
 import { ShowDmcaTakedownComponent } from './show-dmca-takedown/show-dmca-takedown.component';
 import { ShowSecPrivComponent } from './show-sec-priv/show-sec-priv.component';
+import { LogComponent } from './log/log.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDmcaTakedownComponent, ShowSecPrivComponent],
+  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDmcaTakedownComponent, ShowSecPrivComponent, LogComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [SecureGuard, SecureService, HttpService,AdminGuard,
   {

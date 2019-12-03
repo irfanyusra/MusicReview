@@ -95,4 +95,17 @@ export class HttpService {
       dmca_takedown_policy
     );
   }
+
+  get_all_logs() {
+    return this._http.get<any>("/api/admin/log/all");
+  }
+
+  create_log(log) {
+    return this._http.post<any>("/api/admin/log/create", log);
+  }
+
+  toggle_copyright(songId) {
+    return this._http.put<any>(`api/admin/song/toggle-copyright/${songId}`, {});
+  }
+
 }

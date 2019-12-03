@@ -182,4 +182,8 @@ export class AdminComponent implements OnInit {
   show_DCMA_policy() {
     this._router.navigate(["dmca-takedown-policy"]);
   }
+
+  logs() {
+    this._router.navigate(["logs"]);
+  }
 }

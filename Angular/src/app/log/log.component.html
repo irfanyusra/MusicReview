@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Admin</title>
+  </head>
+
+  <header>
+    <div class="container">
+      <a routerLink="/" class="logo">3316 Lab 5</a>
+
+      <nav>
+        <ul>
+            <li>
+                <a (click)="show_security_policy()">Security/Privacy Policy </a>
+            </li>
+            <li><a (click)="show_DCMA_policy()">DCMA/Tackdown Policy </a></li>
+            <li><a (click)="logs()">Logs</a></li>
+            <li><a routerLink="/">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Adding A Log</h1>
+    <form novalidate (ngSubmit)="submit_log()">
+      Log Type:
+      <select name="logModelType" [(ngModel)]="new_log.type">
+        <option value="{{ type }}" *ngFor="let type of log_types">{{
+          type
+        }}</option>
+      </select>
+
+      Comment:
+      <input type="text" [(ngModel)]="new_log.comment" name="comment" />
+      Song:
+      <select name="songId" [(ngModel)]="new_log.songId">
+        <option>Title - Artist</option>
+        <option value="{{ song._id }}" *ngFor="let song of songs"
+          >{{ song.title }} - {{ song.artist }}</option
+        >
+      </select>
+
+      <input type="submit" />
+      {{ output_log_create }}
+    </form>
+    
+
+    <h1>Toggle Copyright for a Song</h1>
+    <form novalidate (ngSubmit)="submit_copyright_song()">
+     Song:
+      <select name="songId" [(ngModel)]="songId">
+        <option>Song</option>
+        <option value="{{ song._id }}" *ngFor="let song of songs"
+          >{{ song.title }} - {{ song.artist }} - {{ song._id }} - Currently
+          <p *ngIf="!song.copyRightViolation">Not</p>
+          under copyright infringement</option
+        >
+      </select>
+
+      <input type="submit" />
+    </form>
+  
+
+   <h1> All Logs: </h1>
+    <p *ngFor="let log of all_logs">
+     {{ log.submittedOn}} -  {{ log.type }} - {{ log.comment }} - {{ log.songId }}
+      
+    </p>
+  </div>
+</html>

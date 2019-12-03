@@ -8,6 +8,7 @@ import { AdminGuard } from "./admin.guard";
 import { SecureGuard } from "./secure.guard";
 import { ShowSecPrivComponent } from "./show-sec-priv/show-sec-priv.component";
 import { ShowDmcaTakedownComponent } from "./show-dmca-takedown/show-dmca-takedown.component";
+import { LogComponent } from "./log/log.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -19,7 +20,9 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   { path: "security-privacy-policy", component: ShowSecPrivComponent },
-  { path: "dmca-takedown-policy", component: ShowDmcaTakedownComponent }
+  { path: "dmca-takedown-policy", component: ShowDmcaTakedownComponent },
+  { path: "logs", component: LogComponent }
+
 ];
 
 @NgModule({
