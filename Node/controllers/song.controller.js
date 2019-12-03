@@ -1,4 +1,6 @@
 const Song = require('../models/song.model');
+const Fuse = require("fuse.js");
+
 
 exports.test = function (req, res) {
   return res.send('song controller test');
@@ -140,6 +142,40 @@ exports.get_all_avail_songs = function (req, res) {
   });
 };
 
+
+Song.collection.createIndex({
+  title: "text",
+  artist: "text",
+  album: "text",
+  track: "text",
+  year: "text",
+  comment: "text",
+  genre: "text",
+});
+
+exports.search_keyword = function (req, res) {
+  Song.find({}, function (err, songs) {
+    if (err) {
+      console.log("error: " + err);
+      res.send({ error: err });
+    } else {
+      res.send(
+        new Fuse(songs, {
+          location: 0,
+          threshold: 0.4,
+          maxPatternLength: 30,
+          minMatchCharLength: 1,
+          shouldSort: true,
+          keys: ["title", "artist", "genre", "comment", "track", "year"],
+          distance: 30,
+          tokenize: true,
+        }).search(req.params.keyword)
+      );
+    }
+  });
+};
+
+
 //getting a song using id 
 // exports.get_song = function (req, res) {
 //   Song.findById(req.params.id, (err, song) => {
@@ -166,3 +202,4 @@ exports.get_all_avail_songs = function (req, res) {
 //     res.send('Deleted successfully!');
 //   })
 // };
+

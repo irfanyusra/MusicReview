@@ -57,5 +57,7 @@ router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
 router.post('/log/create', log_controller.create_log)
 router.get('/log/all', log_controller.get_all_logs)
 
+router.get('/song/search/:keyword', song_controller.search_keyword)
+
 
 module.exports = router;
