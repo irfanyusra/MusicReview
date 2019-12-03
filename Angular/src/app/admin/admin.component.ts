@@ -179,7 +179,7 @@ export class AdminComponent implements OnInit {
       });
   }
 
-  show_DCMA_policy() {
+  show_DMCA_policy() {
     this._router.navigate(["dmca-takedown-policy"]);
   }
 

@@ -55,53 +55,53 @@ export class SecureComponent implements OnInit {
     this.current_user = jwt_decode(localStorage.getItem("token"));
     console.log(this.current_user);
     console.log(this.new_song.comment);
-    this.get_all_avail_songs();
+    // this.get_all_avail_songs();
   }
 
-  onSelect(song) {
-    this.selected_song = song;
-  }
+  // onSelect(song) {
+  //   this.selected_song = song;
+  // }
 
-  submit_review() {
-    console.log(this.current_user.email);
-    this.new_review.submittedBy = this.current_user.email;
-    console.log(this.new_review);
-    this._http.add_review(this.new_review).subscribe(data => {
-      if (data.error) console.log(data.error);
-      else this.refresh_top10 = !this.refresh_top10;
-      this.add_review_output = data.msg;
-    });
-  }
+  // submit_review() {
+  //   console.log(this.current_user.email);
+  //   this.new_review.submittedBy = this.current_user.email;
+  //   console.log(this.new_review);
+  //   this._http.add_review(this.new_review).subscribe(data => {
+  //     if (data.error) console.log(data.error);
+  //     else this.refresh_top10 = !this.refresh_top10;
+  //     this.add_review_output = data.msg;
+  //   });
+  // }
 
-  get_all_avail_songs() {
-    this._http.get_all_avail_songs().subscribe(data => {
-      this.songs = data.msg;
-      console.log(this.songs);
-    });
-  }
-  add_new_song() {
-    console.log(this.current_user.email);
-    console.log(this.new_song.comment);
+  // get_all_avail_songs() {
+  //   this._http.get_all_avail_songs().subscribe(data => {
+  //     this.songs = data.msg;
+  //     console.log(this.songs);
+  //   });
+  // }
+  // add_new_song() {
+  //   console.log(this.current_user.email);
+  //   console.log(this.new_song.comment);
 
-    this._http.add_song(this.new_song).subscribe(data => {
-      if (data.error) console.log(data.error);
-      else {
-        this.get_all_avail_songs();
-        if (this.add_song_rev) {
-          this.new_review.submittedBy = this.current_user.email;
-          this.new_review.songId = data.msg;
-          console.log(this.new_review);
-          this.submit_review();
-          // TODO: fi the validate problem
-          this.add_song_output = "Song added with Review:" + data.msg;
-        } else this.add_song_output = "Song ID:" + data.msg;
-      }
-    });
-  }
+  //   this._http.add_song(this.new_song).subscribe(data => {
+  //     if (data.error) console.log(data.error);
+  //     else {
+  //       this.get_all_avail_songs();
+  //       if (this.add_song_rev) {
+  //         this.new_review.submittedBy = this.current_user.email;
+  //         this.new_review.songId = data.msg;
+  //         console.log(this.new_review);
+  //         this.submit_review();
+  //         // TODO: fi the validate problem
+  //         this.add_song_output = "Song added with Review:" + data.msg;
+  //       } else this.add_song_output = "Song ID:" + data.msg;
+  //     }
+  //   });
+  // }
   show_security_policy() {
     this._router.navigate(["security-privacy-policy"]);
   }
-  show_DCMA_policy() {
+  show_DMCA_policy() {
     this._router.navigate(["dmca-takedown-policy"]);
   }
 }

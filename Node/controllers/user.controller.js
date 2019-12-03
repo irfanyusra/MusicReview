@@ -119,7 +119,7 @@ exports.login = function (req, res, next) {
   if (user.isActive == false)
     return res.send({ msg: `user is marked as deactivated` });
   if (user.verified == false)
-    return res.send({ msg: `Please verify your emai` })
+    return res.send({ msg: `Please verify your email` })
   else {
     if (!user) return res.send({ msg: `cannot find the username` });
     const token = jwt.sign(user.toJSON(), config.JWT_SECRET, { expiresIn: '15m' });

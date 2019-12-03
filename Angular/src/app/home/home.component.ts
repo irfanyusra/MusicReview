@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     this._router.navigate(["security-privacy-policy"]);
   }
 
-  show_DCMA_policy(){
+  show_DMCA_policy(){
     this._router.navigate(["dmca-takedown-policy"]);
 
   }

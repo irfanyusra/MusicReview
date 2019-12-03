@@ -1,39 +1,5 @@
-<!-- TODO: add header and html tag stuff for all the html files -->
-<!-- TODO: validation for all forms  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Secure</title>
-</head>
 
-<header>
-  <div class="container">
-    <a routerLink="/" class="logo">3316 Lab 5</a>
 
-    <nav>
-      <ul>
-        <li><a (click)="show_security_policy()" >Security/Privacy Policy </a></li>
-        <li><a (click)="show_DMCA_policy()" >DMCA/Tackdown Policy </a></li>
-        <li><a routerLink="/">Logout</a></li>
-
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-<app-top10-songs [refresh_top10]="refresh_top10"></app-top10-songs>
-
-</div>
-
-<div class="container">
-<app-add-song-review></app-add-song-review>
-</div>
-<!-- 
-<div class="container">
   <h2>
     Add a Review to a song
   </h2>
@@ -60,9 +26,9 @@
     {{ add_review_output }}
   </form>
   <br />
-</div>
 
-<div class="container">
+
+
   <h2>
     Add a song
   </h2>
@@ -121,6 +87,5 @@
     {{ add_song_output }}
   </form>
 
+  <!-- TODO: add option to add review  -->
   <br />
-</div> -->
-<!-- TODO: add option to add review  -->

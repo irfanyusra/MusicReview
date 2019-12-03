@@ -14,10 +14,8 @@
       <ul>
         <li><a routerLink="/login-page" class="logo">Login / Create Account </a></li>
         <li><a (click)="show_security_policy()" >Security/Privacy Policy </a></li>
-        <li><a (click)="show_DCMA_policy()" >DCMA/Tackdown Policy </a></li>
+        <li><a (click)="show_DMCA_policy()" >DMCA/Tackdown Policy </a></li>
 
-       
-   
       </ul>
     </nav>
   </div>
@@ -28,9 +26,7 @@
   <p>
     djfkdsjfdskjfdlskjfsdjfsldkjfdsljfsldjfdskljfsdlkjfdskljfsljfdlsjfldkjfljfdjfdlfjfljgfjglfkjglfdjgldkj
   </p>
-  <!-- <app-top10-songs></app-top10-songs> -->
 
-</div>
-  <div class="container">
+
       <app-top10-songs [refresh_top10]="refresh_top10"></app-top10-songs>
     </div>

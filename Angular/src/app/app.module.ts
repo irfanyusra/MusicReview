@@ -19,8 +19,10 @@ import { Top10SongsComponent } from './top10-songs/top10-songs.component';
 import { ShowDmcaTakedownComponent } from './show-dmca-takedown/show-dmca-takedown.component';
 import { ShowSecPrivComponent } from './show-sec-priv/show-sec-priv.component';
 import { LogComponent } from './log/log.component';
+import { KeywordSearchComponent } from './keyword-search/keyword-search.component';
+import { AddSongReviewComponent } from './add-song-review/add-song-review.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDmcaTakedownComponent, ShowSecPrivComponent, LogComponent],
+  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDmcaTakedownComponent, ShowSecPrivComponent, LogComponent, KeywordSearchComponent, AddSongReviewComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [SecureGuard, SecureService, HttpService,AdminGuard,
   {

@@ -16,7 +16,7 @@
           <li>
             <a (click)="show_security_policy()">Security/Privacy Policy </a>
           </li>
-          <li><a (click)="show_DCMA_policy()" >DCMA/Tackdown Policy </a></li>
+          <li><a (click)="show_DMCA_policy()" >DMCA/Tackdown Policy </a></li>
           <li><a (click)="logs()" >Logs</a></li>
           <li><a routerLink="/">Logout</a></li>
 
@@ -29,7 +29,7 @@
     <h1>Admin</h1>
 
     <app-top10-songs [refresh_top10]="refresh_top10"></app-top10-songs>
-
+<app-add-song-review></app-add-song-review>
     <div>
       <h2>Add/Remove Admin Access</h2>
       <form novalidate (ngSubmit)="toggle_admin()">
@@ -136,11 +136,11 @@
       <h2>Add DMCA & Take Down Policy</h2>
 
       <form novalidate (ngSubmit)="add_dmca_takedown_policy()">
-        DCMA Policy:
+        DMCA Policy:
         <br />
         <textarea
           [(ngModel)]="add_dmcaTakedown_policy.dmca"
-          name="DCMA"
+          name="DMCA"
           cols="30"
           rows="10"
         ></textarea>
@@ -168,7 +168,7 @@
         <br />
         <textarea
           [(ngModel)]="update_dmcaTakedown_policy.dmca"
-          name="DCMA"
+          name="DMCA"
           cols="30"
           rows="10"
         ></textarea>
