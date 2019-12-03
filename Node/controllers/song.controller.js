@@ -154,12 +154,15 @@ Song.collection.createIndex({
 });
 
 exports.search_keyword = function (req, res) {
+  console.log('"here searcj ":', "here");
+
   Song.find({}, function (err, songs) {
     if (err) {
       console.log("error: " + err);
       res.send({ error: err });
     } else {
-      res.send(
+      res.send({
+        msg: 
         new Fuse(songs, {
           location: 0,
           threshold: 0.4,
@@ -170,7 +173,7 @@ exports.search_keyword = function (req, res) {
           distance: 30,
           tokenize: true,
         }).search(req.params.keyword)
-      );
+      });
     }
   });
 };

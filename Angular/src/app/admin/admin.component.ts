@@ -186,4 +186,8 @@ export class AdminComponent implements OnInit {
   logs() {
     this._router.navigate(["logs"]);
   }
+
+  keyword_search() {
+    this._router.navigate(["keyword-search"]);
+  }
 }

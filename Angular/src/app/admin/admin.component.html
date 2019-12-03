@@ -16,11 +16,10 @@
           <li>
             <a (click)="show_security_policy()">Security/Privacy Policy </a>
           </li>
-          <li><a (click)="show_DMCA_policy()" >DMCA/Tackdown Policy </a></li>
-          <li><a (click)="logs()" >Logs</a></li>
+          <li><a (click)="show_DMCA_policy()">DMCA/Tackdown Policy </a></li>
+          <li><a (click)="logs()">Logs</a></li>
+          <li><a (click)="keyword_search()">Keyword search </a></li>
           <li><a routerLink="/">Logout</a></li>
-
-
         </ul>
       </nav>
     </div>
@@ -37,7 +36,9 @@
           [(ngModel)]="selected_user_admin_id"
         >
           <option value="{{ user._id }}" *ngFor="let user of users"
-            >{{ user.email }} -  <p *ngIf="!user.isAdmin">Not </p>Admin 
+            >{{ user.email }} -
+            <p *ngIf="!user.isAdmin">Not</p>
+            Admin
           </option>
         </select>
         <input type="submit" />
@@ -53,9 +54,10 @@
           [(ngModel)]="selected_user_active_id"
         >
           <option value="{{ user._id }}" *ngFor="let user of users"
-            >{{ user.email }} -  <p *ngIf="!user.isActive">Not </p>
-          Active 
-          </option>   
+            >{{ user.email }} -
+            <p *ngIf="!user.isActive">Not</p>
+            Active
+          </option>
         </select>
         <input type="submit" />
       </form>
@@ -67,7 +69,9 @@
       <form novalidate (ngSubmit)="toggle_hide()">
         <select name="selected_song_id" [(ngModel)]="selected_song_id">
           <option value="{{ song._id }}" *ngFor="let song of songs"
-            >{{ song.title }} - {{ song.artist }} -  <p *ngIf="!song.hidden ">Not </p>Hidden 
+            >{{ song.title }} - {{ song.artist }} -
+            <p *ngIf="!song.hidden">Not</p>
+            Hidden
           </option>
         </select>
         <input type="submit" />

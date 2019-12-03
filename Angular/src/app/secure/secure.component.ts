@@ -105,4 +105,7 @@ export class SecureComponent implements OnInit {
   show_DMCA_policy() {
     this._router.navigate(["dmca-takedown-policy"]);
   }
+  keyword_search() {
+    this._router.navigate(["keyword-search"]);
+  }
 }

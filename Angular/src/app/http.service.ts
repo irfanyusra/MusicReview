@@ -108,4 +108,9 @@ export class HttpService {
     return this._http.put<any>(`api/admin/song/toggle-copyright/${songId}`, {});
   }
 
+  keyword_search(keyword) {
+    console.log('"http":', "http")
+    console.log(keyword);
+    return this._http.get<any>(`/api/open/song/search/${keyword}`);
+  }
 }
