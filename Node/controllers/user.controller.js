@@ -154,7 +154,7 @@ exports.verify_user = function (req, res) {
 
 exports.compare_token = function (req, res) {
   if (typeof (req.headers.authorization) === 'undefined')
-    return res.status(401).send({msg: `Access denied. Missing Authenticatio header`});
+    return res.status(401).send({msg: `Access denied. Missing Authentication header`});
   else {
     const jwt_token = req.headers.authorization;
     try {
@@ -177,6 +177,6 @@ exports.passport_jwt_test = function (req, res, next) {
 };
 
 exports.login_error = function (req, res, next) {
-  return res.send({msg: `Please log in again`});
+  return res.send({msg: `Please try to log in again`});
 };
 

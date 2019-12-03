@@ -10,7 +10,7 @@ import * as jwt_decode from "jwt-decode";
   styleUrls: ["./login-page.component.scss"]
 })
 export class LoginPageComponent implements OnInit {
-  login_user_model = new User("", "h", "", "333", false, false, true);
+  login_user_model = new User("sm", "sm@sm.com", "", "sm", false, false, true);
   output: string;
   create_user_model = new User("", "h", "", "333", false, false, true);
   create_output = "";
@@ -48,13 +48,7 @@ export class LoginPageComponent implements OnInit {
     console.log(this.create_user_model);
     this._http.add_new_user(this.create_user_model).subscribe(data => {
       console.log(data);
-      if (
-        this.create_user_model.name == "" ||
-        this.create_user_model.email == "" ||
-        this.create_user_model.password == ""
-      )
-        this.create_output = "required fields missing";
-      else if (!data.msg) {
+      if (!data.msg) {
         localStorage.setItem("token", data.token);
         this._router.navigate(["secure"]);
       } else {
