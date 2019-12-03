@@ -11,7 +11,6 @@
   <header>
     <div class="container">
       <a routerLink="/" class="logo">3316 Lab 5</a>
-
       <nav>
         <ul>
           <li>
@@ -19,7 +18,6 @@
           </li>
           <li><a (click)="show_DMCA_policy()">DMCA/Tackdown Policy </a></li>
           <li><a (click)="keyword_search()">Keyword search </a></li>
-
           <li><a routerLink="/">Logout</a></li>
         </ul>
       </nav>
@@ -63,13 +61,44 @@
     <h2>
       Add a song
     </h2>
-    <form name="add-song-form" novalidate (ngSubmit)="add_new_song()">
-      Title:
-      <input name="title" type="text" [(ngModel)]="new_song.title" />
-      <br />
-      Artist:
-      <input name="artist" type="text" [(ngModel)]="new_song.artist" />
-      <br />
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && add_new_song()"
+      #f="ngForm"
+      novalidate
+    >
+      <div>
+        Title:
+        <input
+          type="text"
+          name="title"
+          class="form-control"
+          [(ngModel)]="new_song.title"
+          #title="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && title.invalid }"
+          required
+        />
+        <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+          <div *ngIf="title.errors.required">Title is required</div>
+        </div>
+      </div>
+
+      <div>
+        Artist:
+        <input
+          type="text"
+          name="artist"
+          class="form-control"
+          [(ngModel)]="new_song.artist"
+          #artist="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && artist.invalid }"
+          required
+        />
+        <div *ngIf="f.submitted && artist.invalid" class="invalid-feedback">
+          <div *ngIf="artist.errors.required">Artist is required</div>
+        </div>
+      </div>
+
       Album:
       <input name="album" type="text" [(ngModel)]="new_song.album" />
       <br />
