@@ -37,7 +37,6 @@ export class HttpService {
   }
 
   get_all_users() {
-    console.log("ddd");
     return this._http.get<any>(`/api/admin/user/all`);
   }
 
@@ -52,7 +51,6 @@ export class HttpService {
     return this._http.post<any>(`/api/secure/review/add`, review);
   }
   add_song(song) {
-    console.log(song);
     return this._http.post<any>(`/api/secure/song/add`, song);
   }
 
@@ -109,8 +107,6 @@ export class HttpService {
   }
 
   keyword_search(keyword) {
-    console.log('"http":', "http")
-    console.log(keyword);
     return this._http.get<any>(`/api/open/song/search/${keyword}`);
   }
 }

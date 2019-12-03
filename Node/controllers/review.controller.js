@@ -60,32 +60,6 @@ exports.get_review = function (req, res) {
   });
 };
 
-
-// //getting a review using name
-// exports.get_review_name = function (req, res) {
-//   Review.find({"name":req.params.name}, (err, review) => {
-//     if (err) return res.send('Error in finding the review');
-//     res.send(review);
-//   })
-// };
-
-//updates review
-// exports.update_review = function (req, res) {
-//   Review.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, review) {
-//     if (err) return res.send(err);
-//     res.send(review + ' udpated.');
-//   });
-// };
-
-//deletes review 
-// exports.delete_review = function (req, res) {
-//   Review.findByIdAndRemove(req.params.id, function (err) {
-//     if (err) return res.send(err);
-//     res.send('Deleted successfully!');
-//   })
-// };
-
-
 //most recent review of a song 
 exports.get_most_recent_review = function (req, res) {
   Review.find({ songId: req.params.songId }).sort({ submittedOn: 'desc' }).limit(1)

@@ -1,7 +1,6 @@
 const Song = require('../models/song.model');
 const Fuse = require("fuse.js");
 
-
 exports.test = function (req, res) {
   return res.send('song controller test');
 };
@@ -15,16 +14,9 @@ exports.get_10_songs = function (req, res) {
       if (err) return res.send("err: cannot get top 10 songs");
       return res.send(songs);
     });
-
-};
-
-// TODO: get matching songs .. fuse.js 
-exports.get_match_songs = function (req, res) {
-  console.log("getting matched songs");
 };
 
 exports.new_avg_rating = function (reviews, songId) {
-  console.log("here");
   let sum = 0;
   for (let i = 0; i < reviews.length; i++) {
     sum += reviews[i].rating;
@@ -100,7 +92,7 @@ exports.create_song = function (req, res) {
 exports.update_song = function (req, res) {
   Song.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, song) {
     if (err) return res.send(err);
-    res.send(song.id + ' udpated.')
+    return res.send(song.id + ' udpated.');
   });
 };
 
@@ -153,7 +145,7 @@ Song.collection.createIndex({
   genre: "text",
 });
 
-exports.search_keyword = function (req, res) {
+exports.get_match_songs = function (req, res) {
   console.log('"here searcj ":', "here");
 
   Song.find({}, function (err, songs) {
@@ -184,25 +176,6 @@ exports.search_keyword = function (req, res) {
 //   Song.findById(req.params.id, (err, song) => {
 //     if (err) return res.send('Error for finding the song');
 //     res.send(song);
-//   })
-// };
-
-
-//getting a song using name
-// exports.get_song_title = function (req, res) {
-//   Song.find({"name":req.params.name}, (err, song) => {
-//     if (err) return res.send('Error in finding the song');
-//     res.send(song);
-//   })
-// };
-
-
-
-//deletes song 
-// exports.delete_song = function (req, res) {
-//   Song.findByIdAndRemove(req.params.id, function (err) {
-//     if (err) return res.send(err);
-//     res.send('Deleted successfully!');
 //   })
 // };
 
