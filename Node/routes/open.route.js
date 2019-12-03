@@ -38,14 +38,14 @@ router.get('/user/verify/:email', user_controller.verify_user);
 router.post('/user/login', passport.authenticate('local', { session: false, failureRedirect: "/api/open/login/error" }), user_controller.login);
 router.get('/login/error', user_controller.login_error);
 
-// router.get('/user/auth-local', passport.authenticate('local', { session: false, successRedirect: "/admin/user/test", failureRedirect: "/" }), user_controller.passportTest)
+router.get('/user/secure-local', passport.authenticate('local', { session: false, failureRedirect: "/" }), user_controller.passport_test) //successRedirect: "/admin/user/test", 
 // router.get('/user/auth-jwt', passport.authenticate('jwt', { session: false }), user_controller.passportJwtTest)
-router.get('/user/secure-local', user_controller.passport_test)
+// router.get('/user/secure-local', user_controller.passport_test)
 router.get('/user/secure-jwt', user_controller.passport_jwt_test)
 
 //TODO: put or post
 router.post('/user/add', user_controller.create_user);
-router.get('/error', function (req, res) {
+router.get('/login/error', function (req, res) {
     console.log("login again");
     return res.send({ msg: "Invalid token! Login again" })
 });

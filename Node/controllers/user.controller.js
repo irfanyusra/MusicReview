@@ -154,16 +154,16 @@ exports.verify_user = function (req, res) {
 
 exports.compare_token = function (req, res) {
   if (typeof (req.headers.authorization) === 'undefined')
-    return res.status(401).send(`Access denied. Missing Authenticatio header`);
+    return res.status(401).send({msg: `Access denied. Missing Authenticatio header`});
   else {
     const jwt_token = req.headers.authorization;
     try {
       jwt.verify(jwt_token, config.JWT_SECRET, function (err, paylod) { // Verify the token
-        if (err) return res.send(`Token not verified: ${err}`);
+        if (err) return res.send({error: `Token not verified: ${err}`});
         else return res.send(paylod);
       });
     } catch (ex) {
-      return res.status(400).send(`Invalid token`);
+      return res.status(400).send({msg:`Invalid token`});
     }
   }
 }
@@ -177,6 +177,6 @@ exports.passport_jwt_test = function (req, res, next) {
 };
 
 exports.login_error = function (req, res, next) {
-  return res.send(`Error logging in`);
+  return res.send({msg: `Please log in again`});
 };
 
