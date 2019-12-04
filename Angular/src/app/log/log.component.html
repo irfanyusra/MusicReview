@@ -47,22 +47,6 @@
       <input type="submit" />
       {{ output_log_create }}
     </form>
-    
-
-    <h1>Toggle Copyright for a Song</h1>
-    <form novalidate (ngSubmit)="submit_copyright_song()">
-     Song:
-      <select name="songId" [(ngModel)]="songId">
-        <option>Song</option>
-        <option value="{{ song._id }}" *ngFor="let song of songs"
-          >{{ song.title }} - {{ song.artist }} - {{ song._id }} - Currently
-          <p *ngIf="!song.copyRightViolation">Not</p>
-          under copyright infringement</option
-        >
-      </select>
-
-      <input type="submit" />
-    </form>
   
 
    <h1> All Logs: </h1>

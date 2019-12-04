@@ -79,6 +79,21 @@
       {{ toggle_hidden_output }}
     </div>
 
+     <h1>Toggle Copyright for a Song</h1>
+    <form novalidate (ngSubmit)="submit_copyright_song()">
+     Song:
+      <select name="copyright_songId" [(ngModel)]="copyright_songId">
+        <option>Song</option>
+        <option value="{{ song._id }}" *ngFor="let song of songs"
+          >{{ song.title }} - {{ song.artist }} - {{ song._id }} - Currently
+          <p *ngIf="!song.copyRightViolation">Not</p>
+          under copyright infringement</option
+        >
+      </select>
+
+      <input type="submit" />
+    </form>
+{{toggle_copyright_output}}
     <div>
       <h2>Delete Songs</h2>
       <form novalidate (ngSubmit)="delete_song()">
@@ -91,142 +106,152 @@
       </form>
       {{ output_delete_song }}
     </div>
-<br>
-
-<div>
-  <h3>Procedure for implementing DMCA notice & Takedown policy </h3>
-  <p></p>
-
-  <h3>Instructions for using the tools provided for implementing the  DMCA notice & takedown policy</h3>
-  <p></p>
-
-  <button (click)="this.sec_priv_policy = !this.sec_priv_policy">
-      <span *ngIf="!this.sec_priv_policy; then thenBlock; else elseBlock"></span>
-      <ng-template #thenBlock>Add/Update Security & Privacy Policy</ng-template>
-      <ng-template #elseBlock>Cancel</ng-template>
-    </button>
-<br>
-    <div *ngIf="this.sec_priv_policy">
-    <div>
-      <h2>Add Security & Privacy Policy</h2>
-
-      <form novalidate (ngSubmit)="add_priv_sec_policy()">
-        Security Policy:
-        <br />
-        <textarea
-          [(ngModel)]="add_sec_priv_policy.security"
-          name="security"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        Privacy Policy:
-        <br />
-        <textarea
-          [(ngModel)]="add_sec_priv_policy.privacy"
-          name="privacy"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        <input type="submit" />
-      </form>
-      <br />
-      {{ output_priv_sec_add }}
-    </div>
+    <br />
 
     <div>
-      <h2>Update Security & Privacy Policy</h2>
+      <h3>Procedure for using the tools provided for implementing DMCA notice & Takedown policy</h3>
+      <p>
+        Admin can use the logs to decide on the disputes and mark songs as copyright infringed or hide the songs. This can be done by logging in and choosing the song to hide or mark copyright infringed and click on submit.
+      </p>
 
-      <form novalidate (ngSubmit)="update_priv_sec_policy()">
-        Security Policy:
-        <br />
-        <textarea
-          [(ngModel)]="update_sec_priv_policy.security"
-          name="security"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        Privacy Policy:
-        <br />
-        <textarea
-          [(ngModel)]="update_sec_priv_policy.privacy"
-          name="privacy"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        <input type="submit" />
-      </form>
+      <h3>
+        Instructions for using the tools provided for implementing the DMCA notice & takedown policy
+      </h3>
+      <p></p>
+
+      <button (click)="this.sec_priv_policy = !this.sec_priv_policy">
+        <span
+          *ngIf="!this.sec_priv_policy; then thenBlock; else elseBlock"
+        ></span>
+        <ng-template #thenBlock
+          >Add/Update Security & Privacy Policy</ng-template
+        >
+        <ng-template #elseBlock>Cancel</ng-template>
+      </button>
       <br />
-      {{ output_priv_sec_update }}
-    </div>
-    </div>
-</div>
+      <div *ngIf="this.sec_priv_policy">
+        <div>
+          <h2>Add Security & Privacy Policy</h2>
 
-     <button (click)="this.dcma_takedown_pol = !this.dcma_takedown_pol">
-      <span *ngIf="!this.dcma_takedown_pol; then thenBlock; else elseBlock"></span>
+          <form novalidate (ngSubmit)="add_priv_sec_policy()">
+            Security Policy:
+            <br />
+            <textarea
+              [(ngModel)]="add_sec_priv_policy.security"
+              name="security"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <br />
+            Privacy Policy:
+            <br />
+            <textarea
+              [(ngModel)]="add_sec_priv_policy.privacy"
+              name="privacy"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <br />
+            <input type="submit" />
+          </form>
+          <br />
+          {{ output_priv_sec_add }}
+        </div>
+
+        <div>
+          <h2>Update Security & Privacy Policy</h2>
+
+          <form novalidate (ngSubmit)="update_priv_sec_policy()">
+            Security Policy:
+            <br />
+            <textarea
+              [(ngModel)]="update_sec_priv_policy.security"
+              name="security"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <br />
+            Privacy Policy:
+            <br />
+            <textarea
+              [(ngModel)]="update_sec_priv_policy.privacy"
+              name="privacy"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <br />
+            <input type="submit" />
+          </form>
+          <br />
+          {{ output_priv_sec_update }}
+        </div>
+      </div>
+    </div>
+
+    <button (click)="this.dcma_takedown_pol = !this.dcma_takedown_pol">
+      <span
+        *ngIf="!this.dcma_takedown_pol; then thenBlock; else elseBlock"
+      ></span>
       <ng-template #thenBlock>Add/Update DMCA & Take Down Policy </ng-template>
       <ng-template #elseBlock>Cancel</ng-template>
     </button>
 
     <div *ngIf="this.dcma_takedown_pol">
-    <div>
-      <h2>Add DMCA & Take Down Policy</h2>
+      <div>
+        <h2>Add DMCA & Take Down Policy</h2>
 
-      <form novalidate (ngSubmit)="add_dmca_takedown_policy()">
-        DMCA Policy:
+        <form novalidate (ngSubmit)="add_dmca_takedown_policy()">
+          DMCA Policy:
+          <br />
+          <textarea
+            [(ngModel)]="add_dmcaTakedown_policy.dmca"
+            name="DMCA"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <br />
+          Takedown Policy:
+          <br />
+          <textarea
+            [(ngModel)]="add_dmcaTakedown_policy.takedown"
+            name="takedown"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <br />
+          <input type="submit" />
+        </form>
         <br />
-        <textarea
-          [(ngModel)]="add_dmcaTakedown_policy.dmca"
-          name="DMCA"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        Takedown Policy:
-        <br />
-        <textarea
-          [(ngModel)]="add_dmcaTakedown_policy.takedown"
-          name="takedown"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        <input type="submit" />
-      </form>
-      <br />
-      {{ output_dmca_takedown_add }}
-    </div>
+        {{ output_dmca_takedown_add }}
+      </div>
 
-    <div>
-      <h2>Update DMCA & Take Down Policy</h2>
+      <div>
+        <h2>Update DMCA & Take Down Policy</h2>
 
-      <form novalidate (ngSubmit)="update_dmca_takedown_policy()">
-        Update Policy:
+        <form novalidate (ngSubmit)="update_dmca_takedown_policy()">
+          Update Policy:
+          <br />
+          <textarea
+            [(ngModel)]="update_dmcaTakedown_policy.dmca"
+            name="DMCA"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <br />
+          Takedown Policy:
+          <br />
+          <textarea
+            [(ngModel)]="update_dmcaTakedown_policy.takedown"
+            name="takedown"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <br />
+          <input type="submit" />
+        </form>
         <br />
-        <textarea
-          [(ngModel)]="update_dmcaTakedown_policy.dmca"
-          name="DMCA"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        Takedown Policy:
-        <br />
-        <textarea
-          [(ngModel)]="update_dmcaTakedown_policy.takedown"
-          name="takedown"
-          cols="30"
-          rows="10"
-        ></textarea>
-        <br />
-        <input type="submit" />
-      </form>
-      <br />
-      {{ output_dmca_takedown_update }}
-    </div>
+        {{ output_dmca_takedown_update }}
+      </div>
     </div>
   </div>
 </html>

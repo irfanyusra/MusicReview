@@ -54,15 +54,5 @@ output_log_create="";
     });
   }
 
-  submit_copyright_song() {
-    console.log(this.songId);
-    this._http.toggle_copyright(this.songId).subscribe(data => {
-      if (data.msg) {
-        this.output_log_create = ("success toggle copyright: " + data.msg);
-        this.get_all_songs();
-      } else {
-        this.output_log_create=("fail toggle copyright" + data.error);
-      }
-    });
-  }
+
 }

@@ -25,14 +25,17 @@ export class AdminComponent implements OnInit {
   update_dmcaTakedown_policy = new DmcaTakedown("", "", "");
   add_dmcaTakedown_policy = new DmcaTakedown("", "", "");
 
-  toggle_admin_output = "";
-  toggle_active_output = "";
-  toggle_hidden_output = "";
-
+  
   selected_user_admin_id: "";
   selected_song_id: "";
   delete_song_id: "";
   selected_user_active_id: "";
+  copyright_songId="";
+  
+  toggle_copyright_output = "";
+  toggle_admin_output = "";
+  toggle_active_output = "";
+  toggle_hidden_output = "";
   output_priv_sec_add = "";
   output_delete_song = "";
   output_priv_sec_update = "";
@@ -204,5 +207,19 @@ export class AdminComponent implements OnInit {
       }
     });
     this.refresh_top10 = !this.refresh_top10;
+  }
+
+  submit_copyright_song() {
+    console.log(this.copyright_songId);
+    this._http.toggle_copyright(this.copyright_songId).subscribe(data => {
+      if (data.msg) {
+        this.toggle_copyright_output = "success toggle copyright: " + data.msg;
+        this.get_all_songs();
+      } else {
+        this.toggle_copyright_output = "fail toggle copyright" + data.error;
+      }
+    });
+        this.refresh_top10 = !this.refresh_top10;
+
   }
 }

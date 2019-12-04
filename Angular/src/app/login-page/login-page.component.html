@@ -1,3 +1,4 @@
+<!-- TODO: change song id to artist and name by getting the song by id from backend  -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +33,6 @@
       novalidate
     >
       Email:
-
       <input
         type="email"
         name="email"
@@ -50,16 +50,6 @@
       <div [hidden]="!email.errors?.pattern" class="invalid-feedback">
         Invalid pattern
       </div>
-
-      <!-- <p>
-        Password:
-        <input
-          name="password"
-          type="password"
-          [(ngModel)]="login_user_model.password"
-          required
-        />
-      </p> -->
 
       <div>
         Password
