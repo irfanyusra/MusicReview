@@ -48,7 +48,7 @@ export class HttpService {
     return this._http.post<any>(`/api/admin/user/toggle-active/${userId}`, {});
   }
   add_review(review) {
-    return this._http.post<any>(`/api/secure/review/add`, review);
+    return this._http.post<any>(`/api/secure/review`, review);
   }
   add_song(song) {
     return this._http.post<any>(`/api/secure/song/add`, song);
@@ -59,7 +59,7 @@ export class HttpService {
   }
 
   delete_song(songId) {
-    return this._http.delete<any>(`/api/admin/song/delete/${songId}`);
+    return this._http.delete<any>(`/api/admin/song/${songId}`);
   }
 
   get_security_privacy_policiy() {
@@ -99,15 +99,15 @@ export class HttpService {
   }
 
   get_all_logs() {
-    return this._http.get<any>("/api/admin/log/all");
+    return this._http.get<any>("/api/admin/log");
   }
 
   create_log(log) {
-    return this._http.post<any>("/api/admin/log/create", log);
+    return this._http.post<any>("/api/admin/log", log);
   }
 
   toggle_copyright(songId) {
-    return this._http.put<any>(`api/admin/song/toggle-copyright/${songId}`, {});
+    return this._http.put<any>(`api/admin/song/${songId}`, {});
   }
 
   keyword_search(keyword) {

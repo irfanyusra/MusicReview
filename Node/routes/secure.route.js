@@ -12,12 +12,7 @@ router.put('/song/update/:id', song_controller.update_song); //updates using id
 
 
 //review controller 
-router.post('/review/add', review_controller.create_review); //Create a new review for the song with the given ID
-router.get('/review/get-all', review_controller.get_all_reviews);
-
-
-// router.get('/review/get-song/:id', review_controller.get_song_using_review);
-//get all reviews by the user? like if i dont make rating required
-
+router.post('/review', review_controller.create_review); //Create a new review for the song with the given ID
+router.get('/review', review_controller.get_all_reviews);
 
 module.exports = router;

@@ -13,7 +13,6 @@ const security_privacy_controller = require('../controllers/sec_priv.controller'
 const dmca_takedown_controller = require('../controllers/dmca_takedown.controller'); 
 
 //song controller
-router.get('/song/search', song_controller.get_match_songs);
 router.get('/songs/top-10', song_controller.get_10_songs); //Gets 10 songs
 router.get('/songs/all', song_controller.get_all_songs); //Gets 10 songs
 router.get('/songs/all-avail', song_controller.get_all_avail_songs); //Gets 10 songs

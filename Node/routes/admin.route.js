@@ -19,8 +19,8 @@ router.get('/user/test', user_controller.test);
 router.post('/song/copyright/:id', song_controller.toggle_song_copyright); //Set or update copyright violation attributes for a given song ID
 router.get('/song/copyright', song_controller.get_all_songs_copyrightViolated); //Return all songs which are marked as copyright violations.
 router.post('/song/toggle-hide/:id', song_controller.toggle_hide);
-router.put('/song/toggle-copyright/:id', song_controller.toggle_song_copyright); //toggle admin for a user
-router.delete('/song/delete/:id', song_controller.delete_song);
+router.put('/song/:id', song_controller.toggle_song_copyright); //toggle admin for a user
+router.delete('/song/:id', song_controller.delete_song);
 
 router.post('/user/toggle-active/:id', user_controller.toggle_active); // Set or clear “account deactivated” flag for a given user.
 router.post('/user/toggle-admin/:id', user_controller.toggle_admin); //toggle admin for a user 
@@ -33,8 +33,8 @@ router.post('/dmca-takedown/update/:id', dmca_takedown_controller.update_dmca_ta
 router.post('/security-privacy/create', security_privacy_controller.create_security_privacy);
 router.post('/security-privacy/update/:id', security_privacy_controller.update_security_privacy);
 
-router.post('/log/create', log_controller.create_log)
-router.get('/log/all', log_controller.get_all_logs)
+router.post('/log', log_controller.create_log)
+router.get('/log', log_controller.get_all_logs)
 
 
 module.exports = router;

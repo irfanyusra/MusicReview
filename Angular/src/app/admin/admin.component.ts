@@ -206,6 +206,7 @@ export class AdminComponent implements OnInit {
         console.log("Error while deleting the song: " + data.error);
       }
     });
+    this.get_all_songs();
     this.refresh_top10 = !this.refresh_top10;
   }
 
