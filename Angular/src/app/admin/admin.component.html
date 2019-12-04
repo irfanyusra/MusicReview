@@ -78,7 +78,22 @@
       </form>
       {{ toggle_hidden_output }}
     </div>
+<br>
 
+<div>
+  <h3>Procedure for implementing DMCA notice & Takedown policy </h3>
+  <p></p>
+
+  <h3>Instructions for using the tools provided for implementing the  DMCA notice & takedown policy</h3>
+  <p></p>
+
+  <button (click)="this.sec_priv_policy = !this.sec_priv_policy">
+      <span *ngIf="!this.sec_priv_policy; then thenBlock; else elseBlock"></span>
+      <ng-template #thenBlock>Add/Update Security & Privacy Policy</ng-template>
+      <ng-template #elseBlock>Cancel</ng-template>
+    </button>
+<br>
+    <div *ngIf="this.sec_priv_policy">
     <div>
       <h2>Add Security & Privacy Policy</h2>
 
@@ -134,7 +149,16 @@
       <br />
       {{ output_priv_sec_update }}
     </div>
+    </div>
+</div>
 
+     <button (click)="this.dcma_takedown_pol = !this.dcma_takedown_pol">
+      <span *ngIf="!this.dcma_takedown_pol; then thenBlock; else elseBlock"></span>
+      <ng-template #thenBlock>Add/Update DMCA & Take Down Policy </ng-template>
+      <ng-template #elseBlock>Cancel</ng-template>
+    </button>
+
+    <div *ngIf="this.dcma_takedown_pol">
     <div>
       <h2>Add DMCA & Take Down Policy</h2>
 
@@ -189,6 +213,7 @@
       </form>
       <br />
       {{ output_dmca_takedown_update }}
+    </div>
     </div>
   </div>
 </html>

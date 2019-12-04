@@ -39,11 +39,11 @@ exports.new_avg_rating = function (reviews, songId) {
 exports.increment_no_of_reviews = function (songId) {
   console.log(songId);
   Song.findById(songId, function (err, song) {
-    if (err) console.log("err: cannot increment number of reviews in song controller");
+    if (err) return res.send({error: "cannot increment number of reviews in song controller"});
     else {
       song.noOfReviews = song.noOfReviews + 1;
       song.save(function (err) {
-        if (err) console.log(err);
+        if (err) return res.send({error: err});
         else return;
       });
     }

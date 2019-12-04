@@ -67,9 +67,9 @@ export class SecureComponent implements OnInit {
     this.new_review.submittedBy = this.current_user.email;
     console.log(this.new_review);
     this._http.add_review(this.new_review).subscribe(data => {
-      if (data.error) console.log(data.error);
-      else this.refresh_top10 = !this.refresh_top10;
-      this.add_review_output = data.msg;
+      if (data.error) this.add_review_output = "Could not add the review";//console.log(data.error);
+      else {this.refresh_top10 = !this.refresh_top10;
+      this.add_review_output = data.msg;}
     });
   }
 

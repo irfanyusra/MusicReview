@@ -44,7 +44,7 @@
       <br />
       Song:
       <select name="songId" [(ngModel)]="new_review.songId">
-        <option>Song to add review</option>
+        <!-- <option>Song to add review</option> -->
 
         <option value="{{ song._id }}" *ngFor="let song of songs"
           >{{ song.title }} - {{ song.artist }}</option
