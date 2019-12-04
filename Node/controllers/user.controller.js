@@ -196,20 +196,20 @@ exports.confirmation_post = function (req, res, next) {
     // If we found a token, find a matching user
     User.findOne({ _id: token.userId }, function (err, user) {
       if (!user) return res.status(400).send({ msg: 'We were unable to find a user for this token.' });
-      if (user.verified) return res.status(400).send({ type: 'already-verified', msg: 'This user has already been verified.' });
+      if (user.verified) return res.send ("verified")//res.status(400).send({ type: 'already-verified', msg: 'This user has already been verified.' });
 
       // Verify and save the user
       user.verified = true;
       user.save(function (err) {
         if (err) { return res.status(500).send({ msg: err.message }); }
-        res.status(200).send("The account has been verified. Please log in.");
+        res.status(200).send("verified");
       });
     });
   });
 };
 
 exports.resend_token_post = function (req, res, next) {
-  User.findOne({ email: req.body.email }, function (err, user) {
+  User.findOne({ email: req.params.email }, function (err, user) {
     if (!user) return res.status(400).send({ msg: 'We were unable to find a user with that email.' });
     if (user.verified) return res.status(400).send({ msg: 'This account has already been verified. Please log in.' });
     var token = new Token({ userId: user._id, token: crypto.randomBytes(16).toString('hex') });
@@ -217,7 +217,7 @@ exports.resend_token_post = function (req, res, next) {
     // Save the token
     token.save(function (err) {
       if (err) { return res.status(500).send({ msg: err.message }); }
-      res.send(`Please verify your account by clicking the link: \nhttp://${req.headers.host}/api/open/confirmation/${token.token}'`);
+      res.send({msg: `http://${req.headers.host}/api/open/confirmation/${token.token}`});
 
     });
 

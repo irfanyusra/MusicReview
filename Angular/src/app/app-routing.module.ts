@@ -10,6 +10,7 @@ import { ShowSecPrivComponent } from "./show-sec-priv/show-sec-priv.component";
 import { ShowDmcaTakedownComponent } from "./show-dmca-takedown/show-dmca-takedown.component";
 import { LogComponent } from "./log/log.component";
 import { KeywordSearchComponent } from "./keyword-search/keyword-search.component";
+import { VerifyLinkComponent } from "./verify-link/verify-link.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -23,8 +24,8 @@ const routes: Routes = [
   { path: "security-privacy-policy", component: ShowSecPrivComponent },
   { path: "dmca-takedown-policy", component: ShowDmcaTakedownComponent },
   { path: "logs", component: LogComponent },
-  { path: "keyword-search", component: KeywordSearchComponent }
-
+  { path: "keyword-search", component: KeywordSearchComponent },
+  { path: "verify-link", component: VerifyLinkComponent }
 ];
 
 @NgModule({

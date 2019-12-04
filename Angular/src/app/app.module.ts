@@ -20,9 +20,10 @@ import { ShowDmcaTakedownComponent } from './show-dmca-takedown/show-dmca-takedo
 import { ShowSecPrivComponent } from './show-sec-priv/show-sec-priv.component';
 import { LogComponent } from './log/log.component';
 import { KeywordSearchComponent } from "./keyword-search/keyword-search.component";
+import { VerifyLinkComponent } from './verify-link/verify-link.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDmcaTakedownComponent, ShowSecPrivComponent, LogComponent,KeywordSearchComponent],
+  declarations: [AppComponent, HomeComponent, SecureComponent, LoginPageComponent, AdminComponent, Top10SongsComponent, ShowDmcaTakedownComponent, ShowSecPrivComponent, LogComponent,KeywordSearchComponent, VerifyLinkComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [SecureGuard, SecureService, HttpService,AdminGuard,
   {

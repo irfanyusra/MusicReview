@@ -109,4 +109,11 @@ export class HttpService {
   keyword_search(keyword) {
     return this._http.get<any>(`/api/open/song/search/${keyword}`);
   }
+
+  // confirmation_email(token,user){
+  //   return this._http.post<any>(`/api/open/confirmation/${token}`, user);
+  // }
+  resend(e){
+    return this._http.post<any>(`/api/open/resend/${e}`,{});
+  }
 }
