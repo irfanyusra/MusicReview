@@ -38,4 +38,10 @@ router.post('/user/add', user_controller.create_user);
 router.get('/security-privacy', security_privacy_controller.get_security_privacy);
 router.get('/dmca-takedown', dmca_takedown_controller.get_dmca_takedown);
 
+router.post('/confirmation/:token', user_controller.confirmation_post);
+router.post('/resend', user_controller.resend_token_post);
+// router.post('/login', user_controller.loginPost);
+router.post('/signup', user_controller.signup_post);
+
+
 module.exports = router;

@@ -3,6 +3,7 @@ const argon2 = require('argon2');
 
 const config = require('../config');
 const jwt = require('jsonwebtoken');
+const Token = require('../models/token.model');
 
 exports.test = function (req, res) {
   res.send('User controller works!');
@@ -141,15 +142,84 @@ exports.compare_token = function (req, res) {
   }
 }
 
-// exports.passport_test = function (req, res, next) {
-//   return res.send(`Passport authentication works: ${req}`);
-// };
-
-// exports.passport_jwt_test = function (req, res, next) {
-//   return res.send(`Success! You can not see this without a token`);
-// };
-
 exports.login_error = function (req, res, next) {
   return res.send({ msg: `Please try to log in again` });
 };
 
+
+var crypto = require('crypto');
+
+exports.signup_post = async function (req, res, next) {
+
+  // Make sure this account doesn't already exist
+  User.findOne({ email: req.body.email }, function (err, user) {
+
+    // Make sure user doesn't already exist
+    if (user) return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
+  console.log(user);
+  });
+
+    try {
+      // Create and save the user
+      const hash = await argon2.hash(req.body.password);
+      console.log(hash);
+      user = new User({ name: req.body.name, email: req.body.email, hashPassword: hash });
+      user.save(function (err) {
+        if (err) return res.status(500).send({ msg: err.message });
+
+        // Create a verification token for this user
+        var token = new Token({ userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+        console.log('user._id:', user._id);
+        console.log("token", token);
+        // Save the verification token
+        token.save(function (err) {
+          if (err) { return res.status(500).send({ msg: err.message }); }
+          res.send('Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/open/confirmation\/' + token.token);
+        });
+      });
+
+    } catch (err) {
+      return res.send({ msg: `err: cannot hash or get the password` });
+    }
+  
+
+};
+
+
+exports.confirmation_post = function (req, res, next) {
+
+  // Find a matching token
+  console.log('req.params.token :', req.params.token)
+  Token.findOne({ token: req.params.token }, function (err, token) {
+    if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });
+
+    // If we found a token, find a matching user
+    User.findOne({ _id: token.userId }, function (err, user) {
+      if (!user) return res.status(400).send({ msg: 'We were unable to find a user for this token.' });
+      if (user.verified) return res.status(400).send({ type: 'already-verified', msg: 'This user has already been verified.' });
+
+      // Verify and save the user
+      user.verified = true;
+      user.save(function (err) {
+        if (err) { return res.status(500).send({ msg: err.message }); }
+        res.status(200).send("The account has been verified. Please log in.");
+      });
+    });
+  });
+};
+
+exports.resend_token_post = function (req, res, next) {
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (!user) return res.status(400).send({ msg: 'We were unable to find a user with that email.' });
+    if (user.verified) return res.status(400).send({ msg: 'This account has already been verified. Please log in.' });
+    var token = new Token({ userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+
+    // Save the token
+    token.save(function (err) {
+      if (err) { return res.status(500).send({ msg: err.message }); }
+      res.send(`Please verify your account by clicking the link: \nhttp://${req.headers.host}/api/open/confirmation/${token.token}'`);
+
+    });
+
+  });
+};
