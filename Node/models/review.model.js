@@ -8,12 +8,11 @@ let review_schema = new Schema({
   subject: { type: String, required: true, max: 100 },
   comment: { type: String, required: true, max: 100 },
   songId: { type: Schema.Types.ObjectId, ref: 'Song', required: true },
-  submittedBy: { type: String, required: true },
+  submittedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   rating: { type: Number, min: 1, max: 5, required: true },
-  submittedOn: { type: Date }
+  submittedOn: { type: Date, default: Date.now,required: true  }
 
 });
-
 
 // Export the model
 module.exports = mongoose.model('Review', review_schema);

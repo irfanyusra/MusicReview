@@ -7,7 +7,7 @@ let user_schema = new Schema({
   //id from mongo 
   email: { type: String, unique: true, required: true, max: 100 },
   name: { type: String, required: true, max: 100 },
-  hashPassword: { type: String, required: true },
+  hashPassword: { type: String },
   isAdmin: { type: Boolean, default: false },
   verified: { type: Boolean, default: false },
   isActive: { type: Boolean, default: true },

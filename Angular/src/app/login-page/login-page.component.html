@@ -70,6 +70,7 @@
     </form>
     <p>{{ output }}</p>
 
+    <span *ngIf="verify_link"> <button (click)=clicked()> Verify your email</button></span>
     <button (click)="this.create_expand = !this.create_expand">
       <span *ngIf="!this.create_expand; then thenBlock; else elseBlock"></span>
       <ng-template #thenBlock>Create Account</ng-template>
