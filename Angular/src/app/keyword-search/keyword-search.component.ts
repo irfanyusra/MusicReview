@@ -50,7 +50,7 @@ export class KeywordSearchComponent implements OnInit {
   }
 
   search() {
-    console.log('this.keyword:', this.keyword)
+    console.log("this.keyword:", this.keyword);
     this._http.keyword_search(this.keyword).subscribe(data => {
       this.songs = data.msg;
       console.log("this.songs", this.songs);
