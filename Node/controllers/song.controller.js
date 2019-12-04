@@ -170,6 +170,14 @@ exports.get_match_songs = function (req, res) {
   });
 };
 
+// deletes song 
+exports.delete_song = function (req, res) {
+  Song.findByIdAndRemove(req.params.id, function (err) {
+    if (err) return res.send({error: err});
+    res.send({msg:'Deleted successfully!'});
+  })
+};
+
 
 //getting a song using id 
 // exports.get_song = function (req, res) {

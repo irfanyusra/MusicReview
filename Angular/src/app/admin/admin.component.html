@@ -78,6 +78,19 @@
       </form>
       {{ toggle_hidden_output }}
     </div>
+
+    <div>
+      <h2>Delete Songs</h2>
+      <form novalidate (ngSubmit)="delete_song()">
+        <select name="delete_song_id" [(ngModel)]="delete_song_id">
+          <option value="{{ song._id }}" *ngFor="let song of songs"
+            >{{ song.title }} - {{ song.artist }}
+          </option>
+        </select>
+        <input type="submit" />
+      </form>
+      {{ output_delete_song }}
+    </div>
 <br>
 
 <div>

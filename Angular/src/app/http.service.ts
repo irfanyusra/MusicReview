@@ -58,6 +58,10 @@ export class HttpService {
     return this._http.post<any>(`/api/admin/song/toggle-hide/${songId}`, {});
   }
 
+  delete_song(songId) {
+    return this._http.delete<any>(`/api/admin/song/delete/${songId}`);
+  }
+
   get_security_privacy_policiy() {
     return this._http.get<any>(`api/open/security-privacy`);
   }

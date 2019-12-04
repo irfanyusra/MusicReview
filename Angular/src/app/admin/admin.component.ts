@@ -31,8 +31,10 @@ export class AdminComponent implements OnInit {
 
   selected_user_admin_id: "";
   selected_song_id: "";
+  delete_song_id: "";
   selected_user_active_id: "";
   output_priv_sec_add = "";
+  output_delete_song = "";
   output_priv_sec_update = "";
   output_dmca_takedown_add = "";
   output_dmca_takedown_update = "";
@@ -189,5 +191,18 @@ export class AdminComponent implements OnInit {
 
   keyword_search() {
     this._router.navigate(["keyword-search"]);
+  }
+
+  delete_song() {
+    this._http.delete_song(this.delete_song_id).subscribe(data => {
+      if (data.msg) {
+        this.output_delete_song = data.msg;
+        console.log(data.msg);
+      } else {
+        this.output_delete_song = "Could not delete the song";
+        console.log("Error while deleting the song: " + data.error);
+      }
+    });
+    this.refresh_top10 = !this.refresh_top10;
   }
 }
