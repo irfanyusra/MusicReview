@@ -1,4 +1,9 @@
-# se3316-yirfan3-lab5
+# Music Review 
+
+Develop a full-stack web application for a music review site that allows browsing reviews, creating, editing and saving new review. Functionalities like IMDb.
+
+Uses Node.js and Angular v8, MongoDB, Express, Passport, and other libraries 
+
 
 Resources used
 
