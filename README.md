@@ -4,6 +4,14 @@ Develop a full-stack web application for a music review site that allows browsin
 
 Uses Node.js and Angular v8, MongoDB, Express, Passport, and other libraries 
 
+To run the back-end: 
+cd Node
+npm start
+
+To run the front-end:
+cd Angular 
+npm start
+
 
 Resources used
 
