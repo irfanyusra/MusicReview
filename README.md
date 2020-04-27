@@ -1,6 +1,7 @@
 # se3316-yirfan3-lab5
 
-Resoources used:
+Resources used
+
 JWT token 
 - https://medium.com/better-programming/authentication-and-authorization-using-jwt-with-node-js-4099b2e6ca1f
 - https://medium.com/@maison.moa/using-jwt-json-web-tokens-to-authorize-users-and-protect-api-routes-3e04a1453c3e
